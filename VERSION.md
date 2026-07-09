@@ -3,7 +3,7 @@
 
 ## Current Version
 
-**3.0.0**
+**3.1.0**
 
 ## Versioning Rules
 
@@ -23,6 +23,11 @@ Record changes using this format:
 ```
 
 ## Changelog
+
+## 3.1.0 - 2026-07-09
+- Type: minor
+- Summary: **Governance release — freezes the playbook as stable.** No workflow, standard, or architecture changed. Added a Stability Policy to [`README.md#stability-policy`](./README.md#stability-policy) declaring the Engineering System operational rather than in active design, and requiring future changes to originate from real implementation experience, repository-adoption findings, production issues, or retrospectives rather than speculative process additions. Added an `## Evidence Basis` prompt to [`.github/ISSUE_TEMPLATE/playbook_improvement.md`](./.github/ISSUE_TEMPLATE/playbook_improvement.md) so that policy is enforced at the point a change is proposed, not just stated in prose. Verified internal consistency across `README.md`, `AGENTS.md`, `CLAUDE.md`, `AI_AGENT_OPERATING_MODEL.md`, `DECISION_ROUTER.md`, the Repository Readiness Checklist, the Repository Bootstrap workflow, every `*_STANDARD.md`, the `commands/` library, and the `TFRS-Admin/agent-skills` integration — no conflicts found; all reflect the v3.0.0 repository-centered model already. Found and flagged one real drift: `scripts/setup-project-board.sh` and `.github/workflows/setup-project-board.yml` were written against the pre-3.0.0 GitHub-Project-centered model (they provision a 10-field Project board and issue bodies using the old `Pending`/`Active` adoption vocabulary) and were never updated in the 3.0.0 migration. Added a deprecation notice to both rather than rewriting them, since neither is referenced by any current standard, command, or the Repository Readiness Checklist — they are dead tooling, not part of the operating model, and rewriting their Project-provisioning logic would be new work this release is not scoped to do.
+- Impact: Non-breaking. No downstream repository needs to change anything. This release is a declaration, not a capability change: the playbook is now in maintenance mode, and playbook-improvement issues should expect to justify themselves against the Stability Policy.
 
 ## 3.0.0 - 2026-07-09
 - Type: major

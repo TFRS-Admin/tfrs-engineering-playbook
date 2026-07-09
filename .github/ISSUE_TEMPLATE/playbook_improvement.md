@@ -21,6 +21,15 @@ Describe the proposed change.
 
 Explain the expected benefit for TFRS repositories.
 
+## Evidence Basis
+
+Per the [Stability Policy](https://github.com/TFRS-Admin/tfrs-engineering-playbook/blob/main/README.md#stability-policy), this playbook is frozen for normal development — every change must trace to one of the following, not to a speculative process idea:
+
+- [ ] Real implementation work done under this playbook (link the issue/PR)
+- [ ] A repository-adoption finding (e.g. a Repository Readiness Checklist result)
+- [ ] A production issue or incident
+- [ ] An engineering retrospective
+
 ## Metadata
 
 Status: Backlog

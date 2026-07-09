@@ -1,10 +1,11 @@
 <!-- Purpose: Canonical entry point for the TFRS engineering playbook and adoption guidance. -->
 # TFRS Engineering Playbook
 
-![Version](https://img.shields.io/badge/version-3.0.0-blue)
+![Version](https://img.shields.io/badge/version-3.1.0-blue)
 ![Last Updated](https://img.shields.io/badge/last%20updated-2026--07--09-brightgreen)
+![Status](https://img.shields.io/badge/status-stable%20%2F%20frozen-success)
 
-The **TFRS Engineering Playbook** is the canonical engineering operating system for current and future TFRS projects. Version 1 established the documentation foundation: AI-assisted development conventions, planning and review expectations, reusable templates, and GitHub operating standards. Version 2.0 operationalized it — GitHub is the operational source of truth, chat is temporary, and every phase of the lifecycle (review, roadmap, plan, backlog, execute, verify, ship) is an executable prompt any AI agent can run, not just a document to read. Version 2.1 deepened the engineering discipline inside that lifecycle — security, testing, debugging, and code-quality practice that were previously thin or missing. Version 2.2 connected this playbook to [`TFRS-Admin/agent-skills`](https://github.com/TFRS-Admin/agent-skills), a live, shared execution library agents consult for step-by-step task mechanics that this playbook intentionally doesn't restate. Version 2.3 made the system operational end to end: a [Session Initialization Protocol](./AI_AGENT_OPERATING_MODEL.md#1-session-initialization-protocol), a [Decision Router](./DECISION_ROUTER.md) that maps plain-language requests to the right workflow, a full [Issue Execution Protocol](./commands/execute.md#issue-execution-protocol), and a [Repository Readiness Checklist](./REPOSITORY_BOOTSTRAP_GUIDE.md#repository-readiness-checklist) — run for real against `tfrs-website`, with the honest result reported rather than assumed. Version 2.4 was a final cleanup sprint on the GitHub-Project-centered model: it closed a routing gap that let small bug fixes reach execution without planning, defined one explicit Minimum Baseline, added a three-state [Adoption Model](./REPOSITORY_BOOTSTRAP_GUIDE.md#adoption-states), and added [`FOUNDER_WORKFLOW.md`](./FOUNDER_WORKFLOW.md) and this page's [Source-of-Truth Map](#source-of-truth-map) for anyone who isn't an AI agent. **Version 3.0 is an architectural migration**, based on operational experience onboarding `tfrs-website`: the playbook moves from a GitHub-Project-centered model to a **repository-centered** one. Repository-local documentation (`ARCHITECTURE.md`, `docs/engineering/`) and GitHub Issues — each carrying a structured `## Metadata` block per the new [`ISSUE_METADATA_STANDARD.md`](./ISSUE_METADATA_STANDARD.md) — are now the operational source of truth. GitHub Projects become optional visualization, defined in the rewritten [`GITHUB_PROJECT_STANDARD.md`](./GITHUB_PROJECT_STANDARD.md), and are removed entirely from the [Repository Readiness Checklist](./REPOSITORY_BOOTSTRAP_GUIDE.md#repository-readiness-checklist).
+The **TFRS Engineering Playbook** is the canonical engineering operating system for current and future TFRS projects. Version 1 established the documentation foundation: AI-assisted development conventions, planning and review expectations, reusable templates, and GitHub operating standards. Version 2.0 operationalized it — GitHub is the operational source of truth, chat is temporary, and every phase of the lifecycle (review, roadmap, plan, backlog, execute, verify, ship) is an executable prompt any AI agent can run, not just a document to read. Version 2.1 deepened the engineering discipline inside that lifecycle — security, testing, debugging, and code-quality practice that were previously thin or missing. Version 2.2 connected this playbook to [`TFRS-Admin/agent-skills`](https://github.com/TFRS-Admin/agent-skills), a live, shared execution library agents consult for step-by-step task mechanics that this playbook intentionally doesn't restate. Version 2.3 made the system operational end to end: a [Session Initialization Protocol](./AI_AGENT_OPERATING_MODEL.md#1-session-initialization-protocol), a [Decision Router](./DECISION_ROUTER.md) that maps plain-language requests to the right workflow, a full [Issue Execution Protocol](./commands/execute.md#issue-execution-protocol), and a [Repository Readiness Checklist](./REPOSITORY_BOOTSTRAP_GUIDE.md#repository-readiness-checklist) — run for real against `tfrs-website`, with the honest result reported rather than assumed. Version 2.4 was a final cleanup sprint on the GitHub-Project-centered model: it closed a routing gap that let small bug fixes reach execution without planning, defined one explicit Minimum Baseline, added a three-state [Adoption Model](./REPOSITORY_BOOTSTRAP_GUIDE.md#adoption-states), and added [`FOUNDER_WORKFLOW.md`](./FOUNDER_WORKFLOW.md) and this page's [Source-of-Truth Map](#source-of-truth-map) for anyone who isn't an AI agent. Version 3.0 was an architectural migration, based on operational experience onboarding `tfrs-website`: the playbook moved from a GitHub-Project-centered model to a **repository-centered** one. Repository-local documentation (`ARCHITECTURE.md`, `docs/engineering/`) and GitHub Issues — each carrying a structured `## Metadata` block per [`ISSUE_METADATA_STANDARD.md`](./ISSUE_METADATA_STANDARD.md) — are now the operational source of truth. GitHub Projects are optional visualization, defined in the rewritten [`GITHUB_PROJECT_STANDARD.md`](./GITHUB_PROJECT_STANDARD.md), and were removed entirely from the [Repository Readiness Checklist](./REPOSITORY_BOOTSTRAP_GUIDE.md#repository-readiness-checklist). **Version 3.1 is a governance release: it freezes the playbook as stable** (see [Stability Policy](#stability-policy) below) rather than adding or changing any workflow, standard, or architecture.
 
 **What this repository is:** the canonical source of engineering standards, the repository-centered operating model, and the executable command library every TFRS repository and AI agent should follow. It does not contain application code, and it does not contain a copy of the shared skills library — see below.
 
@@ -23,6 +24,17 @@ TFRS-Admin/agent-skills
 ```
 
 Repository-local documentation and GitHub Issues are the operational source of truth. GitHub Issues remain the canonical unit of work. GitHub Projects are optional visualization only and are never required for operation — see [`GITHUB_PROJECT_STANDARD.md`](./GITHUB_PROJECT_STANDARD.md).
+
+## Stability Policy
+
+As of **v3.1.0**, the TFRS Engineering Playbook is **frozen for normal development.** Repository adoption has demonstrated that the current architecture — the repository-centered operating model, the Session Initialization Protocol, the Decision Router, the `## Metadata`-driven issue lifecycle, and the `commands/` library — is operational. The playbook now moves from active design into maintenance.
+
+This means:
+
+- **No speculative process additions.** A new standard, command, template, or workflow should not be added because it seems generally useful. Every change must be traceable to one of: real implementation work done under this playbook, a repository-adoption finding (e.g. the [Repository Readiness Checklist](./REPOSITORY_BOOTSTRAP_GUIDE.md#repository-readiness-checklist) run against an actual repository), a production issue, or an engineering retrospective. [`.github/ISSUE_TEMPLATE/playbook_improvement.md`](./.github/ISSUE_TEMPLATE/playbook_improvement.md) asks for this evidence directly.
+- **Patch and minor changes remain normal.** Clarifications, broken-link fixes, and additive capability that doesn't change how existing repositories operate (see [Versioning Strategy](#versioning-strategy) below) are still welcome — "frozen" means no undirected expansion, not no maintenance.
+- **Major changes require the same bar as any other breaking change**, plus explicit evidence per the point above — architecture doesn't get revisited because a new idea sounds better in the abstract; it gets revisited because adoption or production surfaced a real gap the current model can't handle.
+- **This is a policy statement, not a technical gate.** Nothing in `commands/` or `AI_AGENT_OPERATING_MODEL.md` mechanically enforces it — it is enforced by whoever reviews a `playbook_improvement` issue or a PR against this repository, per [`REVIEW_STANDARD.md`](./REVIEW_STANDARD.md) and [How to Contribute Improvements to the Playbook](#how-to-contribute-improvements-to-the-playbook) below, which is `commands/plan.md` → `commands/execute.md` → `commands/verify.md`, same as any other repository.
 
 ## Engineering Methodology Lineage
 
@@ -55,6 +67,7 @@ This repository has grown enough concepts that "which document owns this" needs 
 | Terminology conflicts (same word, different meaning) | [`AI_ENGINEERING_WORKFLOW.md`](./AI_ENGINEERING_WORKFLOW.md#terminology-map) |
 | Founder/operator usage (plain-language, human-facing) | [`FOUNDER_WORKFLOW.md`](./FOUNDER_WORKFLOW.md) |
 | Version history and upgrade impact | [`VERSION.md`](./VERSION.md) |
+| Stability policy (is the playbook stable, and what justifies changing it) | [Stability Policy](#stability-policy) below |
 
 ## Quick Start
 
@@ -94,7 +107,7 @@ Review → Roadmap → Plan → Backlog → Execute → Verify → Ship
 
 ## Table of Contents
 
-- [README.md](./README.md)
+- [README.md](./README.md) ([Stability Policy](#stability-policy))
 - [AGENTS.md](./AGENTS.md)
 - [CLAUDE.md](./CLAUDE.md)
 - [AI_ENGINEERING_WORKFLOW.md](./AI_ENGINEERING_WORKFLOW.md)
@@ -152,7 +165,7 @@ Review → Roadmap → Plan → Backlog → Execute → Verify → Ship
 
 ## Currently Adopted By
 
-Adoption Status uses the three-state model from [`REPOSITORY_BOOTSTRAP_GUIDE.md#adoption-states`](./REPOSITORY_BOOTSTRAP_GUIDE.md#adoption-states): **Fully Onboarded**, **Degraded but Usable** (only CI/health-cadence conveniences missing, everything else in place), or **Not Onboarded** (a non-degradable item — `AGENTS.md`, `CLAUDE.md`, `AI_AGENT_OPERATING_MODEL.md`, `DECISION_ROUTER.md`, `ARCHITECTURE.md`, repository engineering docs, issue/PR templates, playbook/skills-repo reference, verification commands, or backlog — fails). A GitHub Project is not part of this model at all — see [`GITHUB_PROJECT_STANDARD.md`](./GITHUB_PROJECT_STANDARD.md).
+Adoption Status uses the three-state model from [`REPOSITORY_BOOTSTRAP_GUIDE.md#adoption-states`](./REPOSITORY_BOOTSTRAP_GUIDE.md#adoption-states): **Fully Onboarded**, **Degraded but Usable** (only CI/health-cadence conveniences missing, everything else in place), or **Not Onboarded** (a non-degradable item — `AGENTS.md`, `CLAUDE.md`, `AI_AGENT_OPERATING_MODEL.md`, `DECISION_ROUTER.md`, `ARCHITECTURE.md`, repository engineering docs, issue/PR templates, playbook/skills-repo reference, verification commands, or backlog — fails). A GitHub Project is not part of this model at all — see [`GITHUB_PROJECT_STANDARD.md`](./GITHUB_PROJECT_STANDARD.md). **As of this writing, no repository below has completed onboarding** — this table records honest current state, not aspiration; the Stability Policy above governs the playbook's own maturity independently of how many repositories have finished adopting it.
 
 | Repository | Adoption Status | Notes |
 | --- | --- | --- |

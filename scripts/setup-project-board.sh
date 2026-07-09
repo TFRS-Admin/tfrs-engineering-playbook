@@ -1,5 +1,18 @@
 #!/usr/bin/env bash
 # setup-project-board.sh
+#
+# DEPRECATED as of v3.0.0 (2026-07-09): this script was written against the
+# pre-3.0.0 GitHub-Project-centered model — it provisions a 10-field GitHub
+# Project as required infrastructure and writes issue bodies using the old
+# "Pending"/"Active" adoption vocabulary. Since v3.0.0 the playbook is
+# repository-centered: a GitHub Project is optional visualization only (see
+# GITHUB_PROJECT_STANDARD.md), issue bodies carry the `## Metadata` block
+# defined in ISSUE_METADATA_STANDARD.md instead of Project custom fields, and
+# adoption status uses the three-state model in
+# REPOSITORY_BOOTSTRAP_GUIDE.md#adoption-states. Do not run this script
+# as-is; it will recreate a superseded model. Kept for historical reference.
+#
+# Original description:
 # Creates the TFRS Engineering Playbook GitHub Project board, custom fields,
 # all 12 initial issues, assigns field values, and links sub-issues.
 #

@@ -1,5 +1,12 @@
 name: Setup Project Board
 
+# DEPRECATED as of v3.0.0 (2026-07-09): written against the pre-3.0.0
+# GitHub-Project-centered model. Since v3.0.0 the playbook is
+# repository-centered and a GitHub Project is optional visualization only —
+# see GITHUB_PROJECT_STANDARD.md and REPOSITORY_BOOTSTRAP_GUIDE.md. Running
+# this workflow as-is recreates a superseded model. Kept for historical
+# reference; do not run without updating it to the current standard first.
+#
 # Manually triggered — run once to create the GitHub Project, all 10 custom
 # fields, link the repository, create all 12 initial issues, set every field
 # value, and link sub-issues.
