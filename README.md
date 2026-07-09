@@ -1,10 +1,10 @@
 <!-- Purpose: Canonical entry point for the TFRS engineering playbook and adoption guidance. -->
 # TFRS Engineering Playbook
 
-![Version](https://img.shields.io/badge/version-2.3.0-blue)
+![Version](https://img.shields.io/badge/version-2.4.0-blue)
 ![Last Updated](https://img.shields.io/badge/last%20updated-2026--07--09-brightgreen)
 
-The **TFRS Engineering Playbook** is the canonical engineering operating system for current and future TFRS projects. Version 1 established the documentation foundation: AI-assisted development conventions, planning and review expectations, reusable templates, and GitHub operating standards. Version 2.0 operationalized it — GitHub is the operational source of truth, chat is temporary, and every phase of the lifecycle (review, roadmap, plan, backlog, execute, verify, ship) is an executable prompt any AI agent can run, not just a document to read. Version 2.1 deepened the engineering discipline inside that lifecycle — security, testing, debugging, and code-quality practice that were previously thin or missing. Version 2.2 connected this playbook to [`TFRS-Admin/agent-skills`](https://github.com/TFRS-Admin/agent-skills), a live, shared execution library agents consult for step-by-step task mechanics that this playbook intentionally doesn't restate. Version 2.3 makes the system operational end to end: a [Session Initialization Protocol](./AI_AGENT_OPERATING_MODEL.md#1-session-initialization-protocol), a [Decision Router](./DECISION_ROUTER.md) that maps plain-language requests to the right workflow, a full [Issue Execution Protocol](./commands/execute.md#issue-execution-protocol), and a [Repository Readiness Checklist](./REPOSITORY_BOOTSTRAP_GUIDE.md#repository-readiness-checklist) — run for real against `tfrs-website`, with the honest result reported rather than assumed.
+The **TFRS Engineering Playbook** is the canonical engineering operating system for current and future TFRS projects. Version 1 established the documentation foundation: AI-assisted development conventions, planning and review expectations, reusable templates, and GitHub operating standards. Version 2.0 operationalized it — GitHub is the operational source of truth, chat is temporary, and every phase of the lifecycle (review, roadmap, plan, backlog, execute, verify, ship) is an executable prompt any AI agent can run, not just a document to read. Version 2.1 deepened the engineering discipline inside that lifecycle — security, testing, debugging, and code-quality practice that were previously thin or missing. Version 2.2 connected this playbook to [`TFRS-Admin/agent-skills`](https://github.com/TFRS-Admin/agent-skills), a live, shared execution library agents consult for step-by-step task mechanics that this playbook intentionally doesn't restate. Version 2.3 made the system operational end to end: a [Session Initialization Protocol](./AI_AGENT_OPERATING_MODEL.md#1-session-initialization-protocol), a [Decision Router](./DECISION_ROUTER.md) that maps plain-language requests to the right workflow, a full [Issue Execution Protocol](./commands/execute.md#issue-execution-protocol), and a [Repository Readiness Checklist](./REPOSITORY_BOOTSTRAP_GUIDE.md#repository-readiness-checklist) — run for real against `tfrs-website`, with the honest result reported rather than assumed. Version 2.4 is a final cleanup sprint: it closes a routing gap that let small bug fixes reach execution without planning, defines one explicit Minimum Baseline, adds a three-state [Adoption Model](./REPOSITORY_BOOTSTRAP_GUIDE.md#adoption-states), and adds [`FOUNDER_WORKFLOW.md`](./FOUNDER_WORKFLOW.md) and this page's [Source-of-Truth Map](#source-of-truth-map) for anyone who isn't an AI agent.
 
 **What this repository is:** the canonical source of engineering standards, the GitHub-Project-centered operating model, and the executable command library every TFRS repository and AI agent should follow. It does not contain application code, and it does not contain a copy of the shared skills library — see below.
 
@@ -22,13 +22,31 @@ Separately from that one-time methodology synthesis, TFRS maintains an ongoing, 
 
 See [`SKILLS_STANDARD.md`](./SKILLS_STANDARD.md) for the full precedence rules and skill-selection guidance, and [`docs/agent-skills-integration.md`](./docs/agent-skills-integration.md) for a worked example. Nothing from the fork is vendored or duplicated into this repository — only referenced.
 
+## Source-of-Truth Map
+
+This repository has grown enough concepts that "which document owns this" needs to be explicit, not inferred. Each concept below has exactly one canonical home — if you find the same concept explained differently in two places, that's a bug in this repository, not two valid answers.
+
+| Concept | Canonical document |
+| --- | --- |
+| Session start (what an agent does first) | [`AI_AGENT_OPERATING_MODEL.md`](./AI_AGENT_OPERATING_MODEL.md) |
+| Request routing (plain language → workflow) | [`DECISION_ROUTER.md`](./DECISION_ROUTER.md) |
+| Standards and thresholds (PR size, review bar, security, testing, sizing) | The relevant `*_STANDARD.md` — [`REVIEW_STANDARD.md`](./REVIEW_STANDARD.md), [`EXECUTION_STANDARD.md`](./EXECUTION_STANDARD.md), [`PLANNING_STANDARD.md`](./PLANNING_STANDARD.md), [`SECURITY_STANDARD.md`](./SECURITY_STANDARD.md), [`TESTING_STANDARD.md`](./TESTING_STANDARD.md), [`GITHUB_PROJECT_STANDARD.md`](./GITHUB_PROJECT_STANDARD.md), [`BACKLOG_STANDARD.md`](./BACKLOG_STANDARD.md), [`REPO_HEALTH_STANDARD.md`](./REPO_HEALTH_STANDARD.md) |
+| Execution mechanics (how to actually run a workflow step by step) | [`TFRS-Admin/agent-skills`](https://github.com/TFRS-Admin/agent-skills), consulted per [`SKILLS_STANDARD.md`](./SKILLS_STANDARD.md) |
+| Onboarding and readiness (is a repository set up correctly, and what state is it in) | [`REPOSITORY_BOOTSTRAP_GUIDE.md`](./REPOSITORY_BOOTSTRAP_GUIDE.md) |
+| Minimum baseline (what to copy vs. reference) | [`commands/setup-from-playbook.md#minimum-baseline`](./commands/setup-from-playbook.md#minimum-baseline) |
+| Terminology conflicts (same word, different meaning) | [`AI_ENGINEERING_WORKFLOW.md`](./AI_ENGINEERING_WORKFLOW.md#terminology-map) |
+| Founder/operator usage (plain-language, human-facing) | [`FOUNDER_WORKFLOW.md`](./FOUNDER_WORKFLOW.md) |
+| Version history and upgrade impact | [`VERSION.md`](./VERSION.md) |
+
 ## Quick Start
+
+**Not a developer or an AI agent?** Start at [`FOUNDER_WORKFLOW.md`](./FOUNDER_WORKFLOW.md) instead of the rest of this page — it's the plain-language version of everything below.
 
 **Starting a session against any repository?** Follow the [Session Initialization Protocol](./AI_AGENT_OPERATING_MODEL.md#1-session-initialization-protocol) — it works from a plain-language request (*"implement the next ready issue in `tfrs-website`"*) and routes itself via [`DECISION_ROUTER.md`](./DECISION_ROUTER.md); you don't need to know which command to run before you start.
 
 **Bootstrapping a new or existing repository?**
 
-1. **Copy the baseline files** you need first: [`AGENTS.md`](./AGENTS.md), [`CLAUDE.md`](./CLAUDE.md), [`AI_AGENT_OPERATING_MODEL.md`](./AI_AGENT_OPERATING_MODEL.md), [`REVIEW_STANDARD.md`](./REVIEW_STANDARD.md), and [`EXECUTION_STANDARD.md`](./EXECUTION_STANDARD.md).
+1. **Copy the minimum baseline** — exactly four files, per [`commands/setup-from-playbook.md#minimum-baseline`](./commands/setup-from-playbook.md#minimum-baseline): [`AGENTS.md`](./AGENTS.md), [`CLAUDE.md`](./CLAUDE.md), [`AI_AGENT_OPERATING_MODEL.md`](./AI_AGENT_OPERATING_MODEL.md), and [`DECISION_ROUTER.md`](./DECISION_ROUTER.md) — plus the GitHub-native `.github/ISSUE_TEMPLATE/` and `.github/PULL_REQUEST_TEMPLATE.md`. Everything else (including `REVIEW_STANDARD.md` and `EXECUTION_STANDARD.md`) is referenced, not copied — see [What Should Stay Centralized](#what-should-stay-centralized) below.
 2. **Reference this repository directly** from the target repository README and contributor docs when you want a single maintained standard.
 3. Follow the full onboarding lifecycle in [`REPOSITORY_BOOTSTRAP_GUIDE.md`](./REPOSITORY_BOOTSTRAP_GUIDE.md) — it walks through repository creation, playbook adoption, GitHub Project setup, and the first pass through Review → Plan → Backlog → Execute, using `tfrs-website`'s real, current issue hierarchy as a worked example — including where that repository's own adoption is still incomplete, per its [Repository Readiness Checklist](./REPOSITORY_BOOTSTRAP_GUIDE.md#repository-readiness-checklist) result.
 4. Record the adoption decision in your repository docs and project board using [`GITHUB_PROJECT_STANDARD.md`](./GITHUB_PROJECT_STANDARD.md).
@@ -63,6 +81,7 @@ Review → Roadmap → Plan → Backlog → Execute → Verify → Ship
 - [AI_ENGINEERING_WORKFLOW.md](./AI_ENGINEERING_WORKFLOW.md)
 - [AI_AGENT_OPERATING_MODEL.md](./AI_AGENT_OPERATING_MODEL.md)
 - [DECISION_ROUTER.md](./DECISION_ROUTER.md)
+- [FOUNDER_WORKFLOW.md](./FOUNDER_WORKFLOW.md)
 - [REVIEW_STANDARD.md](./REVIEW_STANDARD.md)
 - [PLANNING_STANDARD.md](./PLANNING_STANDARD.md)
 - [EXECUTION_STANDARD.md](./EXECUTION_STANDARD.md)
@@ -109,34 +128,41 @@ Review → Roadmap → Plan → Backlog → Execute → Verify → Ship
 
 ## Currently Adopted By
 
+Adoption Status uses the three-state model from [`REPOSITORY_BOOTSTRAP_GUIDE.md#adoption-states`](./REPOSITORY_BOOTSTRAP_GUIDE.md#adoption-states): **Fully Onboarded**, **Degraded but Usable** (only GitHub-native conveniences missing, everything else in place), or **Not Onboarded** (a non-degradable item — `AGENTS.md`, `CLAUDE.md`, `DECISION_ROUTER.md`, playbook/skills-repo reference, verification commands, or backlog — fails).
+
 | Repository | Adoption Status | Notes |
 | --- | --- | --- |
-| tfrs-website | Partial (2 of 12 on the [Repository Readiness Checklist](./REPOSITORY_BOOTSTRAP_GUIDE.md#repository-readiness-checklist)) | Has a real, dependency-mapped issue hierarchy and runnable verification commands, used as this playbook's worked example — but its own `AGENTS.md` still points at a vendored skills copy instead of this playbook, and it has no GitHub Project, CI, or issue/PR templates yet. See the checklist result for the full breakdown before treating it as fully onboarded. |
-| Code-Gen-AI | Pending | JavaScript project queued for first-wave adoption |
-| prompt-showcase-by-team44-copy | Pending | Candidate for prompt and review standards rollout |
-| QPM_Base44 | Pending | Needs baseline repo standards and workflow alignment |
-| Digital-Catalogue | Pending | Needs playbook reference and board alignment |
-| CPQ-Master-Inventory | Pending | Needs standardized execution and review guidance |
+| tfrs-website | Not Onboarded (2 of 13 on the [Repository Readiness Checklist](./REPOSITORY_BOOTSTRAP_GUIDE.md#repository-readiness-checklist); 5 non-degradable failures) | Has a real, dependency-mapped issue hierarchy and runnable verification commands, used as this playbook's worked example — but its own `AGENTS.md` still points at a vendored skills copy instead of this playbook, and it's missing `CLAUDE.md`, `DECISION_ROUTER.md`, and any playbook/skills-repo reference. See the checklist result for the full breakdown before treating it as onboarded at all. |
+| Code-Gen-AI | Not Onboarded | JavaScript project queued for first-wave adoption; onboarding not yet started |
+| prompt-showcase-by-team44-copy | Not Onboarded | Candidate for prompt and review standards rollout; onboarding not yet started |
+| QPM_Base44 | Not Onboarded | Needs baseline repo standards and workflow alignment; onboarding not yet started |
+| Digital-Catalogue | Not Onboarded | Needs playbook reference and board alignment; onboarding not yet started |
+| CPQ-Master-Inventory | Not Onboarded | Needs standardized execution and review guidance; onboarding not yet started |
 
 ## Adoption Guidance
 
 ### What Repositories Should Copy
 
-Copy these into the downstream repository so they work without a live dependency on this repository being reachable:
+The minimum baseline — see [`commands/setup-from-playbook.md#minimum-baseline`](./commands/setup-from-playbook.md#minimum-baseline) for the authoritative table and the reasoning behind each entry:
 
-- [`AGENTS.md`](./AGENTS.md), [`CLAUDE.md`](./CLAUDE.md), [`AI_AGENT_OPERATING_MODEL.md`](./AI_AGENT_OPERATING_MODEL.md) — behavioral contract every agent needs on hand.
+- [`AGENTS.md`](./AGENTS.md), [`CLAUDE.md`](./CLAUDE.md), [`AI_AGENT_OPERATING_MODEL.md`](./AI_AGENT_OPERATING_MODEL.md), [`DECISION_ROUTER.md`](./DECISION_ROUTER.md) — behavioral contract and routing table every agent needs on hand without a live fetch of this repository.
 - `.github/ISSUE_TEMPLATE/`, `.github/PULL_REQUEST_TEMPLATE.md` — GitHub-native, must live in the consuming repository to take effect.
+
+Beyond the baseline, also copy (these are repository-specific from the moment they're created, so centralizing them would be meaningless):
+
 - The [`templates/`](./templates/README.md) files relevant to that repository's stack and current work (e.g. copy `epic-template.md` and `engineering-task-template.md` as soon as the repository starts using [`BACKLOG_STANDARD.md`](./BACKLOG_STANDARD.md)).
-- A repository-specific `ARCHITECTURE.md` seeded from [`templates/repository-architecture-template.md`](./templates/repository-architecture-template.md) and a `docs/decision-log/` seeded from [`templates/adr-template.md`](./templates/adr-template.md) — these are repository-specific from the moment they're created and should never be centralized.
+- A repository-specific `ARCHITECTURE.md` seeded from [`templates/repository-architecture-template.md`](./templates/repository-architecture-template.md) and a `docs/decision-log/` seeded from [`templates/adr-template.md`](./templates/adr-template.md).
+
+`REVIEW_STANDARD.md` and `EXECUTION_STANDARD.md` are **not** part of the baseline, despite being described that way in earlier guidance — they belong in [What Should Stay Centralized](#what-should-stay-centralized) below, alongside every other `*_STANDARD.md` document.
 
 ### What Should Stay Centralized
 
 Reference these directly from this repository rather than copying, since they change independently of any one downstream repository and copies would drift:
 
-- [`REVIEW_STANDARD.md`](./REVIEW_STANDARD.md), [`PLANNING_STANDARD.md`](./PLANNING_STANDARD.md), [`EXECUTION_STANDARD.md`](./EXECUTION_STANDARD.md), [`BACKLOG_STANDARD.md`](./BACKLOG_STANDARD.md), [`GITHUB_PROJECT_STANDARD.md`](./GITHUB_PROJECT_STANDARD.md), [`SECURITY_STANDARD.md`](./SECURITY_STANDARD.md), [`TESTING_STANDARD.md`](./TESTING_STANDARD.md), [`SKILLS_STANDARD.md`](./SKILLS_STANDARD.md), [`REPO_HEALTH_STANDARD.md`](./REPO_HEALTH_STANDARD.md), [`DECISION_ROUTER.md`](./DECISION_ROUTER.md) — the standards themselves.
+- [`REVIEW_STANDARD.md`](./REVIEW_STANDARD.md), [`PLANNING_STANDARD.md`](./PLANNING_STANDARD.md), [`EXECUTION_STANDARD.md`](./EXECUTION_STANDARD.md), [`BACKLOG_STANDARD.md`](./BACKLOG_STANDARD.md), [`GITHUB_PROJECT_STANDARD.md`](./GITHUB_PROJECT_STANDARD.md), [`SECURITY_STANDARD.md`](./SECURITY_STANDARD.md), [`TESTING_STANDARD.md`](./TESTING_STANDARD.md), [`SKILLS_STANDARD.md`](./SKILLS_STANDARD.md), [`REPO_HEALTH_STANDARD.md`](./REPO_HEALTH_STANDARD.md) — the standards themselves. (`DECISION_ROUTER.md` is the one exception among the all-caps root documents — it's part of the copy baseline, not this list, per [`commands/setup-from-playbook.md#minimum-baseline`](./commands/setup-from-playbook.md#minimum-baseline).)
 - [`TFRS-Admin/agent-skills`](https://github.com/TFRS-Admin/agent-skills) — the shared skills execution library; reference it live per [`SKILLS_STANDARD.md`](./SKILLS_STANDARD.md), never vendor a copy of it into a downstream repository.
 - The [`commands/`](./commands/README.md) library — executable prompts should be run against the canonical version so improvements to a command reach every repository immediately.
-- [`AI_ENGINEERING_WORKFLOW.md`](./AI_ENGINEERING_WORKFLOW.md) and [`REPOSITORY_BOOTSTRAP_GUIDE.md`](./REPOSITORY_BOOTSTRAP_GUIDE.md).
+- [`AI_ENGINEERING_WORKFLOW.md`](./AI_ENGINEERING_WORKFLOW.md), [`REPOSITORY_BOOTSTRAP_GUIDE.md`](./REPOSITORY_BOOTSTRAP_GUIDE.md), and [`FOUNDER_WORKFLOW.md`](./FOUNDER_WORKFLOW.md) — a founder reads this last one here, in the playbook; it isn't something a downstream repository copies.
 
 ### Versioning Strategy
 

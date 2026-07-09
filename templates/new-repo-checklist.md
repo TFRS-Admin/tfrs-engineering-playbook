@@ -9,8 +9,9 @@
 
 ## Playbook Adoption
 
-- [ ] Copy or reference [`AGENTS.md`](../AGENTS.md), [`CLAUDE.md`](../CLAUDE.md), [`REVIEW_STANDARD.md`](../REVIEW_STANDARD.md), and [`EXECUTION_STANDARD.md`](../EXECUTION_STANDARD.md).
-- [ ] Add a README section linking back to this playbook repository.
+- [ ] Copy the Minimum Baseline exactly — see [`commands/setup-from-playbook.md#minimum-baseline`](../commands/setup-from-playbook.md#minimum-baseline): [`AGENTS.md`](../AGENTS.md), [`CLAUDE.md`](../CLAUDE.md), [`AI_AGENT_OPERATING_MODEL.md`](../AI_AGENT_OPERATING_MODEL.md), and [`DECISION_ROUTER.md`](../DECISION_ROUTER.md).
+- [ ] Reference (don't copy) [`REVIEW_STANDARD.md`](../REVIEW_STANDARD.md), [`EXECUTION_STANDARD.md`](../EXECUTION_STANDARD.md), and the rest of the `*_STANDARD.md` family directly from this playbook.
+- [ ] Add a README section linking back to this playbook repository and naming [`TFRS-Admin/agent-skills`](https://github.com/TFRS-Admin/agent-skills) as the skills execution library.
 - [ ] Record the adopted playbook version from [`VERSION.md`](../VERSION.md).
 
 ## Project and Collaboration Setup
