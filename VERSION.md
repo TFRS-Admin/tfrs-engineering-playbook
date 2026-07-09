@@ -3,7 +3,7 @@
 
 ## Current Version
 
-**2.1.0**
+**2.2.0**
 
 ## Versioning Rules
 
@@ -23,6 +23,11 @@ Record changes using this format:
 ```
 
 ## Changelog
+
+## 2.2.0 - 2026-07-09
+- Type: minor
+- Summary: Integrated [`TFRS-Admin/agent-skills`](https://github.com/TFRS-Admin/agent-skills) — a live fork of the reference skills pack — as the shared, ongoing execution library for AI agents, distinct from the one-time methodology synthesis in `README.md#engineering-methodology-lineage`. Added `SKILLS_STANDARD.md` (the three-repository architecture, conflict precedence, the nine-step skill-consultation workflow, skill-selection table, and fork-management guidance) and `docs/agent-skills-integration.md` (a worked walkthrough). Updated `README.md`, `AGENTS.md`, `CLAUDE.md`, `AI_ENGINEERING_WORKFLOW.md`, `AI_AGENT_OPERATING_MODEL.md`, and `commands/README.md` to cross-reference the new standard. No skill content was copied into this repository.
+- Impact: Additive and backward-compatible — no GitHub Project field or lifecycle changes. Downstream repositories should note the precedence rule (local guidance > this playbook > the skills fork) and start consulting `TFRS-Admin/agent-skills` per the skill-selection table for execution-level detail. Two TFRS-specific skills referenced in that table (`skills/tfrs/repo-health`, `skills/tfrs/backlog-initialization` or `skills/tfrs/github-project-management`) do not exist in the fork yet — see `SKILLS_STANDARD.md#skill-selection` for the fallback in the meantime — and the fork's own plugin manifest still needs a follow-up fix to point at itself instead of upstream (see `SKILLS_STANDARD.md#fork-management`).
 
 ## 2.1.0 - 2026-07-09
 - Type: minor

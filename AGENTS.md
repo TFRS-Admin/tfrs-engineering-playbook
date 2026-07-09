@@ -44,6 +44,7 @@ Use Conventional Commits for every agent-authored commit:
 3. Follow [`EXECUTION_STANDARD.md`](./EXECUTION_STANDARD.md) when coding, and the executable command library under [`commands/`](./commands/README.md) for every phase of the lifecycle.
 4. Check [`REVIEW_STANDARD.md`](./REVIEW_STANDARD.md) before asking for or approving a pull request, and [`SECURITY_STANDARD.md`](./SECURITY_STANDARD.md) / [`TESTING_STANDARD.md`](./TESTING_STANDARD.md) whenever a change touches external input, auth, or behavior that needs test coverage.
 5. Use [`AI_ENGINEERING_WORKFLOW.md`](./AI_ENGINEERING_WORKFLOW.md) to decide what work belongs to humans versus AI.
+6. Consult [`SKILLS_STANDARD.md`](./SKILLS_STANDARD.md) for the step-by-step execution mechanics of a given task type (code review, planning, implementation, verification, and so on) — this playbook defines *what's required*, [`TFRS-Admin/agent-skills`](https://github.com/TFRS-Admin/agent-skills) defines *how to execute it*; don't re-derive a skill's workflow from scratch when one already exists.
 
 ## Branch Naming
 

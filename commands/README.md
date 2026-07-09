@@ -28,4 +28,5 @@ review → roadmap → plan → backlog → execute → verify → ship
 
 ## Related Documents
 
-[`../AI_AGENT_OPERATING_MODEL.md`](../AI_AGENT_OPERATING_MODEL.md) — how an agent decides which command to run next.
+- [`../AI_AGENT_OPERATING_MODEL.md`](../AI_AGENT_OPERATING_MODEL.md) — how an agent decides which command to run next.
+- [`../SKILLS_STANDARD.md`](../SKILLS_STANDARD.md) — for the step-by-step mechanics inside a command, consult the matching skill in [`TFRS-Admin/agent-skills`](https://github.com/TFRS-Admin/agent-skills); these commands define what's required, the skills fork defines how to execute it.

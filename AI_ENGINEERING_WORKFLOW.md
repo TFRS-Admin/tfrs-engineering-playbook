@@ -29,7 +29,7 @@ The standard TFRS path is:
 4. **Pull Request** opened with [`.github/PULL_REQUEST_TEMPLATE.md`](./.github/PULL_REQUEST_TEMPLATE.md) and a verification report from [`commands/verify.md`](./commands/verify.md) attached.
 5. **Merge** after review against [`REVIEW_STANDARD.md`](./REVIEW_STANDARD.md), via [`commands/ship.md`](./commands/ship.md).
 
-Every phase above has a corresponding executable prompt in the [`commands/`](./commands/README.md) library — use those prompts to run the phase rather than improvising it from this table alone.
+Every phase above has a corresponding executable prompt in the [`commands/`](./commands/README.md) library — use those prompts to run the phase rather than improvising it from this table alone. For the step-by-step execution mechanics inside any given phase, consult the matching skill in [`TFRS-Admin/agent-skills`](https://github.com/TFRS-Admin/agent-skills) per [`SKILLS_STANDARD.md`](./SKILLS_STANDARD.md) — this table and the `commands/` library define *what phase* work is in and *what's required*; the skills fork defines *how* to execute within it.
 
 ## Terminology Map
 

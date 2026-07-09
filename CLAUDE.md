@@ -42,3 +42,7 @@ Use [`AGENTS.md`](./AGENTS.md) as the baseline for code style, naming, and branc
 ## Executing the Lifecycle
 
 Every phase of the lifecycle — Review, Roadmap, Plan, Backlog, Execute, Verify, Ship, and recurring Repo Health — has an executable prompt under [`commands/`](./commands/README.md). Run the command that matches the current phase rather than improvising the workflow from these standards alone; the commands encode the required inputs, outputs, and quality gates precisely.
+
+## Using the Skills Execution Library
+
+For the step-by-step mechanics *within* a command or phase — how to actually structure a five-axis review, run a red-green-refactor loop, or triage a failure — consult the matching skill in [`TFRS-Admin/agent-skills`](https://github.com/TFRS-Admin/agent-skills) per [`SKILLS_STANDARD.md`](./SKILLS_STANDARD.md). This playbook's standards win if the two ever conflict; the skill fills in execution detail this playbook intentionally doesn't restate.

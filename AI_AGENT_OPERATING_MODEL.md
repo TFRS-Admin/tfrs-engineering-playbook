@@ -105,7 +105,7 @@ Read standards → Read board → Pick next issue → Update GitHub (start)
   → Update GitHub (PR opened) → Stop or hand off → Update GitHub (closed)
 ```
 
-This loop applies identically whether the acting agent is Claude Code, GitHub Copilot, or a future agent — the model is agent-agnostic by design.
+This loop applies identically whether the acting agent is Claude Code, GitHub Copilot, or a future agent — the model is agent-agnostic by design. The "Implement within acceptance criteria → Verify with evidence" steps have their own detailed sub-procedure — the nine-step skill-consultation workflow in [`SKILLS_STANDARD.md`](./SKILLS_STANDARD.md#the-skill-consultation-workflow) — for exactly how to bring [`TFRS-Admin/agent-skills`](https://github.com/TFRS-Admin/agent-skills) into a given task; this loop doesn't restate that detail.
 
 ## Related Documents
 
@@ -115,3 +115,4 @@ This loop applies identically whether the acting agent is Claude Code, GitHub Co
 - [`GITHUB_PROJECT_STANDARD.md`](./GITHUB_PROJECT_STANDARD.md) — field and view definitions referenced throughout
 - [`commands/execute.md`](./commands/execute.md), [`commands/verify.md`](./commands/verify.md), and [`commands/ship.md`](./commands/ship.md) — the executable procedures this model governs
 - [`SECURITY_STANDARD.md`](./SECURITY_STANDARD.md) — referenced by the optional parallel fan-out pattern in section 9
+- [`SKILLS_STANDARD.md`](./SKILLS_STANDARD.md) — the skill-consultation workflow nested inside this model's Summary Loop

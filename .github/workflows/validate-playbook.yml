@@ -38,12 +38,14 @@ jobs:
             GITHUB_PROJECT_STANDARD.md
             SECURITY_STANDARD.md
             TESTING_STANDARD.md
+            SKILLS_STANDARD.md
             REPOSITORY_BOOTSTRAP_GUIDE.md
             REPO_HEALTH_STANDARD.md
             VERSION.md
             docs/ai-prompting/README.md
             docs/code-patterns/README.md
             docs/decision-log/README.md
+            docs/agent-skills-integration.md
             templates/README.md
             templates/new-repo-checklist.md
             templates/project-board-template.md
