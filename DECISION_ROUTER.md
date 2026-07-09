@@ -13,8 +13,8 @@ An agent should be able to take a plain-language request — *"implement the nex
 | "Review this repo" | [`commands/repo-health.md`](./commands/repo-health.md) if it's a scheduled/general check; [`commands/review.md`](./commands/review.md) if it's scoped to a specific area or triggered by upcoming work |
 | "Plan this feature" | [`commands/plan.md`](./commands/plan.md), gated by [`PLANNING_STANDARD.md#when-a-full-spec-is-required`](./PLANNING_STANDARD.md#when-a-full-spec-is-required) — run Specification first when a trigger there applies |
 | "Build this feature" | Specification (if triggered) → [`commands/plan.md`](./commands/plan.md) → [`commands/backlog.md`](./commands/backlog.md) → [`commands/execute.md`](./commands/execute.md) — the full chain, not a shortcut to Execute |
-| "Implement issue #N" | [`commands/execute.md`](./commands/execute.md) directly — **only if #N is `Ready` and unblocked**; see Forbidden Until Planned/Backlogged below |
-| "Fix this bug" | Check whether a tracking issue already exists; if not, [`commands/review.md`](./commands/review.md) to establish root cause, then [`commands/plan.md`](./commands/plan.md) if the fix isn't small and obvious, then [`commands/execute.md`](./commands/execute.md) |
+| "Implement issue #N" | [`commands/execute.md`](./commands/execute.md) directly — **only if #N is `Ready` and unblocked**; see [Forbidden Until Planned/Backlogged](#forbidden-until-plannedbacklogged) below |
+| "Fix this bug" | If a `Ready`, unblocked tracking issue already exists for this bug, route straight to [`commands/execute.md`](./commands/execute.md). **Otherwise there is no shortcut**, regardless of how small the fix looks: [`commands/review.md`](./commands/review.md) to establish root cause → [`commands/plan.md`](./commands/plan.md) (even a one-task plan for an obvious fix) → [`commands/backlog.md`](./commands/backlog.md) to create the actual issue with acceptance criteria → then [`commands/execute.md`](./commands/execute.md). "Small and obvious" shortens how long Plan and Backlog take — it never skips them; see [Forbidden Until Planned/Backlogged](#forbidden-until-plannedbacklogged) below. |
 | "The app is slow" | [`commands/review.md`](./commands/review.md) or the Testing/CI dimensions of [`commands/repo-health.md`](./commands/repo-health.md) *before* any implementation — performance claims need evidence (reproduce and measure) before a fix is planned, not after |
 | "Make the code cleaner" | [`commands/repo-health.md`](./commands/repo-health.md) → file as backlog via [`commands/backlog.md`](./commands/backlog.md), **not** an immediate refactor — see [`AI_AGENT_OPERATING_MODEL.md#7-how-to-avoid-scope-expansion`](./AI_AGENT_OPERATING_MODEL.md#7-how-to-avoid-scope-expansion) |
 | "Ship this PR" | [`commands/verify.md`](./commands/verify.md) → [`REVIEW_STANDARD.md`](./REVIEW_STANDARD.md) approval → [`commands/ship.md`](./commands/ship.md), in that order — never skip straight to ship |
@@ -40,10 +40,17 @@ State-changing actions always get an explicit checkpoint before or immediately a
 
 - **Proceed** without asking when the request maps cleanly to one row above, the target issue (if any) is `Ready` and unblocked, and the action matches its acceptance criteria — per [`CLAUDE.md`](./CLAUDE.md#when-to-ask-vs-when-to-proceed).
 - **Ask** when the request is ambiguous between rows, names an issue that isn't actually `Ready`, or would require skipping a gate (see Ambiguity Handling above).
-- **Implementation is forbidden** — not just "ask first," but flatly not-yet-possible — until planning and backlog exist for the work in question:
-  - No `commands/execute.md` run against an issue with no acceptance criteria.
-  - No `commands/execute.md` run against work that only exists as a chat request or a "Build this feature" ask that hasn't passed through Plan and Backlog yet.
-  - No `commands/ship.md` run without a passing [`commands/verify.md`](./commands/verify.md) report attached.
+- For anything execution-shaped ("fix this bug," "implement issue #N," "build this feature"), whether to proceed or ask is downstream of one prior question: is there already a `Ready`, unblocked, acceptance-criteria-bearing issue for this work? If not, see below — this isn't an ask/proceed judgment call, it's a hard stop.
+
+## Forbidden Until Planned/Backlogged
+
+**Implementation is forbidden** — not just "ask first," but flatly not-yet-possible — until planning and backlog exist for the work in question. This applies uniformly regardless of how the request was phrased ("implement issue #N," "fix this bug," "build this feature," or anything else that resolves to execution):
+
+- No [`commands/execute.md`](./commands/execute.md) run against an issue with no acceptance criteria.
+- No [`commands/execute.md`](./commands/execute.md) run against work that only exists as a chat request, a bug report with no tracking issue, or a "Build this feature" ask that hasn't passed through [`commands/plan.md`](./commands/plan.md) and [`commands/backlog.md`](./commands/backlog.md) yet — see [`commands/backlog.md`](./commands/backlog.md) for what "passed through Backlog" actually requires (all ten GitHub Project fields set, or the structured-text equivalent, and `Blocked` = `No`).
+- No [`commands/ship.md`](./commands/ship.md) run without a passing [`commands/verify.md`](./commands/verify.md) report attached.
+
+This is the same rule [`commands/execute.md`](./commands/execute.md#issue-execution-protocol) enforces from the execution side (step 4: "confirm the issue is `Ready` and unblocked, or stop and explain why it isn't") — this section and that one are two views of one rule, not two rules.
 
 ## Related Documents
 

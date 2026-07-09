@@ -19,13 +19,30 @@ Bring an existing repository that has partially or informally adopted TFRS conve
 
 Check for `skills/tfrs/repository-adoption` in [`TFRS-Admin/agent-skills`](https://github.com/TFRS-Admin/agent-skills) first (see [`SKILLS_STANDARD.md#skill-selection`](../SKILLS_STANDARD.md#skill-selection)). As of this writing it does not exist in the fork yet; until it does, this command is the whole procedure — there is no generic upstream skill for adopting a TFRS-specific playbook.
 
+## Minimum Baseline
+
+This is the one authoritative list of what a downstream repository must have — by copy where an agent needs it without a live fetch of this repository, or by GitHub-native placement where GitHub itself only honors a file living in the consuming repository. Everything else in this playbook is referenced, never copied (see [`README.md#what-should-stay-centralized`](../README.md#what-should-stay-centralized)) — copying a `*_STANDARD.md` doc or a `commands/` file creates a second copy that drifts the moment this repository updates. If a step below or elsewhere in this playbook ever conflicts with this table, this table wins for what counts as baseline.
+
+| File | Handling | Why |
+| --- | --- | --- |
+| `AGENTS.md` | Copy | Read first, every session, per [`AI_AGENT_OPERATING_MODEL.md#1-session-initialization-protocol`](../AI_AGENT_OPERATING_MODEL.md#1-session-initialization-protocol) step 2 — an agent needs this without fetching this repository first. |
+| `CLAUDE.md` | Copy | Same rationale, step 3. |
+| `AI_AGENT_OPERATING_MODEL.md` | Copy | The operating loop itself — an agent needs the full protocol locally, not a summary of it. |
+| `DECISION_ROUTER.md` | Copy | Needed to route a plain-language request (step 6–7 of the Session Initialization Protocol) before the agent has done anything else — it cannot be deferred to a live fetch either. |
+| `.github/ISSUE_TEMPLATE/` | GitHub-native (must exist locally) | GitHub only surfaces issue templates that live in the consuming repository. |
+| `.github/PULL_REQUEST_TEMPLATE.md` | GitHub-native (must exist locally) | Same reason. |
+
+Everything else — [`REVIEW_STANDARD.md`](../REVIEW_STANDARD.md), [`PLANNING_STANDARD.md`](../PLANNING_STANDARD.md), [`EXECUTION_STANDARD.md`](../EXECUTION_STANDARD.md), [`BACKLOG_STANDARD.md`](../BACKLOG_STANDARD.md), [`GITHUB_PROJECT_STANDARD.md`](../GITHUB_PROJECT_STANDARD.md), [`SECURITY_STANDARD.md`](../SECURITY_STANDARD.md), [`TESTING_STANDARD.md`](../TESTING_STANDARD.md), [`SKILLS_STANDARD.md`](../SKILLS_STANDARD.md), [`REPO_HEALTH_STANDARD.md`](../REPO_HEALTH_STANDARD.md), the [`commands/`](./README.md) library, [`AI_ENGINEERING_WORKFLOW.md`](../AI_ENGINEERING_WORKFLOW.md), and [`REPOSITORY_BOOTSTRAP_GUIDE.md`](../REPOSITORY_BOOTSTRAP_GUIDE.md) — is referenced directly from this repository, never copied. This resolves what used to be an inconsistent "copy or reference" framing elsewhere in this playbook; wherever you see `REVIEW_STANDARD.md` or `EXECUTION_STANDARD.md` described as something to "copy," treat this table as the correction.
+
+The [Repository Readiness Checklist](../REPOSITORY_BOOTSTRAP_GUIDE.md#repository-readiness-checklist) tests for this baseline directly — a repository failing an `AGENTS.md`, `CLAUDE.md`, or `DECISION_ROUTER.md` check on that list is failing this baseline, not a separate requirement.
+
 ## Workflow
 
 1. Review the target repository's README, branch protections, and existing contributor docs — including any existing `AGENTS.md`/`CLAUDE.md`, even an informal one; don't assume the repository has nothing to say.
-2. Copy or reference the baseline files: [`AGENTS.md`](../AGENTS.md), [`CLAUDE.md`](../CLAUDE.md), [`AI_AGENT_OPERATING_MODEL.md`](../AI_AGENT_OPERATING_MODEL.md), [`REVIEW_STANDARD.md`](../REVIEW_STANDARD.md), and [`EXECUTION_STANDARD.md`](../EXECUTION_STANDARD.md). If the repository has its own conflicting `AGENTS.md`, don't silently overwrite it — flag the conflict per [`SKILLS_STANDARD.md#precedence-on-conflict`](../SKILLS_STANDARD.md#precedence-on-conflict) and get explicit sign-off on which rule wins before replacing it.
+2. Copy the four baseline files ([`AGENTS.md`](../AGENTS.md), [`CLAUDE.md`](../CLAUDE.md), [`AI_AGENT_OPERATING_MODEL.md`](../AI_AGENT_OPERATING_MODEL.md), [`DECISION_ROUTER.md`](../DECISION_ROUTER.md)) per the Minimum Baseline above. If the repository has its own conflicting `AGENTS.md`, don't silently overwrite it — flag the conflict per [`SKILLS_STANDARD.md#precedence-on-conflict`](../SKILLS_STANDARD.md#precedence-on-conflict) and get explicit sign-off on which rule wins before replacing it.
 3. Update the target repository's README with a short section naming this repository as the engineering source of truth, and [`TFRS-Admin/agent-skills`](https://github.com/TFRS-Admin/agent-skills) as the skills execution library, per [`SKILLS_STANDARD.md`](../SKILLS_STANDARD.md).
-4. Create or align the repository's GitHub Project using [`GITHUB_PROJECT_STANDARD.md`](../GITHUB_PROJECT_STANDARD.md) — or explicitly record that none exists yet and issues will use structured-text fields in the interim (see [`REPOSITORY_BOOTSTRAP_GUIDE.md#repository-readiness-checklist`](../REPOSITORY_BOOTSTRAP_GUIDE.md#repository-readiness-checklist)).
-5. Add issue templates, PR template, and any reusable workflow files from [`templates/`](../templates/README.md) that fit the target repository's stack.
+4. Create or align the repository's GitHub Project using [`GITHUB_PROJECT_STANDARD.md`](../GITHUB_PROJECT_STANDARD.md) — or explicitly record that none exists yet and issues will use structured-text fields in the interim (see [`REPOSITORY_BOOTSTRAP_GUIDE.md#adoption-states`](../REPOSITORY_BOOTSTRAP_GUIDE.md#adoption-states)).
+5. Add `.github/ISSUE_TEMPLATE/` and `.github/PULL_REQUEST_TEMPLATE.md` (the GitHub-native baseline items above), and any reusable workflow files from [`templates/`](../templates/README.md) that fit the target repository's stack.
 6. Record the adopted playbook version from [`VERSION.md`](../VERSION.md) in the target repository.
 
 ## Required Outputs

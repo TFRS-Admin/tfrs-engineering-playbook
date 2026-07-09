@@ -3,7 +3,7 @@
 
 ## Current Version
 
-**2.3.0**
+**2.4.0**
 
 ## Versioning Rules
 
@@ -23,6 +23,11 @@ Record changes using this format:
 ```
 
 ## Changelog
+
+## 2.4.0 - 2026-07-09
+- Type: minor
+- Summary: Final cleanup sprint — targeted consistency and usability pass, not a rewrite. Fixed a routing bug in `DECISION_ROUTER.md` where "Fix this bug" could reach `commands/execute.md` for small fixes without passing through Plan and Backlog first; gave the "forbidden until planned/backlogged" rule its own real, linkable section instead of an unanchored bullet, and aligned `commands/execute.md` and `commands/backlog.md` wording to match. Defined an explicit Minimum Baseline in `commands/setup-from-playbook.md` (`AGENTS.md`, `CLAUDE.md`, `AI_AGENT_OPERATING_MODEL.md`, `DECISION_ROUTER.md`, plus the two GitHub-native template files) and corrected `README.md` and `REPOSITORY_BOOTSTRAP_GUIDE.md`, which had previously and inconsistently listed `REVIEW_STANDARD.md`/`EXECUTION_STANDARD.md` as both "copy" and "stay centralized." Added a three-state Adoption Model (Fully Onboarded / Degraded but Usable / Not Onboarded) to `REPOSITORY_BOOTSTRAP_GUIDE.md`, splitting the Repository Readiness Checklist into degradable and non-degradable items, and reclassified `tfrs-website` from "Partial" to the more accurate `Not Onboarded` (5 non-degradable failures) in `README.md`. Added `FOUNDER_WORKFLOW.md`, a plain-language operating manual for non-technical founders/operators. Added a Source-of-Truth Map to `README.md` mapping every major concept to its one canonical document.
+- Impact: Additive and backward-compatible — no GitHub Project field changes. Downstream repositories should re-run the Repository Readiness Checklist: the new `DECISION_ROUTER.md` baseline item and the non-degradable/degradable split may change a repository's classification even if nothing about the repository itself changed. Repositories previously told to copy `REVIEW_STANDARD.md`/`EXECUTION_STANDARD.md` should remove that local copy and reference this repository instead, per the corrected Minimum Baseline.
 
 ## 2.3.0 - 2026-07-09
 - Type: minor

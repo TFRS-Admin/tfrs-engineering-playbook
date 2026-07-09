@@ -10,6 +10,7 @@ This is the executable version of [`BACKLOG_STANDARD.md`](../BACKLOG_STANDARD.md
 - Immediately after [`commands/plan.md`](./plan.md) produces an approved task breakdown.
 - When initializing a backlog for a new repository (see [`REPOSITORY_BOOTSTRAP_GUIDE.md`](../REPOSITORY_BOOTSTRAP_GUIDE.md)).
 - When a [`REPO_HEALTH_STANDARD.md`](../REPO_HEALTH_STANDARD.md) finding needs to become tracked work.
+- When a bug fix has no existing `Ready` tracking issue — per [`DECISION_ROUTER.md#forbidden-until-plannedbacklogged`](../DECISION_ROUTER.md#forbidden-until-plannedbacklogged), even a small, obvious fix passes through this command (converting its one-task plan into a real, fielded issue) before [`commands/execute.md`](./execute.md) can run against it.
 
 ## Required Inputs
 
