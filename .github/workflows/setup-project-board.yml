@@ -1,0 +1,468 @@
+name: Setup Project Board
+
+# Manually triggered — run once to create the GitHub Project, all 10 custom
+# fields, link the repository, create all 12 initial issues, set every field
+# value, and link sub-issues.
+#
+# Prerequisites:
+#   - The SETUP_TOKEN secret must exist (a classic Personal Access Token with
+#     scopes: repo, project, read:org).  The default GITHUB_TOKEN does NOT have
+#     the "project" scope required for ProjectV2 mutations.
+#
+# How to add the secret:
+#   Repository → Settings → Secrets and variables → Actions → New repository secret
+#   Name:  SETUP_TOKEN
+#   Value: <your PAT>
+#
+# Then trigger this workflow:
+#   Actions tab → "Setup Project Board" → Run workflow → Run workflow
+
+on:
+  workflow_dispatch:
+
+permissions:
+  issues: write
+  contents: read
+
+jobs:
+  setup:
+    name: Create project board and issues
+    runs-on: ubuntu-latest
+
+    env:
+      OWNER: TFRS-Admin
+      REPO: tfrs-engineering-playbook
+      GH_TOKEN: ${{ secrets.SETUP_TOKEN }}
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Verify SETUP_TOKEN is set
+        run: |
+          if [ -z "$GH_TOKEN" ]; then
+            echo "ERROR: SETUP_TOKEN secret is not set."
+            echo "Add a classic PAT with repo + project + read:org scopes as SETUP_TOKEN."
+            exit 1
+          fi
+          gh auth status
+
+      # ──────────────────────────────────────────────
+      # 1. Create the project
+      # ──────────────────────────────────────────────
+      - name: Create project
+        id: project
+        run: |
+          PROJECT_URL=$(gh project create \
+            --owner "$OWNER" \
+            --title "TFRS Engineering Playbook" \
+            --format json | jq -r '.url')
+          PROJECT_NUMBER=$(echo "$PROJECT_URL" | grep -oE '[0-9]+$')
+          echo "project_url=$PROJECT_URL" >> "$GITHUB_OUTPUT"
+          echo "project_number=$PROJECT_NUMBER" >> "$GITHUB_OUTPUT"
+          echo "Project #$PROJECT_NUMBER created: $PROJECT_URL"
+
+      # ──────────────────────────────────────────────
+      # 2. Create all 10 custom fields
+      # ──────────────────────────────────────────────
+      - name: Create custom fields
+        id: fields
+        run: |
+          NUM="${{ steps.project.outputs.project_number }}"
+
+          create_select() {
+            local name="$1"; shift
+            local opts=()
+            for o in "$@"; do opts+=(--single-select-option "$o"); done
+            gh project field-create "$NUM" --owner "$OWNER" \
+              --name "$name" --data-type SINGLE_SELECT "${opts[@]}" \
+              --format json | jq -r '.id'
+          }
+
+          create_text() {
+            gh project field-create "$NUM" --owner "$OWNER" \
+              --name "$1" --data-type TEXT --format json | jq -r '.id'
+          }
+
+          STATUS_ID=$(create_select "Status" "Backlog" "Ready" "In Progress" "In Review" "QA" "Done")
+          PHASE_ID=$(create_select "Phase" "Review" "Roadmap" "Plan" "Backlog" "Execute" "Verify" "Ship")
+          PRIORITY_ID=$(create_select "Priority" "P0" "P1" "P2" "P3")
+          RISK_ID=$(create_select "Risk" "Low" "Medium" "High" "Critical")
+          SIZE_ID=$(create_select "Size" "S" "M" "L" "XL")
+          SPRINT_ID=$(create_text "Sprint")
+          EPIC_ID=$(create_text "Epic")
+          QA_ID=$(create_select "QA Required" "Yes" "No")
+          BLOCKED_ID=$(create_select "Blocked" "Yes" "No")
+          PERSONA_ID=$(create_select "Agent Persona" "Reviewer" "Planner" "Backlog-Manager" \
+            "Implementer" "Verifier" "Release-Manager" "Repo-Health-Auditor")
+
+          echo "status_id=$STATUS_ID" >> "$GITHUB_OUTPUT"
+          echo "phase_id=$PHASE_ID" >> "$GITHUB_OUTPUT"
+          echo "priority_id=$PRIORITY_ID" >> "$GITHUB_OUTPUT"
+          echo "risk_id=$RISK_ID" >> "$GITHUB_OUTPUT"
+          echo "size_id=$SIZE_ID" >> "$GITHUB_OUTPUT"
+          echo "sprint_id=$SPRINT_ID" >> "$GITHUB_OUTPUT"
+          echo "epic_id=$EPIC_ID" >> "$GITHUB_OUTPUT"
+          echo "qa_id=$QA_ID" >> "$GITHUB_OUTPUT"
+          echo "blocked_id=$BLOCKED_ID" >> "$GITHUB_OUTPUT"
+          echo "persona_id=$PERSONA_ID" >> "$GITHUB_OUTPUT"
+          echo "✓ All 10 fields created"
+
+      # ──────────────────────────────────────────────
+      # 3. Link repository to project
+      # ──────────────────────────────────────────────
+      - name: Link repository to project
+        run: |
+          REPO_NODE=$(gh api "repos/$OWNER/$REPO" --jq '.node_id')
+          PROJECT_NODE=$(gh project list --owner "$OWNER" --format json | \
+            jq -r --argjson num "${{ steps.project.outputs.project_number }}" \
+            '.projects[] | select(.number == $num) | .id')
+          gh api graphql -f query="
+            mutation {
+              linkProjectV2ToRepository(input: {
+                projectId: \"$PROJECT_NODE\",
+                repositoryId: \"$REPO_NODE\"
+              }) {
+                repository { name }
+              }
+            }"
+          echo "✓ Repository linked"
+
+      # ──────────────────────────────────────────────
+      # 4. Create all 12 issues
+      # ──────────────────────────────────────────────
+      - name: Create issues
+        id: issues
+        run: |
+          R="$OWNER/$REPO"
+
+          i() { gh issue create --repo "$R" --title "$1" --body "$2" --format json | jq -r '.number'; }
+
+          I1=$(i "Epic: Retrofit all 5 existing TFRS repositories to adopt the playbook" \
+          "## Origin
+          Playbook v2.0.0 launch. All 5 existing TFRS repositories are currently listed as \"Pending\" adoption in README.md.
+
+          ## Outcome
+          Every active TFRS repository has AGENTS.md, CLAUDE.md, AI_AGENT_OPERATING_MODEL.md copied in, a GitHub Project configured with all 10 required fields, and the playbook version recorded in its README.
+
+          ## Scope
+          - Code-Gen-AI
+          - prompt-showcase-by-team44-copy
+          - QPM_Base44
+          - Digital-Catalogue
+          - CPQ-Master-Inventory
+
+          ## Child Issues
+          - [ ] Adopt playbook in Code-Gen-AI
+          - [ ] Adopt playbook in prompt-showcase-by-team44-copy
+          - [ ] Adopt playbook in QPM_Base44
+          - [ ] Adopt playbook in Digital-Catalogue
+          - [ ] Adopt playbook in CPQ-Master-Inventory
+
+          ## Definition of Done
+          All 5 repositories have adopted the playbook, their READMEs reference tfrs-engineering-playbook v2.0.0, and the adoption table in this repo's README.md shows \"Active\" for all 5.")
+
+          I2=$(i "Adopt TFRS playbook in Code-Gen-AI" \
+          "## Origin
+          Child of Epic: Retrofit all 5 existing TFRS repositories to adopt the playbook.
+
+          ## Acceptance Criteria
+          Given the Code-Gen-AI repository
+          When the playbook adoption is complete
+          Then:
+          - AGENTS.md, CLAUDE.md, AI_AGENT_OPERATING_MODEL.md are present at repo root
+          - .github/ISSUE_TEMPLATE/ and PULL_REQUEST_TEMPLATE.md are present
+          - README.md references tfrs-engineering-playbook v2.0.0
+          - A GitHub Project exists with all 10 required fields and 8 board views
+          - The adoption table in tfrs-engineering-playbook README.md is updated to \"Active\"
+
+          ## Implementation Notes
+          Follow REPOSITORY_BOOTSTRAP_GUIDE.md steps 2-3 (Copy Playbook + Create GitHub Project). Run commands/review.md against the repo before planning new work.
+
+          ## Verification
+          Manual checklist walkthrough against templates/new-repo-checklist.md.")
+
+          I3=$(i "Adopt TFRS playbook in prompt-showcase-by-team44-copy" \
+          "## Origin
+          Child of Epic: Retrofit all 5 existing TFRS repositories to adopt the playbook.
+
+          ## Acceptance Criteria
+          Given the prompt-showcase-by-team44-copy repository
+          When the playbook adoption is complete
+          Then:
+          - AGENTS.md, CLAUDE.md, AI_AGENT_OPERATING_MODEL.md are present at repo root
+          - .github/ISSUE_TEMPLATE/ and PULL_REQUEST_TEMPLATE.md are present
+          - README.md references tfrs-engineering-playbook v2.0.0
+          - A GitHub Project exists with all 10 required fields and 8 board views
+          - The adoption table in tfrs-engineering-playbook README.md is updated to \"Active\"
+
+          ## Verification
+          Manual checklist walkthrough against templates/new-repo-checklist.md.")
+
+          I4=$(i "Adopt TFRS playbook in QPM_Base44" \
+          "## Origin
+          Child of Epic: Retrofit all 5 existing TFRS repositories to adopt the playbook.
+
+          ## Acceptance Criteria
+          Given the QPM_Base44 repository
+          When the playbook adoption is complete
+          Then:
+          - AGENTS.md, CLAUDE.md, AI_AGENT_OPERATING_MODEL.md are present at repo root
+          - .github/ISSUE_TEMPLATE/ and PULL_REQUEST_TEMPLATE.md are present
+          - README.md references tfrs-engineering-playbook v2.0.0
+          - A GitHub Project exists with all 10 required fields and 8 board views
+          - The adoption table in tfrs-engineering-playbook README.md is updated to \"Active\"
+
+          ## Verification
+          Manual checklist walkthrough against templates/new-repo-checklist.md.")
+
+          I5=$(i "Adopt TFRS playbook in Digital-Catalogue" \
+          "## Origin
+          Child of Epic: Retrofit all 5 existing TFRS repositories to adopt the playbook.
+
+          ## Acceptance Criteria
+          Given the Digital-Catalogue repository
+          When the playbook adoption is complete
+          Then:
+          - AGENTS.md, CLAUDE.md, AI_AGENT_OPERATING_MODEL.md are present at repo root
+          - .github/ISSUE_TEMPLATE/ and PULL_REQUEST_TEMPLATE.md are present
+          - README.md references tfrs-engineering-playbook v2.0.0
+          - A GitHub Project exists with all 10 required fields and 8 board views
+          - The adoption table in tfrs-engineering-playbook README.md is updated to \"Active\"
+
+          ## Verification
+          Manual checklist walkthrough against templates/new-repo-checklist.md.")
+
+          I6=$(i "Adopt TFRS playbook in CPQ-Master-Inventory" \
+          "## Origin
+          Child of Epic: Retrofit all 5 existing TFRS repositories to adopt the playbook.
+
+          ## Acceptance Criteria
+          Given the CPQ-Master-Inventory repository
+          When the playbook adoption is complete
+          Then:
+          - AGENTS.md, CLAUDE.md, AI_AGENT_OPERATING_MODEL.md are present at repo root
+          - .github/ISSUE_TEMPLATE/ and PULL_REQUEST_TEMPLATE.md are present
+          - README.md references tfrs-engineering-playbook v2.0.0
+          - A GitHub Project exists with all 10 required fields and 8 board views
+          - The adoption table in tfrs-engineering-playbook README.md is updated to \"Active\"
+
+          ## Verification
+          Manual checklist walkthrough against templates/new-repo-checklist.md.")
+
+          I7=$(i "Epic: Run first repo-health pass on all adopted repositories" \
+          "## Origin
+          REPO_HEALTH_STANDARD.md defines a recurring health cadence. This Epic captures the first pass across all repositories once adoption is complete.
+
+          ## Outcome
+          Every adopted repository has a dated Repository Health Report covering all 8 dimensions. Actionable findings are filed as backlog issues.
+
+          ## Blocked by
+          Adoption Epic (all 5 repos must be adopted first)
+
+          ## Definition of Done
+          Health reports exist for all adopted repos. All actionable findings are tracked as issues.")
+
+          I8=$(i "Add branch protection rules to tfrs-engineering-playbook main branch" \
+          "## Origin
+          templates/new-repo-checklist.md step: protect main with required pull requests and status checks.
+
+          ## Acceptance Criteria
+          Given the tfrs-engineering-playbook repository
+          When branch protection is configured on main
+          Then:
+          - Direct pushes to main are blocked
+          - PRs require at least 1 approval before merge
+          - The validate-playbook.yml workflow is a required status check
+
+          ## Priority
+          P1 — the playbook validate-playbook.yml workflow is already in place but not enforced.")
+
+          I9=$(i "Add repository topics and update description for tfrs-engineering-playbook" \
+          "## Origin
+          templates/new-repo-checklist.md — repositories should have topics matching the product domain.
+
+          ## Acceptance Criteria
+          Given the tfrs-engineering-playbook repository settings
+          When topics are added
+          Then the repository has topics: engineering, playbook, ai-assisted-development, javascript, standards, github-copilot, claude
+
+          ## Implementation
+          Settings → General → Topics. Also confirm description reads: \"TFRS canonical engineering standards, AI workflow guidelines, and project templates\"")
+
+          I10=$(i "Write ADR-001: Adopt tfrs-engineering-playbook as canonical TFRS standard" \
+          "## Origin
+          docs/decision-log/README.md references ADR-001 as the first entry but it has not been written yet.
+
+          ## Acceptance Criteria
+          Given docs/decision-log/ADR-001-adopt-playbook.md does not exist
+          When the ADR is written using templates/adr-template.md
+          Then:
+          - The file exists at docs/decision-log/ADR-001-adopt-playbook.md
+          - Status is Accepted
+          - Context, Decision, and Consequences sections are complete
+          - The ADR index in docs/decision-log/README.md is updated with the entry
+
+          ## Implementation Notes
+          Use templates/adr-template.md as the starting template.")
+
+          I11=$(i "Run first quarterly roadmap pass for tfrs-engineering-playbook" \
+          "## Origin
+          commands/roadmap.md — roadmap should run quarterly.
+
+          ## Acceptance Criteria
+          Given the current backlog of issues
+          When commands/roadmap.md is run for Q3 2026
+          Then:
+          - A sequenced roadmap document exists for Q3
+          - Epics are prioritized and sized
+          - The roadmap is recorded in the Roadmap board view
+
+          ## Timing
+          Run after the adoption Epic is in progress so findings from the first wave of repo retrofits can inform the roadmap.")
+
+          I12=$(i "Playbook improvement: document team communication standards" \
+          "## Origin
+          Opened via .github/ISSUE_TEMPLATE/playbook_improvement.md convention.
+
+          ## Which file should change
+          A new COMMUNICATION_STANDARD.md or a section in EXECUTION_STANDARD.md.
+
+          ## What change
+          Document where async team communication happens (chat, issues, PRs) and when to use each channel. Currently the playbook is silent on this.
+
+          ## Why
+          AI agents need to know where to post status updates, blockers, and decisions when a human is not actively present in a session.
+
+          ## Priority
+          P3 — important but not blocking any current work.")
+
+          echo "issue_1=$I1"   >> "$GITHUB_OUTPUT"
+          echo "issue_2=$I2"   >> "$GITHUB_OUTPUT"
+          echo "issue_3=$I3"   >> "$GITHUB_OUTPUT"
+          echo "issue_4=$I4"   >> "$GITHUB_OUTPUT"
+          echo "issue_5=$I5"   >> "$GITHUB_OUTPUT"
+          echo "issue_6=$I6"   >> "$GITHUB_OUTPUT"
+          echo "issue_7=$I7"   >> "$GITHUB_OUTPUT"
+          echo "issue_8=$I8"   >> "$GITHUB_OUTPUT"
+          echo "issue_9=$I9"   >> "$GITHUB_OUTPUT"
+          echo "issue_10=$I10" >> "$GITHUB_OUTPUT"
+          echo "issue_11=$I11" >> "$GITHUB_OUTPUT"
+          echo "issue_12=$I12" >> "$GITHUB_OUTPUT"
+
+          echo "✓ 12 issues created: #$I1 #$I2 #$I3 #$I4 #$I5 #$I6 #$I7 #$I8 #$I9 #$I10 #$I11 #$I12"
+
+      # ──────────────────────────────────────────────
+      # 5. Add issues to project and set field values
+      # ──────────────────────────────────────────────
+      - name: Configure project items
+        run: |
+          NUM="${{ steps.project.outputs.project_number }}"
+          R="$OWNER/$REPO"
+
+          PROJECT_ID=$(gh project list --owner "$OWNER" --format json | \
+            jq -r --argjson n "$NUM" '.projects[] | select(.number == $n) | .id')
+
+          get_opt() {
+            gh api graphql -f query="
+              query { node(id: \"$1\") {
+                ... on ProjectV2SingleSelectField { options { id name } }
+              } }" | jq -r --arg v "$2" '.data.node.options[] | select(.name==$v) | .id'
+          }
+
+          configure_issue() {
+            local issue_num="$1" status="$2" phase="$3" priority="$4" \
+                  risk="$5" size="$6" qa="$7" blocked="$8" persona="$9"
+
+            local item_id
+            item_id=$(gh project item-add "$NUM" --owner "$OWNER" \
+              --url "https://github.com/$R/issues/$issue_num" \
+              --format json | jq -r '.id')
+
+            local fields=(
+              "${{ steps.fields.outputs.status_id }}:$status"
+              "${{ steps.fields.outputs.phase_id }}:$phase"
+              "${{ steps.fields.outputs.priority_id }}:$priority"
+              "${{ steps.fields.outputs.risk_id }}:$risk"
+              "${{ steps.fields.outputs.size_id }}:$size"
+              "${{ steps.fields.outputs.qa_id }}:$qa"
+              "${{ steps.fields.outputs.blocked_id }}:$blocked"
+              "${{ steps.fields.outputs.persona_id }}:$persona"
+            )
+
+            for pair in "${fields[@]}"; do
+              field_id="${pair%%:*}"
+              value="${pair#*:}"
+              opt_id=$(get_opt "$field_id" "$value")
+              gh project item-edit --project-id "$PROJECT_ID" --id "$item_id" \
+                --field-id "$field_id" --single-select-option-id "$opt_id" > /dev/null
+            done
+            echo "  ✓ Issue #$issue_num configured ($status / $phase / $priority)"
+          }
+
+          configure_issue "${{ steps.issues.outputs.issue_1 }}"  Backlog  Backlog  P1 Low    L No  No  Planner
+          configure_issue "${{ steps.issues.outputs.issue_2 }}"  Backlog  Backlog  P1 Low    S No  No  Implementer
+          configure_issue "${{ steps.issues.outputs.issue_3 }}"  Backlog  Backlog  P1 Low    S No  No  Implementer
+          configure_issue "${{ steps.issues.outputs.issue_4 }}"  Backlog  Backlog  P2 Low    S No  No  Implementer
+          configure_issue "${{ steps.issues.outputs.issue_5 }}"  Backlog  Backlog  P2 Low    S No  No  Implementer
+          configure_issue "${{ steps.issues.outputs.issue_6 }}"  Backlog  Backlog  P2 Low    S No  No  Implementer
+          configure_issue "${{ steps.issues.outputs.issue_7 }}"  Backlog  Backlog  P2 Low    M No  Yes Repo-Health-Auditor
+          configure_issue "${{ steps.issues.outputs.issue_8 }}"  Ready    Backlog  P1 Medium S No  No  Implementer
+          configure_issue "${{ steps.issues.outputs.issue_9 }}"  Ready    Backlog  P2 Low    S No  No  Implementer
+          configure_issue "${{ steps.issues.outputs.issue_10 }}" Ready    Backlog  P2 Low    S No  No  Implementer
+          configure_issue "${{ steps.issues.outputs.issue_11 }}" Backlog  Roadmap  P2 Low    S No  No  Planner
+          configure_issue "${{ steps.issues.outputs.issue_12 }}" Backlog  Plan     P3 Low    S No  No  Planner
+
+      # ──────────────────────────────────────────────
+      # 6. Link sub-issues
+      # ──────────────────────────────────────────────
+      - name: Link sub-issues to Epic 1
+        run: |
+          R="$OWNER/$REPO"
+          PARENT="${{ steps.issues.outputs.issue_1 }}"
+          PARENT_NODE=$(gh api "repos/$R/issues/$PARENT" --jq '.node_id')
+
+          link() {
+            local child="$1"
+            local child_node
+            child_node=$(gh api "repos/$R/issues/$child" --jq '.node_id')
+            gh api graphql -f query="
+              mutation {
+                addSubIssue(input: {
+                  issueId: \"$PARENT_NODE\",
+                  subIssueId: \"$child_node\"
+                }) { issue { number } }
+              }" > /dev/null
+            echo "  ✓ Linked #$child as sub-issue of #$PARENT"
+          }
+
+          link "${{ steps.issues.outputs.issue_2 }}"
+          link "${{ steps.issues.outputs.issue_3 }}"
+          link "${{ steps.issues.outputs.issue_4 }}"
+          link "${{ steps.issues.outputs.issue_5 }}"
+          link "${{ steps.issues.outputs.issue_6 }}"
+
+      # ──────────────────────────────────────────────
+      # 7. Summary
+      # ──────────────────────────────────────────────
+      - name: Print summary
+        run: |
+          echo "## ✅ Project Board Setup Complete" >> "$GITHUB_STEP_SUMMARY"
+          echo "" >> "$GITHUB_STEP_SUMMARY"
+          echo "**Project:** ${{ steps.project.outputs.project_url }}" >> "$GITHUB_STEP_SUMMARY"
+          echo "" >> "$GITHUB_STEP_SUMMARY"
+          echo "### Issues created" >> "$GITHUB_STEP_SUMMARY"
+          echo "| # | Title | Status |" >> "$GITHUB_STEP_SUMMARY"
+          echo "|---|-------|--------|" >> "$GITHUB_STEP_SUMMARY"
+          echo "| ${{ steps.issues.outputs.issue_1 }} | Epic: Retrofit all 5 repos | Backlog |" >> "$GITHUB_STEP_SUMMARY"
+          echo "| ${{ steps.issues.outputs.issue_2 }} | Adopt in Code-Gen-AI | Backlog |" >> "$GITHUB_STEP_SUMMARY"
+          echo "| ${{ steps.issues.outputs.issue_3 }} | Adopt in prompt-showcase | Backlog |" >> "$GITHUB_STEP_SUMMARY"
+          echo "| ${{ steps.issues.outputs.issue_4 }} | Adopt in QPM_Base44 | Backlog |" >> "$GITHUB_STEP_SUMMARY"
+          echo "| ${{ steps.issues.outputs.issue_5 }} | Adopt in Digital-Catalogue | Backlog |" >> "$GITHUB_STEP_SUMMARY"
+          echo "| ${{ steps.issues.outputs.issue_6 }} | Adopt in CPQ-Master-Inventory | Backlog |" >> "$GITHUB_STEP_SUMMARY"
+          echo "| ${{ steps.issues.outputs.issue_7 }} | Epic: First repo-health pass | Backlog / Blocked |" >> "$GITHUB_STEP_SUMMARY"
+          echo "| ${{ steps.issues.outputs.issue_8 }} | Branch protection rules | **Ready** |" >> "$GITHUB_STEP_SUMMARY"
+          echo "| ${{ steps.issues.outputs.issue_9 }} | Repository topics | **Ready** |" >> "$GITHUB_STEP_SUMMARY"
+          echo "| ${{ steps.issues.outputs.issue_10 }} | Write ADR-001 | **Ready** |" >> "$GITHUB_STEP_SUMMARY"
+          echo "| ${{ steps.issues.outputs.issue_11 }} | First quarterly roadmap | Backlog |" >> "$GITHUB_STEP_SUMMARY"
+          echo "| ${{ steps.issues.outputs.issue_12 }} | Communication standards | Backlog |" >> "$GITHUB_STEP_SUMMARY"
