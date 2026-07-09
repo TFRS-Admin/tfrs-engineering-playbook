@@ -33,7 +33,7 @@ Use Conventional Commits for every agent-authored commit:
 
 - Do not force push or rewrite shared history unless a human maintainer explicitly owns that operation.
 - Do not delete the `.github/` directory or weaken repository protections.
-- Do not commit secrets, credentials, tokens, or private keys.
+- Do not commit secrets, credentials, tokens, or private keys — see [`SECURITY_STANDARD.md`](./SECURITY_STANDARD.md) for what to do if one ever is committed anyway.
 - Do not make unrelated refactors while addressing a focused task.
 - Do not ignore existing tests, lint rules, or review feedback without documenting why.
 
@@ -42,7 +42,7 @@ Use Conventional Commits for every agent-authored commit:
 1. Read [`CLAUDE.md`](./CLAUDE.md) for response and execution conventions.
 2. Read [`AI_AGENT_OPERATING_MODEL.md`](./AI_AGENT_OPERATING_MODEL.md) for the full operating loop: what to read first, how to pick the next issue, when to stop, and how to update GitHub. This document defines behavior and conventions; that one defines the loop those conventions run inside.
 3. Follow [`EXECUTION_STANDARD.md`](./EXECUTION_STANDARD.md) when coding, and the executable command library under [`commands/`](./commands/README.md) for every phase of the lifecycle.
-4. Check [`REVIEW_STANDARD.md`](./REVIEW_STANDARD.md) before asking for or approving a pull request.
+4. Check [`REVIEW_STANDARD.md`](./REVIEW_STANDARD.md) before asking for or approving a pull request, and [`SECURITY_STANDARD.md`](./SECURITY_STANDARD.md) / [`TESTING_STANDARD.md`](./TESTING_STANDARD.md) whenever a change touches external input, auth, or behavior that needs test coverage.
 5. Use [`AI_ENGINEERING_WORKFLOW.md`](./AI_ENGINEERING_WORKFLOW.md) to decide what work belongs to humans versus AI.
 
 ## Branch Naming

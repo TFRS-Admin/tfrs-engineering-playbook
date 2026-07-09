@@ -23,10 +23,10 @@ Run the recurring, cadence-driven assessment defined in [`REPO_HEALTH_STANDARD.m
 2. For each due dimension, assess it using the same evidence discipline as [`commands/review.md`](./review.md) — confirmed vs. suspected findings, each with evidence:
    - **Architecture drift**: compare current structure against `docs/decision-log/` ADRs and any architecture doc.
    - **Documentation drift**: spot-check README and key docs against actual current behavior.
-   - **Dependency health**: check for outdated or end-of-life packages.
-   - **Security**: review automated scan results; run a manual pass if this is the quarterly deep audit.
+   - **Dependency health**: check for outdated or end-of-life packages using the triage table in [`../SECURITY_STANDARD.md`](../SECURITY_STANDARD.md#dependency-auditing).
+   - **Security**: review automated scan results against [`../SECURITY_STANDARD.md`](../SECURITY_STANDARD.md); run a manual pass if this is the quarterly deep audit.
    - **Technical debt**: review the trend of open technical-debt issues (opened vs. closed since last report).
-   - **Testing**: check coverage of critical paths and count of skipped/flaky tests.
+   - **Testing**: check coverage of critical paths against the shape in [`../TESTING_STANDARD.md`](../TESTING_STANDARD.md#test-coverage-shape) and count of skipped/flaky tests.
    - **CI**: confirm pipeline is green, check for long-disabled checks.
    - **GitHub Project hygiene**: this is already covered by the weekly triage in [`GITHUB_PROJECT_STANDARD.md`](../GITHUB_PROJECT_STANDARD.md#issue-triage-cadence) — reference that cadence's most recent result rather than re-running it here.
 3. If a dimension cannot be assessed, record it as a gap with the reason (e.g., "no dependency manifest present").

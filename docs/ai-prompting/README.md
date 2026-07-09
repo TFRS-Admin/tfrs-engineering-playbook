@@ -56,3 +56,5 @@ Recent changes: {{recent_changes}}
 Logs or errors: {{logs}}
 Return likely causes, the next best check, and the smallest safe fix.
 ```
+
+For the full triage sequence this prompt is a shortcut for, see [`EXECUTION_STANDARD.md`](../../EXECUTION_STANDARD.md#debugging-error-recovery-and-blockers).

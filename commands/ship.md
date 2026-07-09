@@ -18,7 +18,7 @@ Merge a verified, approved change, update GitHub to reflect completion, and comm
 
 ## Workflow
 
-1. Confirm required approvals are present per [`REVIEW_STANDARD.md`](../REVIEW_STANDARD.md) and no blocking comments remain unresolved.
+1. Confirm required approvals are present per [`REVIEW_STANDARD.md`](../REVIEW_STANDARD.md) and no blocking comments remain unresolved. For `Risk: High` or `Risk: Critical` items, consider the optional parallel fan-out gate described in [`AI_AGENT_OPERATING_MODEL.md`](../AI_AGENT_OPERATING_MODEL.md#9-orchestration-between-personas) — independent Reviewer, Verifier, and security passes run concurrently against the same diff and merge findings before this step. This is optional; the default flow below is sequential.
 2. Confirm CI is green and the verification report is attached and shows an overall Pass.
 3. Merge the PR respecting branch protections (no `--no-verify`, no force-merging around a failing required check).
 4. Close the linked issue with the correct `state_reason` (`completed`).

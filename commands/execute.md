@@ -21,8 +21,8 @@ Implement a single `Ready` issue: the smallest safe change that satisfies its ac
 1. Read the issue and its acceptance criteria in full. Read the linked plan if one exists.
 2. Set the project item `Status` to `In Progress` immediately — before writing code, not after.
 3. Create a branch using the prefix conventions in [`AGENTS.md`](../AGENTS.md) (`feature/`, `fix/`, `docs/`, `chore/`), named after the issue.
-4. Implement the smallest safe change that satisfies the acceptance criteria — nothing more (see [`AI_AGENT_OPERATING_MODEL.md`](../AI_AGENT_OPERATING_MODEL.md#7-how-to-avoid-scope-expansion)).
-5. Run existing lint/tests locally as you go, not only at the end.
+4. Implement the smallest safe change that satisfies the acceptance criteria — nothing more (see [`AI_AGENT_OPERATING_MODEL.md`](../AI_AGENT_OPERATING_MODEL.md#7-how-to-avoid-scope-expansion)) — as a thin vertical slice per [`EXECUTION_STANDARD.md`](../EXECUTION_STANDARD.md#incremental-implementation).
+5. Write the test with the implementation, not after (Red-Green-Refactor, per [`TESTING_STANDARD.md`](../TESTING_STANDARD.md)); run the suite locally before every commit, not only at the end. If anything breaks unexpectedly, follow the stop-the-line sequence in [`EXECUTION_STANDARD.md`](../EXECUTION_STANDARD.md#debugging-error-recovery-and-blockers) before continuing.
 6. Commit using Conventional Commits, referencing the issue number, in a reviewable sequence (scaffold → implementation → validation/docs, per [`EXECUTION_STANDARD.md`](../EXECUTION_STANDARD.md)).
 7. Run [`commands/verify.md`](./verify.md) before opening the PR.
 8. Open the PR using [`.github/PULL_REQUEST_TEMPLATE.md`](../.github/PULL_REQUEST_TEMPLATE.md), link the issue, and attach the verification report.

@@ -13,10 +13,10 @@ Every health check assesses all eight dimensions below. If a dimension cannot be
 | --- | --- | --- |
 | Architecture drift | Does the implemented structure still match the last recorded architecture doc / ADRs in [`docs/decision-log/`](./docs/decision-log/README.md)? | Quarterly |
 | Documentation drift | Do README, playbook adoption notes, and [`templates/repository-architecture-template.md`](./templates/repository-architecture-template.md) still describe current behavior? | Monthly |
-| Dependency health | Are dependencies current, and are there known-vulnerable or end-of-life packages? | Monthly (weekly if automated scanning is available) |
-| Security | Are secrets, auth boundaries, and dependency advisories clean? | Weekly automated scan; quarterly manual deep audit |
+| Dependency health | Are dependencies current, and are there known-vulnerable or end-of-life packages? Assess using the dependency-audit triage in [`SECURITY_STANDARD.md`](./SECURITY_STANDARD.md#dependency-auditing). | Monthly (weekly if automated scanning is available) |
+| Security | Are secrets, auth boundaries, and dependency advisories clean? Assess against [`SECURITY_STANDARD.md`](./SECURITY_STANDARD.md) in full. | Weekly automated scan; quarterly manual deep audit |
 | Technical debt | Is the open technical-debt backlog ([`templates/technical-debt-template.md`](./templates/technical-debt-template.md) issues) growing faster than it's resolved? | Quarterly |
-| Testing | Is coverage of critical paths adequate, and are there flaky or skipped tests accumulating? | Monthly |
+| Testing | Is coverage of critical paths adequate per the shape in [`TESTING_STANDARD.md`](./TESTING_STANDARD.md#test-coverage-shape), and are there flaky or skipped tests accumulating? | Monthly |
 | CI | Is the pipeline green, fast enough to keep in the loop, and free of long-disabled checks? | Monthly |
 | GitHub Project hygiene | Are fields complete, is `Blocked` accurate, are stale items being triaged? | Weekly (this cadence is already defined in [`GITHUB_PROJECT_STANDARD.md`](./GITHUB_PROJECT_STANDARD.md#issue-triage-cadence) — do not duplicate that triage separately) |
 
@@ -43,5 +43,6 @@ Findings that require action are filed as backlog issues via [`commands/backlog.
 
 - [`commands/repo-health.md`](./commands/repo-health.md) — the executable version of this standard
 - [`commands/review.md`](./commands/review.md) — the finding format reused here
+- [`SECURITY_STANDARD.md`](./SECURITY_STANDARD.md) and [`TESTING_STANDARD.md`](./TESTING_STANDARD.md) — the standards behind the Security, Dependency health, and Testing dimensions
 - [`GITHUB_PROJECT_STANDARD.md`](./GITHUB_PROJECT_STANDARD.md) — project hygiene cadence and fields
 - [`BACKLOG_STANDARD.md`](./BACKLOG_STANDARD.md) — how findings become tracked work
