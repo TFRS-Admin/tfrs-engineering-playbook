@@ -44,6 +44,7 @@ jobs:
             SKILLS_STANDARD.md
             REPOSITORY_BOOTSTRAP_GUIDE.md
             REPO_HEALTH_STANDARD.md
+            PR_AUTONOMY_STANDARD.md
             VERSION.md
             docs/ai-prompting/README.md
             docs/code-patterns/README.md

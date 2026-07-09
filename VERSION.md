@@ -3,7 +3,7 @@
 
 ## Current Version
 
-**3.0.0**
+**3.1.0**
 
 ## Versioning Rules
 
@@ -23,6 +23,11 @@ Record changes using this format:
 ```
 
 ## Changelog
+
+## 3.1.0 - 2026-07-09
+- Type: minor
+- Summary: Defined the merge-autonomy policy that was the last unaddressed gap in the executable lifecycle — until now, `commands/ship.md` always required a human approval before every merge, with no distinction between a documentation fix and an authentication change. Added `PR_AUTONOMY_STANDARD.md`, defining three merge levels: `Level 1` (Autonomous — agent merges once verification and a fixed checklist of requirements pass, no human step inserted; covers documentation, patch/minor dependency updates, test/CI improvements, styling, repository adoption work, engineering-doc updates, and issue `## Metadata` bookkeeping), `Level 2` (Approval Required — agent prepares the PR and stops for explicit human approval before merging; covers auth, pricing, permissions, business logic, API contracts, schema changes, infrastructure, architecture, and large UI changes), and `Level 3` (Manual Only — the agent never performs the merge itself, even after approval; covers production secrets, security incidents, emergency rollback, destructive migrations, and legal/compliance changes). Added a classification procedure (highest-risk hunk in a PR sets the level for the whole PR; ambiguity resolves toward more oversight, never less; a repository may narrow but never widen its own Level 1 scope per `SKILLS_STANDARD.md#precedence-on-conflict`) and an explicit Level 1 requirements checklist (verification passed, single-issue scope, no unresolved review comments, no merge conflicts, required checks green, no branch-protection bypass). Rewrote `commands/ship.md`'s workflow to classify the merge level as its first step and branch accordingly, including a `Level 1` step to recommend the next `Ready` issue after an autonomous merge. Updated `REVIEW_STANDARD.md#approval-requirements` to clarify that clearing the review bar is necessary but not sufficient — `PR_AUTONOMY_STANDARD.md` decides who performs the merge. Updated `AI_AGENT_OPERATING_MODEL.md` (new section 10, "How to Determine Merge Autonomy," added after existing section 9 so no existing section anchor moved; Summary Loop updated to include the classification step) and `DECISION_ROUTER.md` (new "Merge this PR" and "Finish this issue" routing rows; "Ship this PR" row and the "Approval Checkpoints" section updated to state that `Level 1` merges are the one case where "before merging" is not an explicit human checkpoint). Updated `AGENTS.md` and `CLAUDE.md` (both Minimum Baseline files) to reference the new standard.
+- Impact: Additive and backward-compatible — no existing Repository Readiness Checklist item changed pass/fail criteria, and no repository is required to change anything. The new capability (autonomous `Level 1` merging) only becomes available to a repository once it re-copies the updated `AGENTS.md`, `CLAUDE.md`, `AI_AGENT_OPERATING_MODEL.md`, and `DECISION_ROUTER.md` per `commands/setup-from-playbook.md#minimum-baseline`; until then, agents in that repository continue requesting approval before every merge, which remains fully correct behavior under this version — it is simply no longer the *only* correct behavior. A repository that wants to restrict or disable `Level 1` autonomous merging entirely may do so by documenting that override in its own `AGENTS.md`, per `PR_AUTONOMY_STANDARD.md`'s escalation-and-overrides section.
 
 ## 3.0.0 - 2026-07-09
 - Type: major

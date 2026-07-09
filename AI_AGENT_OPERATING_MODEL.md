@@ -126,12 +126,24 @@ The one endorsed exception is **parallel fan-out with a merge step**: independen
 
 Do not build a "router" persona whose only job is deciding which other persona to invoke — that's the job of the command layer (`commands/`) and this operating model, not an agent role.
 
+## 10. How to Determine Merge Autonomy
+
+Once [`commands/verify.md`](https://github.com/TFRS-Admin/tfrs-engineering-playbook/blob/main/commands/verify.md) has produced a passing report, [`commands/ship.md`](https://github.com/TFRS-Admin/tfrs-engineering-playbook/blob/main/commands/ship.md) does not assume a human must approve every merge — it classifies the change per [`PR_AUTONOMY_STANDARD.md`](https://github.com/TFRS-Admin/tfrs-engineering-playbook/blob/main/PR_AUTONOMY_STANDARD.md) first:
+
+1. **`Level 1` (Autonomous)** — the agent merges, closes the issue, updates state per section 5 above, and recommends the next `Ready` issue per section 3 — all without a human approval step, as long as every requirement in [`PR_AUTONOMY_STANDARD.md#level-1-requirements`](https://github.com/TFRS-Admin/tfrs-engineering-playbook/blob/main/PR_AUTONOMY_STANDARD.md#level-1-requirements) holds.
+2. **`Level 2` (Approval Required)** — the agent presents verification evidence, a risk summary, the files changed, and confirmation the issue is complete, then stops and waits; it may merge only after explicit approval in that session.
+3. **`Level 3` (Manual Only)** — the agent prepares and presents the same package as `Level 2`, but never performs the merge itself, even after approval — a human merges directly.
+
+This is a merge-time classification, made from the actual diff — it is related to but distinct from the `Risk` field set at plan/backlog time in the issue's `## Metadata` block (see [`ISSUE_METADATA_STANDARD.md`](https://github.com/TFRS-Admin/tfrs-engineering-playbook/blob/main/ISSUE_METADATA_STANDARD.md)); a `Risk: High` issue is very unlikely to resolve to `Level 1`, but the diff — not the earlier estimate — is authoritative here. See [`PR_AUTONOMY_STANDARD.md`](https://github.com/TFRS-Admin/tfrs-engineering-playbook/blob/main/PR_AUTONOMY_STANDARD.md) for the full classification procedure and category list.
+
 ## Summary Loop
 
 ```text
 Read standards → Read repo docs & issues → Pick next issue → Update state (start)
   → Implement within acceptance criteria → Verify with evidence
-  → Update state (PR opened) → Stop or hand off → Update state (closed)
+  → Update state (PR opened) → Classify merge level (PR_AUTONOMY_STANDARD.md)
+  → Merge autonomously (Level 1) or stop and wait for approval (Level 2/3)
+  → Update state (closed)
 ```
 
 This loop applies identically whether the acting agent is Claude Code, GitHub Copilot, or a future agent — the model is agent-agnostic by design. The "Implement within acceptance criteria → Verify with evidence" steps have their own detailed sub-procedure — the nine-step skill-consultation workflow in [`SKILLS_STANDARD.md`](https://github.com/TFRS-Admin/tfrs-engineering-playbook/blob/main/SKILLS_STANDARD.md#the-skill-consultation-workflow) — for exactly how to bring [`TFRS-Admin/agent-skills`](https://github.com/TFRS-Admin/agent-skills) into a given task; this loop doesn't restate that detail.
@@ -144,5 +156,6 @@ This loop applies identically whether the acting agent is Claude Code, GitHub Co
 - [`BACKLOG_STANDARD.md`](https://github.com/TFRS-Admin/tfrs-engineering-playbook/blob/main/BACKLOG_STANDARD.md) — how work enters the state this model operates on
 - [`GITHUB_PROJECT_STANDARD.md`](https://github.com/TFRS-Admin/tfrs-engineering-playbook/blob/main/GITHUB_PROJECT_STANDARD.md) — the optional dashboard layer, consulted only if a repository runs one
 - [`commands/execute.md`](https://github.com/TFRS-Admin/tfrs-engineering-playbook/blob/main/commands/execute.md), [`commands/verify.md`](https://github.com/TFRS-Admin/tfrs-engineering-playbook/blob/main/commands/verify.md), and [`commands/ship.md`](https://github.com/TFRS-Admin/tfrs-engineering-playbook/blob/main/commands/ship.md) — the executable procedures this model governs
+- [`PR_AUTONOMY_STANDARD.md`](https://github.com/TFRS-Admin/tfrs-engineering-playbook/blob/main/PR_AUTONOMY_STANDARD.md) — the merge-level classification referenced in section 10
 - [`SECURITY_STANDARD.md`](https://github.com/TFRS-Admin/tfrs-engineering-playbook/blob/main/SECURITY_STANDARD.md) — referenced by the optional parallel fan-out pattern in section 9
 - [`SKILLS_STANDARD.md`](https://github.com/TFRS-Admin/tfrs-engineering-playbook/blob/main/SKILLS_STANDARD.md) — the skill-consultation workflow nested inside this model's Summary Loop

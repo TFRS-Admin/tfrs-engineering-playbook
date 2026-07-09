@@ -19,7 +19,7 @@ review → roadmap → plan → backlog → execute → verify → ship
 - [`backlog.md`](./backlog.md): convert a plan into Epics, Issues, and repository engineering documentation, with execution order set — the executable version of [`../BACKLOG_STANDARD.md`](../BACKLOG_STANDARD.md). No GitHub Project is required.
 - [`execute.md`](./execute.md): implement a single `Ready` issue.
 - [`verify.md`](./verify.md): produce evidence that an implementation satisfies its acceptance criteria.
-- [`ship.md`](./ship.md): merge, release, and communicate a verified change.
+- [`ship.md`](./ship.md): merge, release, and communicate a verified change — classifies the merge per [`../PR_AUTONOMY_STANDARD.md`](../PR_AUTONOMY_STANDARD.md) before deciding whether it merges autonomously or waits for approval.
 - [`repo-health.md`](./repo-health.md): run the recurring repository health assessment — the executable version of [`../REPO_HEALTH_STANDARD.md`](../REPO_HEALTH_STANDARD.md).
 
 ## Adoption Guides
@@ -30,4 +30,5 @@ review → roadmap → plan → backlog → execute → verify → ship
 
 - [`../DECISION_ROUTER.md`](../DECISION_ROUTER.md) — maps a plain-language request to one of the commands above.
 - [`../AI_AGENT_OPERATING_MODEL.md`](../AI_AGENT_OPERATING_MODEL.md) — how an agent decides which command to run next.
+- [`../PR_AUTONOMY_STANDARD.md`](../PR_AUTONOMY_STANDARD.md) — who performs the merge once `ship.md` reaches that step.
 - [`../SKILLS_STANDARD.md`](../SKILLS_STANDARD.md) — for the step-by-step mechanics inside a command, consult the matching skill in [`TFRS-Admin/agent-skills`](https://github.com/TFRS-Admin/agent-skills); these commands define what's required, the skills fork defines how to execute it.

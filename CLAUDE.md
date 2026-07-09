@@ -38,10 +38,11 @@ Reference [`REVIEW_STANDARD.md`](https://github.com/TFRS-Admin/tfrs-engineering-
 
 - **Proceed** when the task is clear, scoped, and consistent with repository standards.
 - **Ask** when requirements conflict, scope is ambiguous, or execution would change architecture, security posture, or repository-wide conventions.
+- **For merging specifically**, this general rule is superseded by the explicit levels in [`PR_AUTONOMY_STANDARD.md`](https://github.com/TFRS-Admin/tfrs-engineering-playbook/blob/main/PR_AUTONOMY_STANDARD.md) once verification passes — don't re-derive a merge decision from this section's general judgment call when that standard already classifies it.
 
 ## Memory and Cross-References
 
-Use [`AGENTS.md`](./AGENTS.md) as the baseline for code style, naming, and branch rules. Use [`REVIEW_STANDARD.md`](https://github.com/TFRS-Admin/tfrs-engineering-playbook/blob/main/REVIEW_STANDARD.md) as the quality bar before proposing a merge. Use [`AI_AGENT_OPERATING_MODEL.md`](./AI_AGENT_OPERATING_MODEL.md) to determine current work, choose the next issue, and know when to stop — do not rely on chat context alone to answer those questions; GitHub is the source of truth.
+Use [`AGENTS.md`](./AGENTS.md) as the baseline for code style, naming, and branch rules. Use [`REVIEW_STANDARD.md`](https://github.com/TFRS-Admin/tfrs-engineering-playbook/blob/main/REVIEW_STANDARD.md) as the quality bar before proposing a merge, and [`PR_AUTONOMY_STANDARD.md`](https://github.com/TFRS-Admin/tfrs-engineering-playbook/blob/main/PR_AUTONOMY_STANDARD.md) to decide who actually performs that merge once the bar is cleared. Use [`AI_AGENT_OPERATING_MODEL.md`](./AI_AGENT_OPERATING_MODEL.md) to determine current work, choose the next issue, and know when to stop — do not rely on chat context alone to answer those questions; GitHub is the source of truth.
 
 ## Executing the Lifecycle
 
