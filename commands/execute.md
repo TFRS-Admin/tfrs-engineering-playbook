@@ -12,21 +12,35 @@ Implement a single `Ready` issue: the smallest safe change that satisfies its ac
 
 ## Required Inputs
 
-- Issue number/link with acceptance criteria and all required project fields set.
+- Issue number/link with acceptance criteria and all required project fields set (or, absent a real GitHub Project, the equivalent structured text in the issue body — see [`AI_AGENT_OPERATING_MODEL.md#1-session-initialization-protocol`](../AI_AGENT_OPERATING_MODEL.md#1-session-initialization-protocol)).
 - Any linked plan document for broader context.
 - Repository-specific `AGENTS.md`/`CLAUDE.md` conventions.
 
-## Workflow
+## Required Skill Consultation
 
-1. Read the issue and its acceptance criteria in full. Read the linked plan if one exists.
-2. Set the project item `Status` to `In Progress` immediately — before writing code, not after.
-3. Create a branch using the prefix conventions in [`AGENTS.md`](../AGENTS.md) (`feature/`, `fix/`, `docs/`, `chore/`), named after the issue.
-4. Implement the smallest safe change that satisfies the acceptance criteria — nothing more (see [`AI_AGENT_OPERATING_MODEL.md`](../AI_AGENT_OPERATING_MODEL.md#7-how-to-avoid-scope-expansion)) — as a thin vertical slice per [`EXECUTION_STANDARD.md`](../EXECUTION_STANDARD.md#incremental-implementation).
-5. Write the test with the implementation, not after (Red-Green-Refactor, per [`TESTING_STANDARD.md`](../TESTING_STANDARD.md)); run the suite locally before every commit, not only at the end. If anything breaks unexpectedly, follow the stop-the-line sequence in [`EXECUTION_STANDARD.md`](../EXECUTION_STANDARD.md#debugging-error-recovery-and-blockers) before continuing.
-6. Commit using Conventional Commits, referencing the issue number, in a reviewable sequence (scaffold → implementation → validation/docs, per [`EXECUTION_STANDARD.md`](../EXECUTION_STANDARD.md)).
-7. Run [`commands/verify.md`](./verify.md) before opening the PR.
-8. Open the PR using [`.github/PULL_REQUEST_TEMPLATE.md`](../.github/PULL_REQUEST_TEMPLATE.md), link the issue, and attach the verification report.
-9. Set the project item `Status` to `In Review` (or `QA` if `QA Required` = `Yes` and QA happens before code review in this repository's process).
+Mandatory per [`SKILLS_STANDARD.md#when-consultation-is-mandatory`](../SKILLS_STANDARD.md#when-consultation-is-mandatory): consult [`skills/incremental-implementation`](https://github.com/TFRS-Admin/agent-skills/tree/main/skills/incremental-implementation) and [`skills/test-driven-development`](https://github.com/TFRS-Admin/agent-skills/tree/main/skills/test-driven-development) in [`TFRS-Admin/agent-skills`](https://github.com/TFRS-Admin/agent-skills) before implementing — this playbook's [`EXECUTION_STANDARD.md`](../EXECUTION_STANDARD.md) sets TFRS's thresholds (branch prefixes, commit format, PR size cap); the skills define the vertical-slicing and red-green-refactor mechanics this playbook doesn't restate.
+
+## Issue Execution Protocol
+
+1. **Read the issue** and its acceptance criteria in full.
+2. **Read the parent epic**, if one exists, for the broader context and scope boundary the issue was cut from.
+3. **Read linked dependencies** — anything the issue states it's blocked by or blocks.
+4. **Confirm the issue is `Ready` and unblocked, or stop and explain why it isn't.** Never proceed on an issue that is `Blocked`, lacks acceptance criteria, or hasn't passed through [`commands/plan.md`](./plan.md) and [`commands/backlog.md`](./backlog.md) — per [`DECISION_ROUTER.md#when-to-ask-vs-proceed-vs-refuse`](../DECISION_ROUTER.md#when-to-ask-vs-proceed-vs-refuse), this is forbidden, not just discouraged.
+5. **Inspect the related code** the issue actually touches before writing anything — confirm the issue's description still matches current reality; if it doesn't, stop and send it back to [`commands/plan.md`](./plan.md) rather than reinterpreting scope yourself.
+6. **Identify the acceptance criteria** as a checklist you will verify against — restate them if the issue's phrasing is ambiguous, and ask rather than guess if restating doesn't resolve the ambiguity.
+7. **Identify the verification commands** you'll run before this is done (test command, build command, manual steps) — know this before writing code, not after.
+8. **Set the project item `Status` to `In Progress`** immediately — before writing code, not after — and create a branch using the prefix conventions in [`AGENTS.md`](../AGENTS.md) (`feature/`, `fix/`, `docs/`, `chore/`), named after the issue.
+9. **Implement the smallest safe change** that satisfies the acceptance criteria — nothing more (see [`AI_AGENT_OPERATING_MODEL.md#7-how-to-avoid-scope-expansion`](../AI_AGENT_OPERATING_MODEL.md#7-how-to-avoid-scope-expansion)) — as a thin vertical slice per [`EXECUTION_STANDARD.md`](../EXECUTION_STANDARD.md#incremental-implementation), writing the test with the implementation per [`TESTING_STANDARD.md`](../TESTING_STANDARD.md). If anything breaks unexpectedly, follow the stop-the-line sequence in [`EXECUTION_STANDARD.md`](../EXECUTION_STANDARD.md#debugging-error-recovery-and-blockers) before continuing. Commit using Conventional Commits, referencing the issue number, in a reviewable sequence (scaffold → implementation → validation/docs, per [`EXECUTION_STANDARD.md`](../EXECUTION_STANDARD.md)).
+10. **Run verification** using the commands identified in step 7 — this is [`commands/verify.md`](./verify.md), run before opening the PR, never skipped because "it's a small change."
+11. **Capture evidence** per [`commands/verify.md`](./verify.md) and attach it — open the PR using [`.github/PULL_REQUEST_TEMPLATE.md`](../.github/PULL_REQUEST_TEMPLATE.md), link the issue, attach the verification report, and set the project item `Status` to `In Review` (or `QA` if `QA Required` = `Yes`).
+12. **Update the issue/project one final time to reflect reality, then stop.** Do not keep working past this point on the same invocation — per [`AI_AGENT_OPERATING_MODEL.md#4-when-to-stop`](../AI_AGENT_OPERATING_MODEL.md#4-when-to-stop).
+
+## Forbidden
+
+- **Implementing multiple unrelated issues in one pass.** One invocation of this command executes exactly one issue. A second issue — even a trivial one noticed along the way — gets its own issue and its own invocation.
+- **Opportunistic refactors.** Anything not required by the acceptance criteria is out of scope, full stop — file it per [`AI_AGENT_OPERATING_MODEL.md#7-how-to-avoid-scope-expansion`](../AI_AGENT_OPERATING_MODEL.md#7-how-to-avoid-scope-expansion) instead of folding it in.
+- **Closing an issue without verification.** No exceptions, including for changes that "obviously work."
+- **Treating chat as the source of truth.** If it isn't reflected on the GitHub issue/Project, it didn't happen — a chat summary of what was done is not a substitute for step 12.
 
 ## Required Outputs
 

@@ -31,6 +31,7 @@ jobs:
             CLAUDE.md
             AI_ENGINEERING_WORKFLOW.md
             AI_AGENT_OPERATING_MODEL.md
+            DECISION_ROUTER.md
             REVIEW_STANDARD.md
             PLANNING_STANDARD.md
             EXECUTION_STANDARD.md

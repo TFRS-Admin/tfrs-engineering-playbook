@@ -19,6 +19,10 @@ If you are running inside Claude Code and this repository has the built-in `veri
 - Its acceptance criteria (Given/When/Then).
 - The `QA Required` field value.
 
+## Required Skill Consultation
+
+Mandatory per [`SKILLS_STANDARD.md#when-consultation-is-mandatory`](../SKILLS_STANDARD.md#when-consultation-is-mandatory): consult [`skills/test-driven-development`](https://github.com/TFRS-Admin/agent-skills/tree/main/skills/test-driven-development) for how evidence should be produced, and [`skills/debugging-and-error-recovery`](https://github.com/TFRS-Admin/agent-skills/tree/main/skills/debugging-and-error-recovery) if verification surfaces a failure that needs triage before this command can pass.
+
 ## Workflow
 
 1. List every acceptance criterion from the issue individually — verification is per-criterion, not "overall it works."

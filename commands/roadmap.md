@@ -18,6 +18,10 @@ Turn accumulated review findings, technical debt, and business priorities into a
 - Existing open Epics and their current `Priority`/`Status` on the GitHub Project (see [`GITHUB_PROJECT_STANDARD.md`](../GITHUB_PROJECT_STANDARD.md)).
 - Rough capacity for the window (how many Epics the team can realistically carry).
 
+## Required Skill Consultation
+
+No direct upstream skill in [`TFRS-Admin/agent-skills`](https://github.com/TFRS-Admin/agent-skills) — Roadmap is a TFRS-specific prioritization exercise the reference methodology doesn't model (see the [Terminology Map](../AI_ENGINEERING_WORKFLOW.md#terminology-map)). Optionally consult `skills/planning-and-task-breakdown` when sizing individual candidate Epics in step 5, per [`PLANNING_STANDARD.md`](../PLANNING_STANDARD.md).
+
 ## Workflow
 
 1. Collect every candidate: open findings, existing unplanned Epics, and explicit business asks.

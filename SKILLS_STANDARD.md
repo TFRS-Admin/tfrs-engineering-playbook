@@ -27,6 +27,10 @@ None of these three repositories restates another's content. This playbook does 
 
 An agent that notices a real conflict (not just a difference in detail level) should surface it rather than silently picking a side — per [`CLAUDE.md`](./CLAUDE.md#when-to-ask-vs-when-to-proceed), ambiguity that would change scope or standards is an "ask," not a "proceed."
 
+## When Consultation Is Mandatory
+
+Skill consultation is **mandatory** before running any of: `commands/plan.md`, `commands/execute.md`, `commands/verify.md`, `REVIEW_STANDARD.md`'s PR review, or `commands/repo-health.md`'s per-dimension assessment — i.e., anything that plans, implements, verifies, or reviews. It is **not required** for purely informational requests (answering a question, reading code to explain it) or for `commands/review.md`'s discovery pass, which produces findings rather than executing a skill-shaped task. When in doubt, treat consultation as mandatory — reading one `SKILL.md` is cheap; skipping it and re-deriving generic execution mechanics from scratch is the failure mode this document exists to prevent.
+
 ## The Skill-Consultation Workflow
 
 This is the step-by-step procedure an agent follows when using both repositories together. It runs *inside* the broader operating loop already defined in [`AI_AGENT_OPERATING_MODEL.md`](./AI_AGENT_OPERATING_MODEL.md#summary-loop) — specifically, it's the detail behind that loop's "Implement within acceptance criteria → Verify with evidence" steps. The operating model doesn't restate this; this document doesn't restate the operating model's board/issue-selection logic.

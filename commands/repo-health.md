@@ -17,6 +17,10 @@ Run the recurring, cadence-driven assessment defined in [`REPO_HEALTH_STANDARD.m
 - The most recent prior health report, if one exists, for trend comparison.
 - Which dimensions are due this cycle (not every cadence tier runs every time — see the cadence table).
 
+## Required Skill Consultation
+
+Check for `skills/tfrs/repo-health` in [`TFRS-Admin/agent-skills`](https://github.com/TFRS-Admin/agent-skills) first. As of this writing it does not exist in the fork yet (see [`SKILLS_STANDARD.md#skill-selection`](../SKILLS_STANDARD.md#skill-selection)); until it does, follow this command and [`REPO_HEALTH_STANDARD.md`](../REPO_HEALTH_STANDARD.md) directly. Per dimension, the relevant upstream skill still applies where one exists — e.g. `skills/security-and-hardening` for the Security dimension, `skills/test-driven-development` for the Testing dimension.
+
 ## Workflow
 
 1. Identify which dimensions are due this cycle from [`REPO_HEALTH_STANDARD.md`](../REPO_HEALTH_STANDARD.md#dimensions).

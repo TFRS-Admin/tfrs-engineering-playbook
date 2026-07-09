@@ -26,6 +26,10 @@ This is distinct from PR review (see [`REVIEW_STANDARD.md`](../REVIEW_STANDARD.m
 - **Related artifacts**: linked issues, prior ADRs ([`docs/decision-log/`](../docs/decision-log/README.md)), prior review findings for the same area.
 - **Known constraints**: anything already decided that the review should not re-litigate.
 
+## Required Skill Consultation
+
+Not mandatory per [`SKILLS_STANDARD.md#when-consultation-is-mandatory`](../SKILLS_STANDARD.md#when-consultation-is-mandatory) — this command produces findings, not a skill-shaped deliverable. If the review scope is a specific quality dimension (security, performance), optionally skim the matching skill in [`TFRS-Admin/agent-skills`](https://github.com/TFRS-Admin/agent-skills) (e.g. `skills/security-and-hardening`) for what to look for, but do not follow its full workflow here — that happens later, in `commands/plan.md` or `commands/execute.md`.
+
 ## Workflow
 
 1. Read [`AGENTS.md`](../AGENTS.md), [`CLAUDE.md`](../CLAUDE.md), and any repository-specific architecture doc first.
