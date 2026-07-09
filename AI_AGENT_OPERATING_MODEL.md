@@ -21,7 +21,7 @@ TFRS Engineering Playbook
 TFRS-Admin/agent-skills
 ```
 
-**Repository-local documentation and GitHub Issues are the operational source of truth.** GitHub Projects, if a repository chooses to run one, are an optional visual dashboard — never a dependency for an agent to determine state or pick up work. Everywhere this document previously said "read the GitHub Project," it now means "read the repository's `docs/engineering/` files and the issue's `## Metadata` block" (see [`ISSUE_METADATA_STANDARD.md`](./ISSUE_METADATA_STANDARD.md)).
+**Repository-local documentation and GitHub Issues are the operational source of truth.** GitHub Projects, if a repository chooses to run one, are an optional visual dashboard — never a dependency for an agent to determine state or pick up work. Everywhere this document previously said "read the GitHub Project," it now means "read the repository's `docs/engineering/` files and the issue's `## Metadata` block" (see [`ISSUE_METADATA_STANDARD.md`](https://github.com/TFRS-Admin/tfrs-engineering-playbook/blob/main/ISSUE_METADATA_STANDARD.md)).
 
 ## 1. Session Initialization Protocol
 
@@ -31,7 +31,7 @@ This is how every AI engineering session begins, whether it's triggered by an ex
 2. **Read `AGENTS.md`.** Baseline conventions: naming, style, commit format, what agents must never do.
 3. **Read `CLAUDE.md`.** Response style, planning-before-execution, PR conventions, and the Ask-vs-Proceed rule you'll need in step 9.
 4. **Identify the current repository.** Confirm which repository the request is about and that it has actually adopted this playbook (see the [Repository Readiness Checklist](https://github.com/TFRS-Admin/tfrs-engineering-playbook/blob/main/REPOSITORY_BOOTSTRAP_GUIDE.md#repository-readiness-checklist)) — don't assume a repository is fully onboarded just because it's a TFRS repository; check.
-5. **Read the repository's engineering documentation, then the relevant GitHub Issue(s).** Read `docs/engineering/CURRENT_SPRINT.md` for what's actively in flight, then the open issues themselves (each carries its own `## Metadata` block per [`ISSUE_METADATA_STANDARD.md`](./ISSUE_METADATA_STANDARD.md)), then `docs/engineering/BACKLOG.md` and `docs/engineering/ROADMAP.md` for broader context. This is the full source of truth — check a GitHub Project only if the repository happens to run one (see [`GITHUB_PROJECT_STANDARD.md`](https://github.com/TFRS-Admin/tfrs-engineering-playbook/blob/main/GITHUB_PROJECT_STANDARD.md)); its absence changes nothing about what an agent can determine.
+5. **Read the repository's engineering documentation, then the relevant GitHub Issue(s).** Read `docs/engineering/CURRENT_SPRINT.md` for what's actively in flight, then the open issues themselves (each carries its own `## Metadata` block per [`ISSUE_METADATA_STANDARD.md`](https://github.com/TFRS-Admin/tfrs-engineering-playbook/blob/main/ISSUE_METADATA_STANDARD.md)), then `docs/engineering/BACKLOG.md` and `docs/engineering/ROADMAP.md` for broader context. This is the full source of truth — check a GitHub Project only if the repository happens to run one (see [`GITHUB_PROJECT_STANDARD.md`](https://github.com/TFRS-Admin/tfrs-engineering-playbook/blob/main/GITHUB_PROJECT_STANDARD.md)); its absence changes nothing about what an agent can determine.
 6. **Determine the task category.** Every request is one of: *informational* (a question, no state change), *planning* (turning an idea into a strategy), *review* (assessing a diff or existing state), *execution* (implementing a specific issue), *verification* (proving a change works), or *release* (shipping). Use [`DECISION_ROUTER.md`](./DECISION_ROUTER.md) to map a plain-language request to one of these categories. If the request sounds execution-shaped (e.g., "fix this bug") but no `Ready`, unblocked, acceptance-criteria-bearing issue exists yet, the category is actually *planning* first — see [`DECISION_ROUTER.md#forbidden-until-plannedbacklogged`](./DECISION_ROUTER.md#forbidden-until-plannedbacklogged).
 7. **Select the correct workflow.** Once the category is known, `DECISION_ROUTER.md` names the [`commands/`](https://github.com/TFRS-Admin/tfrs-engineering-playbook/blob/main/commands/README.md) prompt(s) to run.
 8. **Select the correct skill, if applicable.** Per [`SKILLS_STANDARD.md`](https://github.com/TFRS-Admin/tfrs-engineering-playbook/blob/main/SKILLS_STANDARD.md#skill-selection), most non-informational categories have a matching skill in [`TFRS-Admin/agent-skills`](https://github.com/TFRS-Admin/agent-skills) to consult before executing.
@@ -46,7 +46,7 @@ Current work is whatever the repository — its engineering docs and its issues 
 1. **`AGENTS.md`** — confirm baseline conventions haven't changed.
 2. **`CLAUDE.md`** — confirm response/execution conventions haven't changed.
 3. **`docs/engineering/CURRENT_SPRINT.md`** — what's actively committed this sprint and its current state.
-4. **GitHub Issues** — read each in-flight issue's `## Metadata` block directly (see [`ISSUE_METADATA_STANDARD.md`](./ISSUE_METADATA_STANDARD.md)). Check `In Progress` and `In Review` items first — an agent should finish or hand off in-flight work before starting new work. If nothing is in flight, check `Ready`.
+4. **GitHub Issues** — read each in-flight issue's `## Metadata` block directly (see [`ISSUE_METADATA_STANDARD.md`](https://github.com/TFRS-Admin/tfrs-engineering-playbook/blob/main/ISSUE_METADATA_STANDARD.md)). Check `In Progress` and `In Review` items first — an agent should finish or hand off in-flight work before starting new work. If nothing is in flight, check `Ready`.
 5. **`docs/engineering/BACKLOG.md`** — the full backlog if nothing in the current sprint answers the question.
 6. **`docs/engineering/ROADMAP.md`** — broader sequencing context if the request is about what's coming, not what's ready now.
 7. **This playbook's standards** — for anything the repository's own docs don't resolve (e.g., how `Priority` and `Risk` should order two competing `Ready` issues).
@@ -63,7 +63,7 @@ When multiple issues are in `Ready`, choose using this order:
 3. **Highest `Priority`**, then highest `Risk` (resolve risk while there is runway in the sprint), then smallest `Size` when priority and risk tie (see [`BACKLOG_STANDARD.md#execution-ordering`](https://github.com/TFRS-Admin/tfrs-engineering-playbook/blob/main/BACKLOG_STANDARD.md#execution-ordering)).
 4. **Matches your `Agent Persona`** — an agent operating as `Implementer` should not pick up an issue whose `Agent Persona` is `Verifier` or `Release-Manager`; hand it off instead.
 
-All four fields are read directly from the issue's `## Metadata` block per [`ISSUE_METADATA_STANDARD.md`](./ISSUE_METADATA_STANDARD.md). If no issue in `Ready` satisfies these constraints, stop and report that the backlog needs attention rather than inventing work.
+All four fields are read directly from the issue's `## Metadata` block per [`ISSUE_METADATA_STANDARD.md`](https://github.com/TFRS-Admin/tfrs-engineering-playbook/blob/main/ISSUE_METADATA_STANDARD.md). If no issue in `Ready` satisfies these constraints, stop and report that the backlog needs attention rather than inventing work.
 
 ## 4. When to Stop
 
@@ -106,7 +106,7 @@ Every claim of "this works" must be backed by evidence attached to the PR or iss
 
 ## 8. Agent Personas
 
-[`ISSUE_METADATA_STANDARD.md`](./ISSUE_METADATA_STANDARD.md) assigns every issue an `Agent Persona` value. Here is what each one actually does:
+[`ISSUE_METADATA_STANDARD.md`](https://github.com/TFRS-Admin/tfrs-engineering-playbook/blob/main/ISSUE_METADATA_STANDARD.md) assigns every issue an `Agent Persona` value. Here is what each one actually does:
 
 | Persona | Behavior |
 | --- | --- |
@@ -140,7 +140,7 @@ This loop applies identically whether the acting agent is Claude Code, GitHub Co
 
 - [`AGENTS.md`](./AGENTS.md) — baseline conventions
 - [`CLAUDE.md`](./CLAUDE.md) — Claude-specific response and PR conventions
-- [`ISSUE_METADATA_STANDARD.md`](./ISSUE_METADATA_STANDARD.md) — the field vocabulary this document reads and updates on every issue
+- [`ISSUE_METADATA_STANDARD.md`](https://github.com/TFRS-Admin/tfrs-engineering-playbook/blob/main/ISSUE_METADATA_STANDARD.md) — the field vocabulary this document reads and updates on every issue
 - [`BACKLOG_STANDARD.md`](https://github.com/TFRS-Admin/tfrs-engineering-playbook/blob/main/BACKLOG_STANDARD.md) — how work enters the state this model operates on
 - [`GITHUB_PROJECT_STANDARD.md`](https://github.com/TFRS-Admin/tfrs-engineering-playbook/blob/main/GITHUB_PROJECT_STANDARD.md) — the optional dashboard layer, consulted only if a repository runs one
 - [`commands/execute.md`](https://github.com/TFRS-Admin/tfrs-engineering-playbook/blob/main/commands/execute.md), [`commands/verify.md`](https://github.com/TFRS-Admin/tfrs-engineering-playbook/blob/main/commands/verify.md), and [`commands/ship.md`](https://github.com/TFRS-Admin/tfrs-engineering-playbook/blob/main/commands/ship.md) — the executable procedures this model governs

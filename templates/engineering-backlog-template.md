@@ -47,4 +47,4 @@ If this repository has no backlog yet, replace the sections above with:
 
 ## Related Documents
 
-[`commands/backlog.md`](https://github.com/TFRS-Admin/tfrs-engineering-playbook/blob/main/commands/backlog.md) · [`BACKLOG_STANDARD.md`](https://github.com/TFRS-Admin/tfrs-engineering-playbook/blob/main/BACKLOG_STANDARD.md) · `ISSUE_METADATA_STANDARD.md` in the playbook repository · sibling `docs/engineering/CURRENT_SPRINT.md`
+[`commands/backlog.md`](https://github.com/TFRS-Admin/tfrs-engineering-playbook/blob/main/commands/backlog.md) · [`BACKLOG_STANDARD.md`](https://github.com/TFRS-Admin/tfrs-engineering-playbook/blob/main/BACKLOG_STANDARD.md) · [`ISSUE_METADATA_STANDARD.md`](https://github.com/TFRS-Admin/tfrs-engineering-playbook/blob/main/ISSUE_METADATA_STANDARD.md) · sibling `docs/engineering/CURRENT_SPRINT.md`
