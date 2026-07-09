@@ -1,10 +1,14 @@
 <!-- Purpose: Canonical entry point for the TFRS engineering playbook and adoption guidance. -->
 # TFRS Engineering Playbook
 
-![Version](https://img.shields.io/badge/version-2.0.0-blue)
+![Version](https://img.shields.io/badge/version-2.1.0-blue)
 ![Last Updated](https://img.shields.io/badge/last%20updated-2026--07--09-brightgreen)
 
-The **TFRS Engineering Playbook** is the canonical engineering operating system for current and future TFRS projects. Version 1 established the documentation foundation: AI-assisted development conventions, planning and review expectations, reusable templates, and GitHub operating standards. Version 2 operationalizes it — GitHub is the operational source of truth, chat is temporary, and every phase of the lifecycle (review, roadmap, plan, backlog, execute, verify, ship) is an executable prompt any AI agent can run, not just a document to read.
+The **TFRS Engineering Playbook** is the canonical engineering operating system for current and future TFRS projects. Version 1 established the documentation foundation: AI-assisted development conventions, planning and review expectations, reusable templates, and GitHub operating standards. Version 2.0 operationalized it — GitHub is the operational source of truth, chat is temporary, and every phase of the lifecycle (review, roadmap, plan, backlog, execute, verify, ship) is an executable prompt any AI agent can run, not just a document to read. Version 2.1 deepens the engineering discipline inside that lifecycle — security, testing, debugging, and code-quality practice that were previously thin or missing.
+
+## Engineering Methodology Lineage
+
+This playbook treats [`agent-skills`](https://github.com/addyosmani/agent-skills) (a reference-quality, open-source engineering-skills pack, snapshotted at [`docs/agent-skills-main.zip`](./docs/agent-skills-main.zip)) as its engineering *methodology*, and this playbook as TFRS's *implementation* of that methodology — synthesized and adapted, not copied verbatim, and preserved where TFRS's existing workflow was already at least as strong. [`SECURITY_STANDARD.md`](./SECURITY_STANDARD.md) and [`TESTING_STANDARD.md`](./TESTING_STANDARD.md) are the two new standards that came directly out of this synthesis; nearly every other standard in this repository received smaller additions from it. See the pull request that introduced this synthesis for the full list of what was adopted, adapted, and intentionally left out, and the [Terminology Map](./AI_ENGINEERING_WORKFLOW.md#terminology-map) for where the two systems use the same word differently. The snapshot in `docs/agent-skills-main.zip` is a point-in-time reference, not a live dependency — re-sync it deliberately (a new snapshot plus a fresh comparison pass) rather than assuming it stays current on its own.
 
 ## Quick Start
 
@@ -45,6 +49,8 @@ Review → Roadmap → Plan → Backlog → Execute → Verify → Ship
 - [EXECUTION_STANDARD.md](./EXECUTION_STANDARD.md)
 - [BACKLOG_STANDARD.md](./BACKLOG_STANDARD.md)
 - [GITHUB_PROJECT_STANDARD.md](./GITHUB_PROJECT_STANDARD.md)
+- [SECURITY_STANDARD.md](./SECURITY_STANDARD.md)
+- [TESTING_STANDARD.md](./TESTING_STANDARD.md)
 - [REPOSITORY_BOOTSTRAP_GUIDE.md](./REPOSITORY_BOOTSTRAP_GUIDE.md)
 - [REPO_HEALTH_STANDARD.md](./REPO_HEALTH_STANDARD.md)
 - [VERSION.md](./VERSION.md)
@@ -106,7 +112,7 @@ Copy these into the downstream repository so they work without a live dependency
 
 Reference these directly from this repository rather than copying, since they change independently of any one downstream repository and copies would drift:
 
-- [`REVIEW_STANDARD.md`](./REVIEW_STANDARD.md), [`PLANNING_STANDARD.md`](./PLANNING_STANDARD.md), [`EXECUTION_STANDARD.md`](./EXECUTION_STANDARD.md), [`BACKLOG_STANDARD.md`](./BACKLOG_STANDARD.md), [`GITHUB_PROJECT_STANDARD.md`](./GITHUB_PROJECT_STANDARD.md), [`REPO_HEALTH_STANDARD.md`](./REPO_HEALTH_STANDARD.md) — the standards themselves.
+- [`REVIEW_STANDARD.md`](./REVIEW_STANDARD.md), [`PLANNING_STANDARD.md`](./PLANNING_STANDARD.md), [`EXECUTION_STANDARD.md`](./EXECUTION_STANDARD.md), [`BACKLOG_STANDARD.md`](./BACKLOG_STANDARD.md), [`GITHUB_PROJECT_STANDARD.md`](./GITHUB_PROJECT_STANDARD.md), [`SECURITY_STANDARD.md`](./SECURITY_STANDARD.md), [`TESTING_STANDARD.md`](./TESTING_STANDARD.md), [`REPO_HEALTH_STANDARD.md`](./REPO_HEALTH_STANDARD.md) — the standards themselves.
 - The [`commands/`](./commands/README.md) library — executable prompts should be run against the canonical version so improvements to a command reach every repository immediately.
 - [`AI_ENGINEERING_WORKFLOW.md`](./AI_ENGINEERING_WORKFLOW.md) and [`REPOSITORY_BOOTSTRAP_GUIDE.md`](./REPOSITORY_BOOTSTRAP_GUIDE.md).
 

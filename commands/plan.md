@@ -22,12 +22,13 @@ Turn an approved review finding, roadmap Epic, or raw issue into a concrete impl
 
 1. Read [`PLANNING_STANDARD.md`](../PLANNING_STANDARD.md) for issue anatomy, sizing, and acceptance criteria format.
 2. Restate the problem in one sentence — if you cannot, the input isn't ready for planning; send it back to `Review`.
-3. Break the work into stories/tasks, each independently sized `S`/`M`/`L` (split anything that would be `XL`).
-4. Write acceptance criteria for each task in Given/When/Then form.
-5. Identify risks and unknowns explicitly — do not fold them silently into the estimate.
-6. Identify dependencies between the tasks you just created, and between this work and anything else in flight.
-7. Propose a PR breakdown: which tasks can ship as independent PRs, and which are tightly coupled and must land together.
-8. Do not begin implementation. The output of this command is a strategy document, not a branch.
+3. Check whether this work meets any trigger in [`PLANNING_STANDARD.md`](../PLANNING_STANDARD.md#when-a-full-spec-is-required); if so, produce the fuller plan described there (including an explicit `Assumptions:` block) rather than just a task list.
+4. Break the work into stories/tasks, each independently sized `S`/`M`/`L` (split anything that would be `XL`, and split further if it trips any of the finer-grained triggers in [`PLANNING_STANDARD.md`](../PLANNING_STANDARD.md#estimation-approach)).
+5. Write acceptance criteria for each task in Given/When/Then form.
+6. Identify risks and unknowns explicitly — do not fold them silently into the estimate. For anything `Risk: High` or `Risk: Critical`, note that [`commands/backlog.md`](./backlog.md) will require the Threat Model First step from [`SECURITY_STANDARD.md`](../SECURITY_STANDARD.md).
+7. Identify dependencies between the tasks you just created, and between this work and anything else in flight.
+8. Propose a PR breakdown: which tasks can ship as independent PRs, and which are tightly coupled and must land together.
+9. Do not begin implementation. The output of this command is a strategy document, not a branch.
 
 ## Required Outputs
 

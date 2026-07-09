@@ -31,12 +31,26 @@ The standard TFRS path is:
 
 Every phase above has a corresponding executable prompt in the [`commands/`](./commands/README.md) library — use those prompts to run the phase rather than improvising it from this table alone.
 
+## Terminology Map
+
+TFRS's engineering methodology synthesizes practices from the `agent-skills` reference methodology (see [`README.md`](./README.md#engineering-methodology-lineage)). The two use several of the same words for different lifecycle points — this table exists so that never causes real confusion:
+
+| Word | TFRS meaning here | Where it lives | Note |
+| --- | --- | --- | --- |
+| **Review** (discovery) | Assess current state and produce findings *before* planning new work | [`commands/review.md`](./commands/review.md) | Runs at the *start* of the lifecycle |
+| **Review** (PR/code) | The approval bar for merging a specific diff, right before Ship | [`REVIEW_STANDARD.md`](./REVIEW_STANDARD.md) | Runs near the *end* of the lifecycle — same word, opposite end |
+| **Plan** | Turn an approved finding/Epic into a sized implementation strategy | [`commands/plan.md`](./commands/plan.md), [`PLANNING_STANDARD.md`](./PLANNING_STANDARD.md) | Consistent with the reference methodology's "Plan" |
+| **Verify** | Produce evidence that an implementation satisfies its acceptance criteria, as a discrete gate before Ship | [`commands/verify.md`](./commands/verify.md) | TFRS keeps this as its own explicit command producing an attachable evidence artifact, rather than folding it entirely into build-time testing, because [`GITHUB_PROJECT_STANDARD.md`](./GITHUB_PROJECT_STANDARD.md)'s `QA Required` field needs a discrete artifact to point to |
+| **Backlog** | Convert a plan into GitHub Projects, Epics, and Issues | [`BACKLOG_STANDARD.md`](./BACKLOG_STANDARD.md) | Net-new phase this playbook added in v2.0.0; has no direct equivalent since the reference methodology isn't built around a project-management system |
+
+If you only remember one row: **"Review" means two different things depending on whether it's the command or the standard** — `commands/review.md` looks backward at existing state before anything is planned, `REVIEW_STANDARD.md` looks at a finished diff before it merges.
+
 ## Phase Guidance
 
 ### Idea
 
 - Humans own problem framing and business priority.
-- AI can suggest missing requirements, edge cases, and similar prior work.
+- AI can suggest missing requirements, edge cases, and similar prior work — and should surface its assumptions explicitly (an `Assumptions:` block) rather than silently guessing at scope; ask a targeted clarifying question when genuinely unsure rather than proceeding on a guess, per [`CLAUDE.md`](./CLAUDE.md#when-to-ask-vs-when-to-proceed).
 - Definition of done: a clear statement of what success looks like.
 
 ### Plan

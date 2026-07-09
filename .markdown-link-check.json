@@ -2,6 +2,9 @@
   "ignorePatterns": [
     {
       "pattern": "^https://img\\.shields\\.io/"
+    },
+    {
+      "pattern": "^https://github\\.com/addyosmani/agent-skills"
     }
   ]
 }

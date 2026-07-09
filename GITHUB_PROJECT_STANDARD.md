@@ -42,7 +42,7 @@ How much could go wrong if this item is done poorly or fails in production.
 
 Allowed values: `Low`, `Medium`, `High`, `Critical`
 
-- **Usage:** governs review rigor, whether `QA Required` should default to `Yes`, and how much autonomy an agent should exercise (see [`AI_AGENT_OPERATING_MODEL.md`](./AI_AGENT_OPERATING_MODEL.md#4-when-to-stop)). `High`/`Critical` risk items get resolved earlier in a sprint, not later.
+- **Usage:** governs review rigor, whether `QA Required` should default to `Yes`, and how much autonomy an agent should exercise (see [`AI_AGENT_OPERATING_MODEL.md`](./AI_AGENT_OPERATING_MODEL.md#4-when-to-stop)). `High`/`Critical` risk items get resolved earlier in a sprint, not later, and trigger the Threat Model First step in [`SECURITY_STANDARD.md`](./SECURITY_STANDARD.md) — note that field is a planning-time estimate, distinct from a security audit's finding-severity scale (see that document for the distinction).
 - **Ownership:** set during [`commands/plan.md`](./commands/plan.md) or [`commands/backlog.md`](./commands/backlog.md); default to the more conservative value when uncertain.
 
 ### Size
@@ -96,7 +96,7 @@ Which role — human or AI — is expected to act on this item next.
 
 Allowed values: `Reviewer`, `Planner`, `Backlog-Manager`, `Implementer`, `Verifier`, `Release-Manager`, `Repo-Health-Auditor`
 
-- **Usage:** an agent should only pick up an item whose `Agent Persona` matches the role it is operating as (see [`AI_AGENT_OPERATING_MODEL.md`](./AI_AGENT_OPERATING_MODEL.md#3-how-to-choose-the-next-issue)). The value updates as the item moves through phases (e.g. `Implementer` while `Phase` = `Execute`, then `Verifier` while `Phase` = `Verify`).
+- **Usage:** an agent should only pick up an item whose `Agent Persona` matches the role it is operating as (see [`AI_AGENT_OPERATING_MODEL.md`](./AI_AGENT_OPERATING_MODEL.md#3-how-to-choose-the-next-issue)). The value updates as the item moves through phases (e.g. `Implementer` while `Phase` = `Execute`, then `Verifier` while `Phase` = `Verify`). See [`AI_AGENT_OPERATING_MODEL.md`](./AI_AGENT_OPERATING_MODEL.md#8-agent-personas) for exactly what each persona value does, and the orchestration rule governing how (and whether) personas hand off to one another.
 - **Ownership:** defaults are derived from `Phase`; a human may override to assign a specific owner.
 
 ## Board Views

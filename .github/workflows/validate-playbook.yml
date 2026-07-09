@@ -36,6 +36,8 @@ jobs:
             EXECUTION_STANDARD.md
             BACKLOG_STANDARD.md
             GITHUB_PROJECT_STANDARD.md
+            SECURITY_STANDARD.md
+            TESTING_STANDARD.md
             REPOSITORY_BOOTSTRAP_GUIDE.md
             REPO_HEALTH_STANDARD.md
             VERSION.md

@@ -75,6 +75,28 @@ Every claim of "this works" must be backed by evidence attached to the PR or iss
 3. Keep PRs under the size guideline in [`EXECUTION_STANDARD.md`](./EXECUTION_STANDARD.md); a PR that keeps growing is a sign the issue was under-scoped at `Plan` or `Backlog` time — flag that upstream rather than absorbing the growth silently.
 4. When in doubt whether something is in scope, it is out of scope. Ask (per [`CLAUDE.md`](./CLAUDE.md#when-to-ask-vs-when-to-proceed)) rather than deciding unilaterally.
 
+## 8. Agent Personas
+
+[`GITHUB_PROJECT_STANDARD.md`](./GITHUB_PROJECT_STANDARD.md) assigns every issue an `Agent Persona` value. Here is what each one actually does:
+
+| Persona | Behavior |
+| --- | --- |
+| `Reviewer` | Runs [`commands/review.md`](./commands/review.md) — assesses current state and produces findings. Does not fix anything. |
+| `Planner` | Runs [`commands/roadmap.md`](./commands/roadmap.md) and [`commands/plan.md`](./commands/plan.md) — sequences findings into Epics and turns approved work into a sized strategy. |
+| `Backlog-Manager` | Runs [`commands/backlog.md`](./commands/backlog.md) — converts a plan into GitHub Projects, Epics, Issues, and dependency-ordered execution. |
+| `Implementer` | Runs [`commands/execute.md`](./commands/execute.md) — implements a single `Ready` issue within its acceptance criteria. |
+| `Verifier` | Runs [`commands/verify.md`](./commands/verify.md) — produces the evidence artifact for an implementation; does not implement fixes itself, sends failures back to `Implementer`. |
+| `Release-Manager` | Runs [`commands/ship.md`](./commands/ship.md) — merges, releases, and communicates a verified change. |
+| `Repo-Health-Auditor` | Runs [`commands/repo-health.md`](./commands/repo-health.md) — recurring, cadence-driven assessment across all eight health dimensions. |
+
+## 9. Orchestration Between Personas
+
+**The governing rule: a human, or the command/phase an agent is currently running, is the orchestrator. Personas do not invoke other personas.** An agent operating as `Implementer` does not spawn a `Verifier` sub-agent mid-task to check its own work — it finishes execution, updates `Status`, and hands off; a separate agent (or the same agent starting a new command) picks up `commands/verify.md` next. This mirrors a hard platform constraint on Claude Code specifically (subagents cannot spawn other subagents), but the rule applies regardless of which agent is operating.
+
+The one endorsed exception is **parallel fan-out with a merge step**: independent perspectives on the *same* input, run concurrently, with their reports merged by whoever requested them — never one persona calling another. TFRS makes this available, optionally, for `Risk: High` or `Risk: Critical` items at the [`commands/ship.md`](./commands/ship.md) gate: a `Reviewer`-persona pass, a `Verifier`-persona pass, and a security check against [`SECURITY_STANDARD.md`](./SECURITY_STANDARD.md) can run concurrently against the same diff, with findings merged before the merge/no-merge decision — each with a fresh context window, none aware of or dependent on the others' output. This is optional guidance for high-stakes work, not a default requirement for every PR; `commands/ship.md`'s standard flow remains sequential.
+
+Do not build a "router" persona whose only job is deciding which other persona to invoke — that's the job of the command layer (`commands/`) and this operating model, not an agent role.
+
 ## Summary Loop
 
 ```text
@@ -91,4 +113,5 @@ This loop applies identically whether the acting agent is Claude Code, GitHub Co
 - [`CLAUDE.md`](./CLAUDE.md) — Claude-specific response and PR conventions
 - [`BACKLOG_STANDARD.md`](./BACKLOG_STANDARD.md) — how work enters the state this model operates on
 - [`GITHUB_PROJECT_STANDARD.md`](./GITHUB_PROJECT_STANDARD.md) — field and view definitions referenced throughout
-- [`commands/execute.md`](./commands/execute.md) and [`commands/verify.md`](./commands/verify.md) — the executable procedures this model governs
+- [`commands/execute.md`](./commands/execute.md), [`commands/verify.md`](./commands/verify.md), and [`commands/ship.md`](./commands/ship.md) — the executable procedures this model governs
+- [`SECURITY_STANDARD.md`](./SECURITY_STANDARD.md) — referenced by the optional parallel fan-out pattern in section 9

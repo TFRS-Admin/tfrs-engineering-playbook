@@ -9,7 +9,7 @@ Produce a factual, evidence-backed account of the current state of a system, fea
 Review → Roadmap/Plan → Backlog → Execute → Verify → Ship
 ```
 
-This is distinct from PR review (see [`REVIEW_STANDARD.md`](../REVIEW_STANDARD.md), which is the approval bar for merging a specific diff). This command reviews *existing state*, not a proposed change.
+This is distinct from PR review (see [`REVIEW_STANDARD.md`](../REVIEW_STANDARD.md), which is the approval bar for merging a specific diff — see the terminology map in [`AI_ENGINEERING_WORKFLOW.md`](../AI_ENGINEERING_WORKFLOW.md#terminology-map) for why both are called "Review"). This command reviews *existing state*, not a proposed change.
 
 ## When to Use It
 
@@ -33,7 +33,7 @@ This is distinct from PR review (see [`REVIEW_STANDARD.md`](../REVIEW_STANDARD.m
 3. Explore the scoped code (search by symbol, by directory, by behavior — use whatever breadth the scope requires; for a scope larger than a few files, fan out multiple independent searches rather than one linear pass).
 4. For each observation, capture: what you found, where (file:line or reproduction steps), why it matters, and severity.
 5. Distinguish **confirmed** findings (you traced the code path or reproduced the behavior) from **suspected** findings (plausible but unverified) — never present a suspicion as a fact.
-6. Do not write or propose a fix in this pass. If a fix is obvious, note it as a "likely direction" but leave the actual solution design to [`commands/plan.md`](./plan.md).
+6. Do not write or propose a fix in this pass — this is Chesterton's Fence in practice: understand why something is the way it is before deciding whether to change it (see [`REVIEW_STANDARD.md`](../REVIEW_STANDARD.md#complexity--simplification)). If a fix is obvious, note it as a "likely direction" but leave the actual solution design to [`commands/plan.md`](./plan.md).
 7. Rank findings by severity, then write the findings document.
 
 ## Required Outputs
