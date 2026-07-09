@@ -43,6 +43,8 @@ Everything else — [`REVIEW_STANDARD.md`](../REVIEW_STANDARD.md), [`PLANNING_ST
 
 The [Repository Readiness Checklist](../REPOSITORY_BOOTSTRAP_GUIDE.md#repository-readiness-checklist) tests for this baseline directly — a repository failing an `AGENTS.md`, `CLAUDE.md`, or `DECISION_ROUTER.md` check on that list is failing this baseline, not a separate requirement.
 
+The four copied files are written so their own links stay valid once copied into a downstream repository: a link from one copied baseline file to another (e.g. `AGENTS.md` → `CLAUDE.md`) stays a local relative link, since both sides travel together; a link from a copied file to anything centralized (any `*_STANDARD.md`, `AI_ENGINEERING_WORKFLOW.md`, `REPOSITORY_BOOTSTRAP_GUIDE.md`, or anything under `commands/` or `templates/`) is a full `https://github.com/TFRS-Admin/tfrs-engineering-playbook/blob/main/...` URL back to this repository, not a relative path that would silently 404 once the file no longer lives next to what it's referencing. Follow this same convention if you ever add a link to one of the four baseline files.
+
 ## Workflow
 
 1. Review the target repository's README, branch protections, and existing contributor docs — including any existing `AGENTS.md`/`CLAUDE.md`, even an informal one; don't assume the repository has nothing to say.

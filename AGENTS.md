@@ -33,7 +33,7 @@ Use Conventional Commits for every agent-authored commit:
 
 - Do not force push or rewrite shared history unless a human maintainer explicitly owns that operation.
 - Do not delete the `.github/` directory or weaken repository protections.
-- Do not commit secrets, credentials, tokens, or private keys — see [`SECURITY_STANDARD.md`](./SECURITY_STANDARD.md) for what to do if one ever is committed anyway.
+- Do not commit secrets, credentials, tokens, or private keys — see [`SECURITY_STANDARD.md`](https://github.com/TFRS-Admin/tfrs-engineering-playbook/blob/main/SECURITY_STANDARD.md) for what to do if one ever is committed anyway.
 - Do not make unrelated refactors while addressing a focused task.
 - Do not ignore existing tests, lint rules, or review feedback without documenting why.
 
@@ -42,10 +42,10 @@ Use Conventional Commits for every agent-authored commit:
 0. **Start every session with the [Session Initialization Protocol](./AI_AGENT_OPERATING_MODEL.md#1-session-initialization-protocol)** — this applies even to a plain-language request with no issue number attached; route it with [`DECISION_ROUTER.md`](./DECISION_ROUTER.md) rather than guessing which command applies.
 1. Read [`CLAUDE.md`](./CLAUDE.md) for response and execution conventions.
 2. Read [`AI_AGENT_OPERATING_MODEL.md`](./AI_AGENT_OPERATING_MODEL.md) for the full operating loop: what to read first, how to pick the next issue, when to stop, and how to update GitHub. This document defines behavior and conventions; that one defines the loop those conventions run inside.
-3. Follow [`EXECUTION_STANDARD.md`](./EXECUTION_STANDARD.md) when coding, and the executable command library under [`commands/`](./commands/README.md) for every phase of the lifecycle.
-4. Check [`REVIEW_STANDARD.md`](./REVIEW_STANDARD.md) before asking for or approving a pull request, and [`SECURITY_STANDARD.md`](./SECURITY_STANDARD.md) / [`TESTING_STANDARD.md`](./TESTING_STANDARD.md) whenever a change touches external input, auth, or behavior that needs test coverage.
-5. Use [`AI_ENGINEERING_WORKFLOW.md`](./AI_ENGINEERING_WORKFLOW.md) to decide what work belongs to humans versus AI.
-6. Consult [`SKILLS_STANDARD.md`](./SKILLS_STANDARD.md) for the step-by-step execution mechanics of a given task type (code review, planning, implementation, verification, and so on) — this playbook defines *what's required*, [`TFRS-Admin/agent-skills`](https://github.com/TFRS-Admin/agent-skills) defines *how to execute it*; don't re-derive a skill's workflow from scratch when one already exists.
+3. Follow [`EXECUTION_STANDARD.md`](https://github.com/TFRS-Admin/tfrs-engineering-playbook/blob/main/EXECUTION_STANDARD.md) when coding, and the executable command library under [`commands/`](https://github.com/TFRS-Admin/tfrs-engineering-playbook/blob/main/commands/README.md) for every phase of the lifecycle.
+4. Check [`REVIEW_STANDARD.md`](https://github.com/TFRS-Admin/tfrs-engineering-playbook/blob/main/REVIEW_STANDARD.md) before asking for or approving a pull request, and [`SECURITY_STANDARD.md`](https://github.com/TFRS-Admin/tfrs-engineering-playbook/blob/main/SECURITY_STANDARD.md) / [`TESTING_STANDARD.md`](https://github.com/TFRS-Admin/tfrs-engineering-playbook/blob/main/TESTING_STANDARD.md) whenever a change touches external input, auth, or behavior that needs test coverage.
+5. Use [`AI_ENGINEERING_WORKFLOW.md`](https://github.com/TFRS-Admin/tfrs-engineering-playbook/blob/main/AI_ENGINEERING_WORKFLOW.md) to decide what work belongs to humans versus AI.
+6. Consult [`SKILLS_STANDARD.md`](https://github.com/TFRS-Admin/tfrs-engineering-playbook/blob/main/SKILLS_STANDARD.md) for the step-by-step execution mechanics of a given task type (code review, planning, implementation, verification, and so on) — this playbook defines *what's required*, [`TFRS-Admin/agent-skills`](https://github.com/TFRS-Admin/agent-skills) defines *how to execute it*; don't re-derive a skill's workflow from scratch when one already exists.
 
 ## Branch Naming
 
