@@ -11,20 +11,25 @@ This workflow describes how TFRS moves from idea to shipped software using a hum
 | --- | --- | --- | --- | --- | --- |
 | Idea | Clarify the problem, business value, and constraints | Help shape options and capture assumptions | Customer need, issue request, context | Draft problem statement | Problem is clear enough to estimate |
 | Plan | Break work into issues, define acceptance criteria, assign priority | Propose scope, risks, and implementation checklist | Problem statement, existing standards | Approved issue or plan | Issue has acceptance criteria and owner |
+| Backlog | Approve GitHub Project structure, priority, and sequencing | Convert the plan into Epics/Issues, map dependencies, set execution order | Approved plan, [`GITHUB_PROJECT_STANDARD.md`](./GITHUB_PROJECT_STANDARD.md) fields | Fully-fielded, dependency-ordered GitHub issues | Every issue is `Ready` with no empty required field |
 | Build | Approve direction, answer blockers, review progress | Implement focused changes, update docs, run checks | Approved issue, repo code, playbook | Branch commits and PR draft | Change matches acceptance criteria |
 | Review | Review logic, UX, security, and maintainability | Self-review, summarize diffs, surface trade-offs | PR diff, test results | Review comments and approvals | Required approvals complete |
 | Ship | Merge, release, communicate downstream impact | Verify release notes and follow-up checklist | Approved PR, release decision | Merged code and rollout note | Default branch updated cleanly |
 | Reflect | Capture lessons and update standards | Summarize what should be standardized next | Delivered work, incidents, review notes | ADRs, playbook updates, backlog items | Improvement action is recorded |
 
+Historically this repository had no defined phase between `Plan` and `Build` — plans existed as documents or chat output with no required path into tracked, executable GitHub work. `Backlog` closes that gap; see [`BACKLOG_STANDARD.md`](./BACKLOG_STANDARD.md) for the full standard and [`commands/backlog.md`](./commands/backlog.md) for the executable procedure.
+
 ## GitHub Integration Flow
 
 The standard TFRS path is:
 
-1. **Issue** created using the repository template in [`.github/ISSUE_TEMPLATE`](./.github/ISSUE_TEMPLATE/).
-2. **Project Board** entry created and prioritized using [`GITHUB_PROJECT_STANDARD.md`](./GITHUB_PROJECT_STANDARD.md).
+1. **Issue** created using the repository template in [`.github/ISSUE_TEMPLATE`](./.github/ISSUE_TEMPLATE/), or generated during the Backlog phase from an approved plan (see [`BACKLOG_STANDARD.md`](./BACKLOG_STANDARD.md)).
+2. **Project Board** entry created and prioritized using [`GITHUB_PROJECT_STANDARD.md`](./GITHUB_PROJECT_STANDARD.md), with all required fields set and dependencies mapped before the item reaches `Ready`.
 3. **Branch** created according to [`AGENTS.md`](./AGENTS.md) and [`EXECUTION_STANDARD.md`](./EXECUTION_STANDARD.md).
-4. **Pull Request** opened with [`.github/PULL_REQUEST_TEMPLATE.md`](./.github/PULL_REQUEST_TEMPLATE.md).
-5. **Merge** after review against [`REVIEW_STANDARD.md`](./REVIEW_STANDARD.md).
+4. **Pull Request** opened with [`.github/PULL_REQUEST_TEMPLATE.md`](./.github/PULL_REQUEST_TEMPLATE.md) and a verification report from [`commands/verify.md`](./commands/verify.md) attached.
+5. **Merge** after review against [`REVIEW_STANDARD.md`](./REVIEW_STANDARD.md), via [`commands/ship.md`](./commands/ship.md).
+
+Every phase above has a corresponding executable prompt in the [`commands/`](./commands/README.md) library — use those prompts to run the phase rather than improvising it from this table alone.
 
 ## Phase Guidance
 
@@ -101,3 +106,5 @@ Diff summary: {{diff_summary}}
 Known risks: {{known_risks}}
 Return only actionable findings.
 ```
+
+These three prompts are quick-reference starting points. For the full executable procedure — required inputs, workflow, outputs, quality gates, and failure handling — for every phase of the lifecycle, use the [`commands/`](./commands/README.md) library instead.

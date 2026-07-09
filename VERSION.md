@@ -3,7 +3,7 @@
 
 ## Current Version
 
-**1.0.0**
+**2.0.0**
 
 ## Versioning Rules
 
@@ -23,6 +23,11 @@ Record changes using this format:
 ```
 
 ## Changelog
+
+## 2.0.0 - 2026-07-09
+- Type: major
+- Summary: Operationalized the playbook. Closed the gap between Plan and Execute by adding `BACKLOG_STANDARD.md` and the full `commands/` executable library (review, roadmap, plan, backlog, execute, verify, ship, repo-health). Added `AI_AGENT_OPERATING_MODEL.md`, `REPOSITORY_BOOTSTRAP_GUIDE.md`, and `REPO_HEALTH_STANDARD.md`. Expanded `GITHUB_PROJECT_STANDARD.md` to ten required fields (`Status`, `Phase`, `Priority`, `Risk`, `Size`, `Sprint`, `Epic`, `QA Required`, `Blocked`, `Agent Persona`) and eight board views. Added eight new work-item, decision, and evidence templates.
+- Impact: This is a breaking change for downstream repositories — existing GitHub Projects must add the new required fields and board views before any issue can reach `Ready` (see `GITHUB_PROJECT_STANDARD.md`), and any in-flight planning work should be routed through the new Backlog phase (see `BACKLOG_STANDARD.md`) before further execution. Repositories should re-run `REPOSITORY_BOOTSTRAP_GUIDE.md` step 3 (Create GitHub Project) as an upgrade pass rather than a fresh setup.
 
 ## 1.0.0 - 2026-07-09
 - Type: major

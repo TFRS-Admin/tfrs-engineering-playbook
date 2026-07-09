@@ -3,21 +3,7 @@
 
 ## ADR Template
 
-Use this template for each Architecture Decision Record:
-
-```text
-# ADR-XXX: <Title>
-Status: Proposed | Accepted | Superseded
-
-## Context
-<What problem or pressure exists?>
-
-## Decision
-<What was chosen?>
-
-## Consequences
-<What becomes easier, harder, or required next?>
-```
+The canonical, filled-example ADR template lives at [`templates/adr-template.md`](../../templates/adr-template.md) — copy it for every new decision rather than starting from a blank structure.
 
 ## ADR Index
 

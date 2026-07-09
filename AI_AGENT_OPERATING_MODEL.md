@@ -1,0 +1,94 @@
+<!-- Purpose: Define the canonical operating model every AI agent follows when it enters a TFRS repository. -->
+# TFRS AI Agent Operating Model
+
+## Purpose
+
+[`AGENTS.md`](./AGENTS.md) defines baseline conventions (naming, style, commits, branch prefixes). This document defines the **operating loop**: what an agent does from the moment it starts a session in a repository that has adopted this playbook, to the moment it stops. Every future TFRS repository should be usable by an AI agent that has read only this file plus the repository's own README.
+
+## 1. What to Read First
+
+On entering any repository that references this playbook, read in this order and stop as soon as you have enough context to act:
+
+1. The repository's own `README.md` — for repository-specific context this playbook cannot know.
+2. `AGENTS.md` and `CLAUDE.md` (or the repository's copies of them) — behavioral contract.
+3. `GITHUB_PROJECT_STANDARD.md` — how to read the current state of work on the project board.
+4. Any open issue or PR you were pointed at directly.
+5. `docs/decision-log/` (ADRs) for the area you are about to touch, so you do not contradict a recorded decision without flagging it.
+
+Do not re-derive information already recorded in these documents by re-reading the entire codebase. Trust the standards; verify only the specific issue you are working.
+
+## 2. How to Determine Current Work
+
+Current work is whatever GitHub says it is — not what a prior chat message implied. To determine current state:
+
+1. Read the GitHub Project board (see [`GITHUB_PROJECT_STANDARD.md`](./GITHUB_PROJECT_STANDARD.md) for field and view definitions).
+2. Check the `In Progress` and `In Review` views first — an agent should finish or hand off in-flight work before starting new work.
+3. If nothing is in flight, check `Ready`.
+4. If you were invoked with an explicit issue or PR number, that takes precedence over board scanning — but still check the board to confirm the item's `Status`, `Blocked`, and `Phase` fields before acting, in case the issue is stale relative to GitHub state.
+
+## 3. How to Choose the Next Issue
+
+When multiple issues are in `Ready`, choose using this order:
+
+1. **Assigned to you or unassigned and explicitly requested** — never pick up an issue assigned to another agent or human without confirming the handoff.
+2. **`Blocked` = `No`** — never start work that is flagged blocked, even if it looks unblocked from the code.
+3. **Highest `Priority`**, then highest `Risk` (resolve risk while there is runway in the sprint), then smallest `Size` when priority and risk tie (see [`BACKLOG_STANDARD.md`](./BACKLOG_STANDARD.md#execution-ordering)).
+4. **Matches your `Agent Persona`** — an agent operating as `Implementer` should not pick up an issue whose `Agent Persona` is `Verifier` or `Release-Manager`; hand it off instead.
+
+If no issue in `Ready` satisfies these constraints, stop and report that the backlog needs attention rather than inventing work.
+
+## 4. When to Stop
+
+Stop and hand control back to a human when any of the following is true:
+
+- The acceptance criteria are ambiguous or contradictory.
+- Completing the issue would require changing architecture, security posture, or a cross-repository convention not already documented.
+- A dependency you did not know about surfaces mid-implementation (undocumented `Blocked` state).
+- You have completed the acceptance criteria and produced verification evidence — stop and open the PR; do not keep "improving" beyond scope.
+- You have hit the same failure twice after attempting a fix — a third blind attempt is not more likely to work; escalate instead.
+
+Stopping is not failure. An agent that stops with a clear, documented reason is more valuable than one that guesses past a real blocker.
+
+## 5. How to Update GitHub
+
+GitHub is the source of truth; update it as state changes, not only at the end:
+
+1. Move the project item's `Status` when you start (`Ready` → `In Progress`), when you open a PR (`In Progress` → `In Review`), and when QA is required (`In Review` → `QA`).
+2. Set `Blocked` to `Yes` immediately when you hit a blocker, with a comment explaining what is needed — do not silently pause.
+3. Reference the issue number in every commit and the PR description (see [`EXECUTION_STANDARD.md`](./EXECUTION_STANDARD.md)).
+4. Close issues with the correct `state_reason` (`completed` vs. `not_planned`) — never close silently.
+5. Never let a chat-only status update substitute for a GitHub update. If it did not happen in GitHub, it did not happen.
+
+## 6. How to Document Evidence
+
+Every claim of "this works" must be backed by evidence attached to the PR or issue, not asserted in prose:
+
+1. Use [`commands/verify.md`](./commands/verify.md) and [`templates/verification-report-template.md`](./templates/verification-report-template.md) to produce the evidence artifact.
+2. Evidence is command output, test results, or a description of the exact manual steps taken and observed — never "should work" or "looks correct."
+3. Attach the verification report to the PR before requesting review, and to the issue before moving `Status` to `Done`.
+4. If a criterion could not be verified (no test infrastructure, no way to reproduce), say so explicitly in the report rather than omitting it.
+
+## 7. How to Avoid Scope Expansion
+
+1. Treat the issue's acceptance criteria as the complete definition of "done" — not a starting point for adjacent improvements.
+2. If you notice an unrelated bug or improvement while working, do not fix it inline. File it as a new issue using [`templates/engineering-task-template.md`](./templates/engineering-task-template.md) or [`templates/technical-debt-template.md`](./templates/technical-debt-template.md) and link it from your PR description as a follow-up.
+3. Keep PRs under the size guideline in [`EXECUTION_STANDARD.md`](./EXECUTION_STANDARD.md); a PR that keeps growing is a sign the issue was under-scoped at `Plan` or `Backlog` time — flag that upstream rather than absorbing the growth silently.
+4. When in doubt whether something is in scope, it is out of scope. Ask (per [`CLAUDE.md`](./CLAUDE.md#when-to-ask-vs-when-to-proceed)) rather than deciding unilaterally.
+
+## Summary Loop
+
+```text
+Read standards → Read board → Pick next issue → Update GitHub (start)
+  → Implement within acceptance criteria → Verify with evidence
+  → Update GitHub (PR opened) → Stop or hand off → Update GitHub (closed)
+```
+
+This loop applies identically whether the acting agent is Claude Code, GitHub Copilot, or a future agent — the model is agent-agnostic by design.
+
+## Related Documents
+
+- [`AGENTS.md`](./AGENTS.md) — baseline conventions
+- [`CLAUDE.md`](./CLAUDE.md) — Claude-specific response and PR conventions
+- [`BACKLOG_STANDARD.md`](./BACKLOG_STANDARD.md) — how work enters the state this model operates on
+- [`GITHUB_PROJECT_STANDARD.md`](./GITHUB_PROJECT_STANDARD.md) — field and view definitions referenced throughout
+- [`commands/execute.md`](./commands/execute.md) and [`commands/verify.md`](./commands/verify.md) — the executable procedures this model governs

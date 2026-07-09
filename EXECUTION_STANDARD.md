@@ -46,3 +46,11 @@ When work is blocked:
 1. Document the blocker in the issue or PR.
 2. State the decision or input needed from a human.
 3. Suggest at least one unblocked next step if available.
+4. Set the `Blocked` field to `Yes` on the GitHub Project item immediately (see [`GITHUB_PROJECT_STANDARD.md`](./GITHUB_PROJECT_STANDARD.md)) — a blocker that isn't visible on the board isn't tracked.
+
+## Related Documents
+
+- [`commands/execute.md`](./commands/execute.md) — the executable, step-by-step procedure for this standard
+- [`commands/verify.md`](./commands/verify.md) — required before opening a PR for review
+- [`AI_AGENT_OPERATING_MODEL.md`](./AI_AGENT_OPERATING_MODEL.md) — how an agent decides what to execute next and when to stop
+- [`BACKLOG_STANDARD.md`](./BACKLOG_STANDARD.md) — how work arrives here from planning

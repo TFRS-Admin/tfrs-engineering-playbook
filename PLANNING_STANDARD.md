@@ -55,3 +55,13 @@ Then the repository adopts the baseline AI workflow files and references the pla
 ## Linking Issues to Project Boards
 
 Every active issue should be linked to the relevant GitHub Project item so status, priority, sprint, and reviewer state stay visible in one place.
+
+## From Plan to Backlog
+
+A plan produced against this standard is not yet executable work — it becomes executable when it is converted into GitHub issues with dependencies and execution order set. That conversion is defined in [`BACKLOG_STANDARD.md`](./BACKLOG_STANDARD.md). The executable, step-by-step version of the planning process described in this document is [`commands/plan.md`](./commands/plan.md).
+
+## Related Documents
+
+- [`BACKLOG_STANDARD.md`](./BACKLOG_STANDARD.md) — what happens after a plan is approved
+- [`GITHUB_PROJECT_STANDARD.md`](./GITHUB_PROJECT_STANDARD.md) — field definitions referenced by issue labels and sizing
+- [`commands/plan.md`](./commands/plan.md) — executable procedure

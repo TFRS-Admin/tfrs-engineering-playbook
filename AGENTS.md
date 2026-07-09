@@ -40,9 +40,10 @@ Use Conventional Commits for every agent-authored commit:
 ## How Agents Should Use This Playbook
 
 1. Read [`CLAUDE.md`](./CLAUDE.md) for response and execution conventions.
-2. Follow [`EXECUTION_STANDARD.md`](./EXECUTION_STANDARD.md) when coding.
-3. Check [`REVIEW_STANDARD.md`](./REVIEW_STANDARD.md) before asking for or approving a pull request.
-4. Use [`AI_ENGINEERING_WORKFLOW.md`](./AI_ENGINEERING_WORKFLOW.md) to decide what work belongs to humans versus AI.
+2. Read [`AI_AGENT_OPERATING_MODEL.md`](./AI_AGENT_OPERATING_MODEL.md) for the full operating loop: what to read first, how to pick the next issue, when to stop, and how to update GitHub. This document defines behavior and conventions; that one defines the loop those conventions run inside.
+3. Follow [`EXECUTION_STANDARD.md`](./EXECUTION_STANDARD.md) when coding, and the executable command library under [`commands/`](./commands/README.md) for every phase of the lifecycle.
+4. Check [`REVIEW_STANDARD.md`](./REVIEW_STANDARD.md) before asking for or approving a pull request.
+5. Use [`AI_ENGINEERING_WORKFLOW.md`](./AI_ENGINEERING_WORKFLOW.md) to decide what work belongs to humans versus AI.
 
 ## Branch Naming
 

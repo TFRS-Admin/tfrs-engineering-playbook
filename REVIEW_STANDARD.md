@@ -61,3 +61,7 @@ TFRS aims to review pull requests within **24 hours** of being marked ready for 
 - Be specific about the file, behavior, or risk you want changed.
 - Suggest the expected direction when possible.
 - Distinguish blocking issues from optional improvements.
+
+## Related Documents
+
+This document is the approval bar for a specific pull request's diff. For assessing the *current state* of a system or feature area before planning new work — not a diff — see [`commands/review.md`](./commands/review.md), which produces findings rather than approve/reject decisions. See also [`commands/verify.md`](./commands/verify.md) for the evidence a PR must carry before it reaches this review bar, and [`REPO_HEALTH_STANDARD.md`](./REPO_HEALTH_STANDARD.md) for recurring, cadence-driven assessment.
