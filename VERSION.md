@@ -3,7 +3,7 @@
 
 ## Current Version
 
-**2.4.0**
+**3.0.0**
 
 ## Versioning Rules
 
@@ -23,6 +23,11 @@ Record changes using this format:
 ```
 
 ## Changelog
+
+## 3.0.0 - 2026-07-09
+- Type: major
+- Summary: Migrated the playbook from a GitHub-Project-centered operating model to a **repository-centered** one, based on operational experience onboarding `tfrs-website` — a real GitHub Project (v2) could not reliably be created for that repository, while repository-local context (issue bodies, repository docs) proved significantly more reliable and portable for AI agents. Repository-local documentation and GitHub Issues are now the operational source of truth; GitHub Projects are optional visualization only. Added `ISSUE_METADATA_STANDARD.md`, defining the required `## Metadata` block (`Status`, `Priority`, `Risk`, `Size`, `Epic`, `Sprint`, `Blocked`, `QA Required`, `Agent Persona`) plus `## Acceptance Criteria`, `## Verification`, and `## Dependencies` sections every issue body now carries — this is the field vocabulary formerly defined only as GitHub Project custom fields. Rewrote `GITHUB_PROJECT_STANDARD.md` to describe an optional dashboard that mirrors this Metadata block, with a Project no longer required to create, configure, or maintain. Added four new required repository documents — `ARCHITECTURE.md` (root) and `docs/engineering/ROADMAP.md`, `BACKLOG.md`, `CURRENT_SPRINT.md`, `REPO_HEALTH.md` — with matching templates, and removed the GitHub Project checklist item from `REPOSITORY_BOOTSTRAP_GUIDE.md#repository-readiness-checklist` entirely (rather than marking it degradable), while promoting `ARCHITECTURE.md`, the four `docs/engineering/` files, and `.github/ISSUE_TEMPLATE/`/`PULL_REQUEST_TEMPLATE.md` to non-degradable checklist items. Updated `AI_AGENT_OPERATING_MODEL.md`'s Session Initialization Protocol and "How to Determine Current Work" to read, in order: `AGENTS.md` → `CLAUDE.md` → `docs/engineering/CURRENT_SPRINT.md` → GitHub Issues (via `## Metadata`) → `docs/engineering/BACKLOG.md` → `docs/engineering/ROADMAP.md` → this playbook's standards → the relevant skill in `TFRS-Admin/agent-skills`. Updated `DECISION_ROUTER.md`'s "What's next?" row to the same order. Updated every command (`backlog.md`, `execute.md`, `ship.md`, `roadmap.md`, `repo-health.md`, `setup-from-playbook.md`) and standard (`BACKLOG_STANDARD.md`, `PLANNING_STANDARD.md`, `REVIEW_STANDARD.md`, `SECURITY_STANDARD.md`, `REPO_HEALTH_STANDARD.md`, `SKILLS_STANDARD.md`, `EXECUTION_STANDARD.md`) to read and write state through issue bodies and repository docs instead of a Project API. Renamed the `REPO_HEALTH_STANDARD.md` "GitHub Project hygiene" dimension to "Issue metadata hygiene." `commands/backlog.md` now explicitly produces a master Epic, child Epics, task issues, and repository engineering documentation as its required output. Added ADR-002 to `docs/decision-log/README.md` recording this decision.
+- Impact: **Breaking.** Every downstream repository must add `ARCHITECTURE.md` and the four `docs/engineering/` files, and ensure every open issue carries the new `## Metadata` block, to be considered `Fully Onboarded` or `Degraded but Usable` under the corrected [Repository Readiness Checklist](./REPOSITORY_BOOTSTRAP_GUIDE.md#repository-readiness-checklist). Any existing GitHub Project remains usable as an optional dashboard with no changes required — it simply stops being a readiness requirement. Repositories with no GitHub Project lose no capability and are no longer penalized for lacking one. Re-run `commands/setup-from-playbook.md` or the relevant step of `REPOSITORY_BOOTSTRAP_GUIDE.md` to create the newly required files.
 
 ## 2.4.0 - 2026-07-09
 - Type: minor

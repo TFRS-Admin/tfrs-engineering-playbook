@@ -59,7 +59,7 @@ Five things every review checks. **Approve when a change definitely improves ove
 ## Approval Requirements
 
 - At least one reviewer should confirm correctness and maintainability.
-- Higher-risk changes (`Risk: High` or `Risk: Critical` on the GitHub Project — see [`GITHUB_PROJECT_STANDARD.md`](./GITHUB_PROJECT_STANDARD.md)) should receive review from the repository owner or area owner.
+- Higher-risk changes (`Risk: High` or `Risk: Critical` in the issue's `## Metadata` block — see [`ISSUE_METADATA_STANDARD.md`](./ISSUE_METADATA_STANDARD.md)) should receive review from the repository owner or area owner.
 - No pull request should merge with unresolved `Critical` review comments (see severity labels below).
 
 ## AI-Assisted PR Guidelines

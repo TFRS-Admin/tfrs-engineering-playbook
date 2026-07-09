@@ -14,7 +14,7 @@ This is the example-driven companion to [`SKILLS_STANDARD.md`](../SKILLS_STANDAR
 │   and how is work tracked?" │◀────▶│   of task, step by step?"     │
 │                              │      │                                │
 │  Standards, lifecycle,      │      │  Reusable skill workflows,    │
-│  GitHub Project fields,     │      │  quality gates, agent          │
+│  issue Metadata fields,     │      │  quality gates, agent          │
 │  TFRS-specific thresholds   │      │  personas, TFRS-only skills    │
 └──────────────────────────────┘      │  under skills/tfrs/           │
               ▲                       └──────────────────────────────┘
@@ -41,7 +41,7 @@ This is the same nine-step sequence defined in [`SKILLS_STANDARD.md#the-skill-co
 5. **Execute the skill-defined workflow.** The agent implements the server-side validation as a thin vertical slice, writing the test with the implementation per the skill's Red-Green-Refactor cycle.
 6. **Apply repository-specific constraints.** The skill's generic guidance doesn't know about TFRS's 400-line PR cap or its Conventional Commits format — the agent applies [`EXECUTION_STANDARD.md`](../EXECUTION_STANDARD.md)'s specifics on top of the skill's generic mechanics, per the precedence order in `SKILLS_STANDARD.md`.
 7. **Verify work.** The agent runs [`commands/verify.md`](../commands/verify.md), producing the evidence artifact per [`TESTING_STANDARD.md`](../TESTING_STANDARD.md) — the skill's own verification checklist informed *how* the tests were written, but the playbook's evidence-artifact requirement is what actually gates the PR.
-8. **Update GitHub issues/projects.** `Status` moves through `In Progress` → `In Review` per [`GITHUB_PROJECT_STANDARD.md`](../GITHUB_PROJECT_STANDARD.md); this happens regardless of what either repository's generic guidance says, because GitHub is TFRS's source of truth, not a skill's own bookkeeping.
+8. **Update the issue's `## Metadata` block.** `Status` moves through `In Progress` → `In Review` per [`ISSUE_METADATA_STANDARD.md`](../ISSUE_METADATA_STANDARD.md); this happens regardless of what either repository's generic guidance says, because the repository and its issues are TFRS's source of truth, not a skill's own bookkeeping.
 9. **Stop.** The agent opens the PR and stops — per [`AI_AGENT_OPERATING_MODEL.md`](../AI_AGENT_OPERATING_MODEL.md#4-when-to-stop) — rather than continuing past the acceptance criteria because the skill's workflow "felt" incomplete.
 
 ## Referencing the Fork Today

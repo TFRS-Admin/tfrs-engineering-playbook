@@ -32,12 +32,12 @@ Check for `skills/tfrs/repo-health` in [`TFRS-Admin/agent-skills`](https://githu
    - **Technical debt**: review the trend of open technical-debt issues (opened vs. closed since last report).
    - **Testing**: check coverage of critical paths against the shape in [`../TESTING_STANDARD.md`](../TESTING_STANDARD.md#test-coverage-shape) and count of skipped/flaky tests.
    - **CI**: confirm pipeline is green, check for long-disabled checks.
-   - **GitHub Project hygiene**: this is already covered by the weekly triage in [`GITHUB_PROJECT_STANDARD.md`](../GITHUB_PROJECT_STANDARD.md#issue-triage-cadence) — reference that cadence's most recent result rather than re-running it here.
+   - **Issue metadata hygiene**: this is already covered by the weekly triage in [`GITHUB_PROJECT_STANDARD.md`](../GITHUB_PROJECT_STANDARD.md#issue-triage-cadence) — reference that cadence's most recent result rather than re-running it here. Check issue `## Metadata` blocks directly, per [`ISSUE_METADATA_STANDARD.md`](../ISSUE_METADATA_STANDARD.md); a GitHub Project, if one exists, is checked only as a secondary consistency check against the issue bodies.
 3. If a dimension cannot be assessed, record it as a gap with the reason (e.g., "no dependency manifest present").
 4. Compare each dimension's result to the previous report: improving / flat / degrading.
 5. For every actionable finding, file it via [`commands/backlog.md`](./backlog.md) — do not leave findings as prose only.
 6. Escalate immediately (do not wait for the report to be read) any `Critical`/`High` security finding, per [`REPO_HEALTH_STANDARD.md`](../REPO_HEALTH_STANDARD.md#escalation).
-7. Publish the report and update the "last checked" date per dimension.
+7. Publish the report into `docs/engineering/REPO_HEALTH.md` (append, keeping prior reports for trend comparison) and update the "last checked" date per dimension.
 
 ## Required Outputs
 

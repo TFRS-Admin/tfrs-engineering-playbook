@@ -20,3 +20,21 @@ Describe the proposed change.
 ## Why Does It Matter?
 
 Explain the expected benefit for TFRS repositories.
+
+## Metadata
+
+Status: Backlog
+Priority:
+Risk:
+Size:
+Epic:
+Sprint:
+Blocked: No
+QA Required:
+Agent Persona:
+
+## Acceptance Criteria
+
+## Verification
+
+## Dependencies

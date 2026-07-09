@@ -1,5 +1,7 @@
-<!-- Purpose: Describe the standard board, field, and automation setup for TFRS GitHub Projects. -->
-# TFRS Project Board Template
+<!-- Purpose: Describe the standard board, field, and automation setup for the optional TFRS GitHub Project dashboard. -->
+# TFRS Project Board Template (Optional)
+
+This template is for a repository whose humans want a visual GitHub Project dashboard. It is **never required** — see [`GITHUB_PROJECT_STANDARD.md`](../GITHUB_PROJECT_STANDARD.md). The repository's `docs/engineering/` files and each issue's `## Metadata` block (per [`ISSUE_METADATA_STANDARD.md`](../ISSUE_METADATA_STANDARD.md)) remain authoritative regardless of whether this board exists; a Project built from this template should mirror those, not replace them.
 
 ## Column Setup
 

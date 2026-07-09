@@ -15,7 +15,7 @@ Turn accumulated review findings, technical debt, and business priorities into a
 
 - All open, approved findings from recent reviews and health checks.
 - Business goals or constraints for the window (from a human — roadmap priority is not an AI decision).
-- Existing open Epics and their current `Priority`/`Status` on the GitHub Project (see [`GITHUB_PROJECT_STANDARD.md`](../GITHUB_PROJECT_STANDARD.md)).
+- Existing open Epics and their current `Priority`/`Status`, read from each Epic issue's `## Metadata` block (see [`ISSUE_METADATA_STANDARD.md`](../ISSUE_METADATA_STANDARD.md)) and `docs/engineering/ROADMAP.md`.
 - Rough capacity for the window (how many Epics the team can realistically carry).
 
 ## Required Skill Consultation
@@ -30,12 +30,12 @@ No direct upstream skill in [`TFRS-Admin/agent-skills`](https://github.com/TFRS-
 4. Sequence using: (a) hard dependencies first, (b) business priority, (c) risk — front-load high-risk work while there's runway in the window.
 5. Assign a rough size (S/M/L/XL per [`PLANNING_STANDARD.md`](../PLANNING_STANDARD.md)) to each candidate Epic; anything XL should be flagged for splitting before it is planned in detail.
 6. Present the sequenced list to a human for explicit approval — roadmap sequencing is a business trade-off, not something to finalize unilaterally.
-7. For each approved Epic, create or update the GitHub issue using [`templates/epic-template.md`](../templates/epic-template.md) and place it in the `Roadmap` board view.
+7. For each approved Epic, create or update the GitHub issue using [`templates/epic-template.md`](../templates/epic-template.md) with a complete `## Metadata` block, and record it in `docs/engineering/ROADMAP.md` — this file, not a GitHub Project view, is the roadmap's actual home. A GitHub Project, if the repository runs one, may optionally mirror the same sequencing.
 
 ## Required Outputs
 
-- A roadmap document listing sequenced Epics with their origin (which review/finding/ask produced them), size, priority, and dependencies.
-- Created or updated Epic issues on the GitHub Project, `Phase` = `Review` or `Plan` depending on readiness, in the `Roadmap` view.
+- `docs/engineering/ROADMAP.md` updated with sequenced Epics, their origin (which review/finding/ask produced them), size, priority, and dependencies.
+- Created or updated Epic issues, each with a `## Metadata` `Status` reflecting readiness (`Backlog` or `Ready`).
 - An explicit list of anything intentionally deferred, with the reason.
 
 ## Quality Gates

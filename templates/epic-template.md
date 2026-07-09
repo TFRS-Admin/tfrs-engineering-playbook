@@ -1,7 +1,7 @@
 <!-- Purpose: Production-ready template for Epic issues that group related stories and tasks under one initiative. -->
 # Epic Template
 
-Copy this into a new GitHub issue when creating an Epic. An Epic is never directly executed — it groups and sequences the Story/Task issues that are.
+Copy this into a new GitHub issue when creating an Epic. An Epic is never directly executed — it groups and sequences the Story/Task issues that are. Every field below is defined in [`ISSUE_METADATA_STANDARD.md`](../ISSUE_METADATA_STANDARD.md) — this issue body, not a GitHub Project, is where they're authoritative.
 
 ---
 
@@ -39,25 +39,30 @@ Contact form submissions are validated server-side, page metadata is generated f
 - [ ] #145 — Introduce shared page-metadata source
 - [ ] #146 — Add automated accessibility check to CI
 
-## Required Project Fields
+## Metadata
 
-| Field | Value |
-| --- | --- |
-| Status | Backlog |
-| Phase | Backlog |
-| Priority | P1 |
-| Risk | Medium |
-| Size | L |
-| Sprint | Q3 Sprint 1-2 |
-| Epic | (this issue) |
-| QA Required | Yes |
-| Blocked | No |
-| Agent Persona | Planner |
+Status: Backlog
+Priority: P1
+Risk: Medium
+Size: L
+Epic: (this issue)
+Sprint: Q3 Sprint 1-2
+Blocked: No
+QA Required: Yes
+Agent Persona: Planner
 
-## Definition of Done
+## Acceptance Criteria
 
 All child issues are closed with passing verification reports, and the outcome statement above is demonstrably true in production.
 
+## Verification
+
+Verified by confirming every child issue's own `## Verification` section shows Pass, per [`commands/verify.md`](../commands/verify.md).
+
+## Dependencies
+
+None.
+
 ## Related Documents
 
-[`BACKLOG_STANDARD.md`](../BACKLOG_STANDARD.md) · [`commands/backlog.md`](../commands/backlog.md) · [`GITHUB_PROJECT_STANDARD.md`](../GITHUB_PROJECT_STANDARD.md)
+[`BACKLOG_STANDARD.md`](../BACKLOG_STANDARD.md) · [`commands/backlog.md`](../commands/backlog.md) · [`ISSUE_METADATA_STANDARD.md`](../ISSUE_METADATA_STANDARD.md)
