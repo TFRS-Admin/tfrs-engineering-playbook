@@ -37,6 +37,7 @@ jobs:
             PLANNING_STANDARD.md
             EXECUTION_STANDARD.md
             BACKLOG_STANDARD.md
+            ISSUE_METADATA_STANDARD.md
             GITHUB_PROJECT_STANDARD.md
             SECURITY_STANDARD.md
             TESTING_STANDARD.md
@@ -57,6 +58,10 @@ jobs:
             templates/engineering-task-template.md
             templates/adr-template.md
             templates/repository-architecture-template.md
+            templates/engineering-roadmap-template.md
+            templates/engineering-backlog-template.md
+            templates/engineering-current-sprint-template.md
+            templates/engineering-repo-health-template.md
             templates/verification-report-template.md
             templates/sprint-review-template.md
             templates/backlog-initialization-template.md

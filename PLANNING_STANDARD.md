@@ -25,7 +25,7 @@ Every issue should include:
 
 ### Labels
 
-At minimum, classify work with a type label and a priority label. Align these labels with [`GITHUB_PROJECT_STANDARD.md`](./GITHUB_PROJECT_STANDARD.md).
+At minimum, classify work with a type label and a priority label. Align these labels with the `Priority` values in [`ISSUE_METADATA_STANDARD.md`](./ISSUE_METADATA_STANDARD.md).
 
 ## Epic vs. Story vs. Task
 
@@ -42,7 +42,7 @@ Estimate using lightweight relative sizing:
 - **L**: up to one sprint and probably needs breakdown
 - **XL**: too large; split before work starts
 
-These are the same `S`/`M`/`L`/`XL` values used by the `Size` field in [`GITHUB_PROJECT_STANDARD.md`](./GITHUB_PROJECT_STANDARD.md) — don't introduce a second sizing scale with different labels for the same concept.
+These are the same `S`/`M`/`L`/`XL` values used by the `Size` field in [`ISSUE_METADATA_STANDARD.md`](./ISSUE_METADATA_STANDARD.md) — don't introduce a second sizing scale with different labels for the same concept.
 
 Split further, regardless of the day-estimate above, when any of these is true:
 - The work would take more than one focused implementation session.
@@ -75,9 +75,9 @@ When the setup checklist is followed
 Then the repository adopts the baseline AI workflow files and references the playbook
 ```
 
-## Linking Issues to Project Boards
+## Recording Status, Priority, and Sprint
 
-Every active issue should be linked to the relevant GitHub Project item so status, priority, sprint, and reviewer state stay visible in one place.
+Every active issue carries its own status, priority, sprint, and reviewer state directly in its `## Metadata` block, per [`ISSUE_METADATA_STANDARD.md`](./ISSUE_METADATA_STANDARD.md) — this is what keeps that state visible in one place, without depending on a GitHub Project. A repository may optionally also mirror this into a GitHub Project (see [`GITHUB_PROJECT_STANDARD.md`](./GITHUB_PROJECT_STANDARD.md)) for a visual board, but the issue body is what's authoritative.
 
 ## From Plan to Backlog
 
@@ -86,5 +86,6 @@ A plan produced against this standard is not yet executable work — it becomes 
 ## Related Documents
 
 - [`BACKLOG_STANDARD.md`](./BACKLOG_STANDARD.md) — what happens after a plan is approved
-- [`GITHUB_PROJECT_STANDARD.md`](./GITHUB_PROJECT_STANDARD.md) — field definitions referenced by issue labels and sizing
+- [`ISSUE_METADATA_STANDARD.md`](./ISSUE_METADATA_STANDARD.md) — field definitions referenced by issue labels and sizing
+- [`GITHUB_PROJECT_STANDARD.md`](./GITHUB_PROJECT_STANDARD.md) — the optional dashboard that may mirror these fields
 - [`commands/plan.md`](./commands/plan.md) — executable procedure

@@ -18,7 +18,7 @@ Merge a verified, approved change, update GitHub to reflect completion, and comm
 
 ## Required Skill Consultation
 
-Mandatory per [`SKILLS_STANDARD.md#when-consultation-is-mandatory`](../SKILLS_STANDARD.md#when-consultation-is-mandatory): consult [`skills/shipping-and-launch`](https://github.com/TFRS-Admin/agent-skills/tree/main/skills/shipping-and-launch) in [`TFRS-Admin/agent-skills`](https://github.com/TFRS-Admin/agent-skills) for rollout/rollback mechanics; TFRS's merge-gate specifics (required approvals, `state_reason`, the `Release` board view) still govern per [`REVIEW_STANDARD.md`](../REVIEW_STANDARD.md) and [`GITHUB_PROJECT_STANDARD.md`](../GITHUB_PROJECT_STANDARD.md).
+Mandatory per [`SKILLS_STANDARD.md#when-consultation-is-mandatory`](../SKILLS_STANDARD.md#when-consultation-is-mandatory): consult [`skills/shipping-and-launch`](https://github.com/TFRS-Admin/agent-skills/tree/main/skills/shipping-and-launch) in [`TFRS-Admin/agent-skills`](https://github.com/TFRS-Admin/agent-skills) for rollout/rollback mechanics; TFRS's merge-gate specifics (required approvals, `state_reason`, the `docs/engineering/BACKLOG.md`/`CURRENT_SPRINT.md` update) still govern per [`REVIEW_STANDARD.md`](../REVIEW_STANDARD.md) and [`ISSUE_METADATA_STANDARD.md`](../ISSUE_METADATA_STANDARD.md).
 
 ## Workflow
 
@@ -26,14 +26,15 @@ Mandatory per [`SKILLS_STANDARD.md#when-consultation-is-mandatory`](../SKILLS_ST
 2. Confirm CI is green and the verification report is attached and shows an overall Pass.
 3. Merge the PR respecting branch protections (no `--no-verify`, no force-merging around a failing required check).
 4. Close the linked issue with the correct `state_reason` (`completed`).
-5. Move the project item's `Status` to `Done`.
+5. Move the issue's `## Metadata` `Status` to `Done`. Mirror to a GitHub Project only if the repository runs one per [`GITHUB_PROJECT_STANDARD.md`](../GITHUB_PROJECT_STANDARD.md).
 6. If the change affects a versioned artifact (a release, or this playbook itself), update the changelog (`VERSION.md` for this repository; the repository's own release notes elsewhere) per its versioning rules.
 7. Communicate downstream impact: if other repositories or teams depend on the changed behavior, note it in the PR/issue and, for playbook changes, in the README adoption table.
-8. If the shipped item belongs to a sprint, leave it in the `Release` view until the release actually goes out, then move it to `Completed`.
+8. Update `docs/engineering/CURRENT_SPRINT.md` to remove the shipped item, and `docs/engineering/BACKLOG.md` to reflect it as `Done`, once the release actually goes out.
 
 ## Required Outputs
 
-- Merged PR, closed issue, `Status` = `Done`.
+- Merged PR, closed issue, issue `## Metadata` `Status` = `Done`.
+- Updated `docs/engineering/CURRENT_SPRINT.md` and `docs/engineering/BACKLOG.md`.
 - Updated changelog/release notes where applicable.
 - Downstream communication recorded where the change has cross-repository impact.
 
@@ -59,7 +60,8 @@ Mandatory per [`SKILLS_STANDARD.md#when-consultation-is-mandatory`](../SKILLS_ST
 ```text
 Merged PR #201 into main.
 Closed issue #143 (state_reason: completed).
-Project item #143: Status → Done.
+Issue #143 Metadata: Status → Done.
+docs/engineering/CURRENT_SPRINT.md and BACKLOG.md updated.
 
 No cross-repository impact — contact form validation is internal to
 tfrs-website. No README/adoption table update needed.

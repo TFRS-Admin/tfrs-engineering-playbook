@@ -18,11 +18,11 @@ Every health check assesses all eight dimensions below. If a dimension cannot be
 | Technical debt | Is the open technical-debt backlog ([`templates/technical-debt-template.md`](./templates/technical-debt-template.md) issues) growing faster than it's resolved? | Quarterly |
 | Testing | Is coverage of critical paths adequate per the shape in [`TESTING_STANDARD.md`](./TESTING_STANDARD.md#test-coverage-shape), and are there flaky or skipped tests accumulating? | Monthly |
 | CI | Is the pipeline green, fast enough to keep in the loop, and free of long-disabled checks? | Monthly |
-| GitHub Project hygiene | Are fields complete, is `Blocked` accurate, are stale items being triaged? | Weekly (this cadence is already defined in [`GITHUB_PROJECT_STANDARD.md`](./GITHUB_PROJECT_STANDARD.md#issue-triage-cadence) — do not duplicate that triage separately) |
+| Issue metadata hygiene | Are `## Metadata` blocks complete on open issues (see [`ISSUE_METADATA_STANDARD.md`](./ISSUE_METADATA_STANDARD.md)), is `Blocked` accurate, are stale items being triaged, and is `docs/engineering/BACKLOG.md` in sync with the actual issue set? A GitHub Project, if one exists, is checked only as a secondary mirror-consistency check. | Weekly (this cadence is already defined in [`GITHUB_PROJECT_STANDARD.md`](./GITHUB_PROJECT_STANDARD.md#issue-triage-cadence) — do not duplicate that triage separately) |
 
 ## Recommended Cadence Summary
 
-- **Weekly:** GitHub Project hygiene triage, automated security scan review.
+- **Weekly:** Issue metadata hygiene triage, automated security scan review.
 - **Monthly:** Documentation drift, dependency health, testing, CI.
 - **Quarterly:** Architecture drift, technical debt trend, full manual security audit.
 
@@ -30,7 +30,7 @@ Align these with the repository's sprint cadence — e.g., run the monthly pass 
 
 ## Output
 
-Every health check produces a Repository Health Report. There is no separate report template file for this — it is the same finding format used by [`commands/review.md`](./commands/review.md), scoped to these eight dimensions, dated, and compared against the previous report so trend (improving / flat / degrading) is visible per dimension.
+Every health check produces a Repository Health Report, appended to `docs/engineering/REPO_HEALTH.md` — this file, not a GitHub Project or a one-off chat summary, is where the report lives. It uses the same finding format used by [`commands/review.md`](./commands/review.md), scoped to these eight dimensions, dated, and compared against the previous report in that same file so trend (improving / flat / degrading) is visible per dimension.
 
 Findings that require action are filed as backlog issues via [`commands/backlog.md`](./commands/backlog.md) — a health report is not complete if its findings only exist as prose. Use [`templates/technical-debt-template.md`](./templates/technical-debt-template.md) for anything that isn't a specific bug or feature.
 
@@ -44,5 +44,6 @@ Findings that require action are filed as backlog issues via [`commands/backlog.
 - [`commands/repo-health.md`](./commands/repo-health.md) — the executable version of this standard
 - [`commands/review.md`](./commands/review.md) — the finding format reused here
 - [`SECURITY_STANDARD.md`](./SECURITY_STANDARD.md) and [`TESTING_STANDARD.md`](./TESTING_STANDARD.md) — the standards behind the Security, Dependency health, and Testing dimensions
-- [`GITHUB_PROJECT_STANDARD.md`](./GITHUB_PROJECT_STANDARD.md) — project hygiene cadence and fields
+- [`ISSUE_METADATA_STANDARD.md`](./ISSUE_METADATA_STANDARD.md) — the Metadata block the issue metadata hygiene dimension checks
+- [`GITHUB_PROJECT_STANDARD.md`](./GITHUB_PROJECT_STANDARD.md) — the optional dashboard, checked only as a secondary consistency pass
 - [`BACKLOG_STANDARD.md`](./BACKLOG_STANDARD.md) — how findings become tracked work

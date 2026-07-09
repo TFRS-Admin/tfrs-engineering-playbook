@@ -11,11 +11,11 @@ This is a distinct relationship from the one described in [`README.md`](./README
 
 | Repository | Answers | Owns |
 | --- | --- | --- |
-| `tfrs-engineering-playbook` (this repo) | *What does TFRS require, and how is work tracked?* | Engineering standards, the lifecycle operating model, GitHub Project conventions, TFRS-specific thresholds (PR size, required fields, versioning) |
+| `tfrs-engineering-playbook` (this repo) | *What does TFRS require, and how is work tracked?* | Engineering standards, the lifecycle operating model, the issue Metadata conventions, TFRS-specific thresholds (PR size, required fields, versioning) |
 | [`TFRS-Admin/agent-skills`](https://github.com/TFRS-Admin/agent-skills) | *How do I actually execute this kind of task, step by step?* | Reusable, tool-agnostic execution workflows (the skills), quality gates and anti-rationalization tables within a skill, agent personas |
 | Any downstream repository | *What's true about this specific codebase?* | Local architecture, stack-specific conventions, repository-local `CLAUDE.md`/`AGENTS.md` overrides |
 
-None of these three repositories restates another's content. This playbook does not re-document a skill's step-by-step workflow (that's duplication the source material itself warns against — `docs/skill-anatomy.md` in the reference snapshot at [`docs/agent-skills-main.zip`](./docs/agent-skills-main.zip) states it directly: "Don't duplicate content between skills — reference and link instead," which applies equally here). The skills fork does not restate TFRS's specific thresholds (400-line PR cap, the ten required GitHub Project fields, `S`/`M`/`L`/`XL` sizing) — those are TFRS-specific decisions that belong here, not in a repository meant to be reusable outside TFRS. A downstream repository does not restate either — it only adds what's true about itself.
+None of these three repositories restates another's content. This playbook does not re-document a skill's step-by-step workflow (that's duplication the source material itself warns against — `docs/skill-anatomy.md` in the reference snapshot at [`docs/agent-skills-main.zip`](./docs/agent-skills-main.zip) states it directly: "Don't duplicate content between skills — reference and link instead," which applies equally here). The skills fork does not restate TFRS's specific thresholds (400-line PR cap, the required issue `## Metadata` fields, `S`/`M`/`L`/`XL` sizing) — those are TFRS-specific decisions that belong here, not in a repository meant to be reusable outside TFRS. A downstream repository does not restate either — it only adds what's true about itself.
 
 ## Precedence on Conflict
 
@@ -42,7 +42,7 @@ This is the step-by-step procedure an agent follows when using both repositories
 5. **Execute the skill-defined workflow** — follow it as written; don't partially apply a skill and call it done.
 6. **Apply repository-specific constraints** — reconcile the skill's generic workflow with this playbook's TFRS-specific thresholds and the downstream repo's local rules, per the precedence order above.
 7. **Verify work** — per [`commands/verify.md`](./commands/verify.md) and [`TESTING_STANDARD.md`](./TESTING_STANDARD.md); a skill's own verification checklist is evidence, not a substitute for TFRS's evidence-artifact requirement.
-8. **Update GitHub issues/projects** — per [`GITHUB_PROJECT_STANDARD.md`](./GITHUB_PROJECT_STANDARD.md) and [`AI_AGENT_OPERATING_MODEL.md`](./AI_AGENT_OPERATING_MODEL.md#5-how-to-update-github). This is never optional and never happens only in the skills fork's own terms — GitHub, per this playbook, is still the source of truth.
+8. **Update the issue's `## Metadata` block and repository engineering docs** — per [`ISSUE_METADATA_STANDARD.md`](./ISSUE_METADATA_STANDARD.md) and [`AI_AGENT_OPERATING_MODEL.md`](./AI_AGENT_OPERATING_MODEL.md#5-how-to-update-state). This is never optional and never happens only in the skills fork's own terms — the repository and its issues, per this playbook, are still the source of truth.
 9. **Stop** — per [`AI_AGENT_OPERATING_MODEL.md`](./AI_AGENT_OPERATING_MODEL.md#4-when-to-stop). Finishing a skill's workflow is not, by itself, a reason to keep going past the issue's acceptance criteria.
 
 ## Skill Selection
@@ -59,7 +59,7 @@ Use this table to go from "what kind of task is this" to "which skill do I consu
 | Repository health | `skills/tfrs/repo-health` *(not yet added to the fork — see Fork Management below)* | Follow [`REPO_HEALTH_STANDARD.md`](./REPO_HEALTH_STANDARD.md) and [`commands/repo-health.md`](./commands/repo-health.md) directly until that skill exists |
 | GitHub backlog/project creation | `skills/tfrs/backlog-initialization` or `skills/tfrs/github-project-management` *(not yet added to the fork)* | Follow [`BACKLOG_STANDARD.md`](./BACKLOG_STANDARD.md) and [`commands/backlog.md`](./commands/backlog.md) directly until a TFRS-specific skill exists |
 
-The last two rows are the concrete case of a general rule: **a TFRS-specific skill in the fork wins when one exists; otherwise, fall back to this playbook's own standard and command directly.** Never invent a generic-skill substitute for TFRS-specific process (backlog conversion, GitHub Project field conventions) that has no upstream equivalent — those concepts don't exist in the reference methodology because it isn't built around a GitHub Project execution model the way TFRS is (see the [Terminology Map](./AI_ENGINEERING_WORKFLOW.md#terminology-map)).
+The last two rows are the concrete case of a general rule: **a TFRS-specific skill in the fork wins when one exists; otherwise, fall back to this playbook's own standard and command directly.** Never invent a generic-skill substitute for TFRS-specific process (backlog conversion, the issue Metadata-block conventions) that has no upstream equivalent — those concepts don't exist in the reference methodology because it isn't built around a repository-centered execution model with structured issue Metadata the way TFRS is (see the [Terminology Map](./AI_ENGINEERING_WORKFLOW.md#terminology-map)).
 
 ## Fork Management
 

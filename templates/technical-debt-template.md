@@ -29,20 +29,17 @@ Medium and growing — no active exploit known today, but the gap between curren
 
 Replace `node-sass` with `sass` (drop-in compatible for this codebase's usage), then upgrade `webpack`, `eslint`, and `react-router` in separate PRs so any breakage is isolated to one dependency at a time.
 
-## Required Project Fields
+## Metadata
 
-| Field | Value |
-| --- | --- |
-| Status | Backlog |
-| Phase | Backlog |
-| Priority | P2 |
-| Risk | Medium |
-| Size | M |
-| Sprint | (unassigned until scheduled) |
-| Epic | (none — standalone debt item) |
-| QA Required | Yes |
-| Blocked | No |
-| Agent Persona | Implementer |
+Status: Backlog
+Priority: P2
+Risk: Medium
+Size: M
+Epic: None
+Sprint: (unassigned until scheduled)
+Blocked: No
+QA Required: Yes
+Agent Persona: Implementer
 
 ## Acceptance Criteria
 
@@ -56,6 +53,14 @@ When each is upgraded in its own PR
 Then existing tests and lint pass with no behavior change
 ```
 
+## Verification
+
+Planned: run the full build and test suite after each dependency swap, per [`commands/verify.md`](../commands/verify.md).
+
+## Dependencies
+
+None.
+
 ## Related Documents
 
-[`REPO_HEALTH_STANDARD.md`](../REPO_HEALTH_STANDARD.md) · [`commands/repo-health.md`](../commands/repo-health.md) · [`BACKLOG_STANDARD.md`](../BACKLOG_STANDARD.md)
+[`REPO_HEALTH_STANDARD.md`](../REPO_HEALTH_STANDARD.md) · [`commands/repo-health.md`](../commands/repo-health.md) · [`BACKLOG_STANDARD.md`](../BACKLOG_STANDARD.md) · [`ISSUE_METADATA_STANDARD.md`](../ISSUE_METADATA_STANDARD.md)

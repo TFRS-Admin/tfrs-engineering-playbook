@@ -3,7 +3,7 @@
 
 ## Purpose
 
-This is the canonical, ordered procedure for bringing a repository — new or existing — fully onto the TFRS engineering operating system. It is the single document that ties together repository creation, playbook adoption, GitHub Project setup, and the first pass through the full engineering lifecycle.
+This is the canonical, ordered procedure for bringing a repository — new or existing — fully onto the TFRS engineering operating system. It is the single document that ties together repository creation, playbook adoption, repository engineering documentation, and the first pass through the full engineering lifecycle. **This system is repository-centered, not GitHub-Project-centered:** a GitHub Project is optional visualization (see [`GITHUB_PROJECT_STANDARD.md`](./GITHUB_PROJECT_STANDARD.md)) and is never part of what makes a repository operational.
 
 ## The Bootstrap Lifecycle
 
@@ -12,7 +12,7 @@ Create Repository
       ↓
 Copy Playbook
       ↓
-Create GitHub Project
+Establish Repository Engineering Documentation
       ↓
 Run Review
       ↓
@@ -35,18 +35,22 @@ Use [`templates/new-repo-checklist.md`](./templates/new-repo-checklist.md):
 
 ### 2. Copy Playbook
 
-- Copy exactly the four baseline files and the two GitHub-native items defined in [`commands/setup-from-playbook.md#minimum-baseline`](./commands/setup-from-playbook.md#minimum-baseline): [`AGENTS.md`](./AGENTS.md), [`CLAUDE.md`](./CLAUDE.md), [`AI_AGENT_OPERATING_MODEL.md`](./AI_AGENT_OPERATING_MODEL.md), [`DECISION_ROUTER.md`](./DECISION_ROUTER.md), `.github/ISSUE_TEMPLATE/`, and `.github/PULL_REQUEST_TEMPLATE.md`. Reference everything else (`REVIEW_STANDARD.md`, `PLANNING_STANDARD.md`, `EXECUTION_STANDARD.md`, `BACKLOG_STANDARD.md`, and the rest of the `*_STANDARD.md` family) directly from this repository — don't copy them.
+- Copy exactly the baseline files and the two GitHub-native items defined in [`commands/setup-from-playbook.md#minimum-baseline`](./commands/setup-from-playbook.md#minimum-baseline): [`AGENTS.md`](./AGENTS.md), [`CLAUDE.md`](./CLAUDE.md), [`AI_AGENT_OPERATING_MODEL.md`](./AI_AGENT_OPERATING_MODEL.md), [`DECISION_ROUTER.md`](./DECISION_ROUTER.md), `.github/ISSUE_TEMPLATE/`, and `.github/PULL_REQUEST_TEMPLATE.md`. Reference everything else (`REVIEW_STANDARD.md`, `PLANNING_STANDARD.md`, `EXECUTION_STANDARD.md`, `BACKLOG_STANDARD.md`, `ISSUE_METADATA_STANDARD.md`, and the rest of the `*_STANDARD.md` family) directly from this repository — don't copy them.
 - Copy the `templates/` directory contents relevant to the repository's stack.
 - Add a README section naming this repository (`tfrs-engineering-playbook`) as the engineering source of truth, and record the adopted playbook version from [`VERSION.md`](./VERSION.md).
 - See [`commands/setup-from-playbook.md`](./commands/setup-from-playbook.md) for the step-by-step adoption procedure.
 
-### 3. Create GitHub Project
+### 3. Establish Repository Engineering Documentation
 
-Follow [`GITHUB_PROJECT_STANDARD.md`](./GITHUB_PROJECT_STANDARD.md):
+This is the step that replaces GitHub Project setup as the operational foundation. Create, from the templates in [`templates/README.md#repository-engineering-docs`](./templates/README.md#repository-engineering-docs):
 
-- Create the project and attach the repository.
-- Create all ten required custom fields (`Status`, `Phase`, `Priority`, `Risk`, `Size`, `Sprint`, `Epic`, `QA Required`, `Blocked`, `Agent Persona`).
-- Create the eight required board views (Roadmap, Backlog, Ready, In Progress, Review, QA, Release, Completed).
+- `ARCHITECTURE.md` at the repository root, seeded from [`templates/repository-architecture-template.md`](./templates/repository-architecture-template.md).
+- `docs/engineering/ROADMAP.md`, seeded from [`templates/engineering-roadmap-template.md`](./templates/engineering-roadmap-template.md).
+- `docs/engineering/BACKLOG.md`, seeded from [`templates/engineering-backlog-template.md`](./templates/engineering-backlog-template.md).
+- `docs/engineering/CURRENT_SPRINT.md`, seeded from [`templates/engineering-current-sprint-template.md`](./templates/engineering-current-sprint-template.md).
+- `docs/engineering/REPO_HEALTH.md`, seeded from [`templates/engineering-repo-health-template.md`](./templates/engineering-repo-health-template.md).
+
+A GitHub Project is optional at this point (or ever) — see [`GITHUB_PROJECT_STANDARD.md`](./GITHUB_PROJECT_STANDARD.md). Stand one up only if the repository's humans want a visual board; it changes nothing about whether the repository is operational.
 
 ### 4. Run Review
 
@@ -58,7 +62,7 @@ Use [`commands/plan.md`](./commands/plan.md) to turn approved findings and initi
 
 ### 6. Initialize Backlog
 
-Use [`commands/backlog.md`](./commands/backlog.md) and [`templates/backlog-initialization-template.md`](./templates/backlog-initialization-template.md) to convert plans into Epics and Issues on the GitHub Project, with dependencies mapped and execution order set, per [`BACKLOG_STANDARD.md`](./BACKLOG_STANDARD.md).
+Use [`commands/backlog.md`](./commands/backlog.md) and [`templates/backlog-initialization-template.md`](./templates/backlog-initialization-template.md) to convert plans into a master Epic, child Epics, and task Issues — each carrying a complete `## Metadata` block per [`ISSUE_METADATA_STANDARD.md`](./ISSUE_METADATA_STANDARD.md) — with dependencies mapped, execution order set, and `docs/engineering/BACKLOG.md`/`docs/engineering/ROADMAP.md` updated to match, per [`BACKLOG_STANDARD.md`](./BACKLOG_STANDARD.md). A GitHub Project may optionally mirror the result.
 
 ### 7. Begin Execution
 
@@ -66,23 +70,24 @@ Use [`commands/execute.md`](./commands/execute.md), followed by [`commands/verif
 
 ## Repository Readiness Checklist
 
-Before treating a repository as ready for the full "plain-language request → agent executes" flow described in [`AI_AGENT_OPERATING_MODEL.md`](./AI_AGENT_OPERATING_MODEL.md), verify each of these directly — don't assume any of them are true because the repository is a TFRS repository. Each item is pass/fail; there is no partial credit, though a documented, explicit gap is materially better than an undocumented one.
+Before treating a repository as ready for the full "plain-language request → agent executes" flow described in [`AI_AGENT_OPERATING_MODEL.md`](./AI_AGENT_OPERATING_MODEL.md), verify each of these directly — don't assume any of them are true because the repository is a TFRS repository. Each item is pass/fail; there is no partial credit, though a documented, explicit gap is materially better than an undocumented one. **A GitHub Project is not on this list at all** — it is optional visualization per [`GITHUB_PROJECT_STANDARD.md`](./GITHUB_PROJECT_STANDARD.md) and its presence or absence has no bearing on a repository's readiness state.
 
 | Item | Pass criteria | Degradable? |
 | --- | --- | --- |
 | `AGENTS.md` | Present, and does not instruct agents to treat anything other than this playbook and [`TFRS-Admin/agent-skills`](https://github.com/TFRS-Admin/agent-skills) as authoritative for workflow. | No |
 | `CLAUDE.md` | Present, consistent with this playbook's `CLAUDE.md`. | No |
+| `AI_AGENT_OPERATING_MODEL.md` | Present per the [Minimum Baseline](./commands/setup-from-playbook.md#minimum-baseline). | No |
 | `DECISION_ROUTER.md` | Present per the [Minimum Baseline](./commands/setup-from-playbook.md#minimum-baseline). | No |
+| `ARCHITECTURE.md` | Present at the repository root, seeded from [`templates/repository-architecture-template.md`](./templates/repository-architecture-template.md) and kept current. | No |
+| Repository engineering docs | `docs/engineering/ROADMAP.md`, `docs/engineering/BACKLOG.md`, `docs/engineering/CURRENT_SPRINT.md`, and `docs/engineering/REPO_HEALTH.md` all present, seeded from the templates in [`templates/README.md#repository-engineering-docs`](./templates/README.md#repository-engineering-docs). | No |
+| `.github/ISSUE_TEMPLATE/` | Present, and its templates carry the `## Metadata` block from [`ISSUE_METADATA_STANDARD.md`](./ISSUE_METADATA_STANDARD.md). | No |
+| `.github/PULL_REQUEST_TEMPLATE.md` | Present. | No |
 | Playbook reference | The repository's README names `tfrs-engineering-playbook` as its engineering source of truth, with the adopted version recorded. | No |
 | Skills repo reference | The repository references [`TFRS-Admin/agent-skills`](https://github.com/TFRS-Admin/agent-skills) per [`SKILLS_STANDARD.md`](./SKILLS_STANDARD.md) — not a vendored copy of any skills pack. | No |
 | Verification commands | The repository has runnable commands (test, build, lint, and any domain-specific checks) that [`commands/verify.md`](./commands/verify.md) can invoke to produce evidence. | No |
-| Backlog initialized or explicitly empty | Either real, dependency-mapped issues exist per [`BACKLOG_STANDARD.md`](./BACKLOG_STANDARD.md), or the repository explicitly records that its backlog is empty by design — never silently absent. | No |
-| Architecture docs | A repository-specific `ARCHITECTURE.md` exists, seeded from [`templates/repository-architecture-template.md`](./templates/repository-architecture-template.md) and kept current. | Yes — fall back to re-deriving architecture via [`commands/review.md`](./commands/review.md) each time it's needed. |
-| GitHub Project | A real GitHub Project (v2) exists with the ten required fields and eight board views from [`GITHUB_PROJECT_STANDARD.md`](./GITHUB_PROJECT_STANDARD.md) — not a substitute like structured text inside issue bodies. | Yes — fall back to reading Priority/Risk/Size/Blocked as structured text directly from issue bodies (per [`AI_AGENT_OPERATING_MODEL.md#1-session-initialization-protocol`](./AI_AGENT_OPERATING_MODEL.md#1-session-initialization-protocol) step 5). |
-| Issue templates | `.github/ISSUE_TEMPLATE/` exists and matches or extends this playbook's. | Yes — fall back to using this playbook's [`templates/`](./templates/README.md) content manually when filing an issue. |
-| PR template | `.github/PULL_REQUEST_TEMPLATE.md` exists. | Yes — fall back to using this playbook's template content manually in the PR description. |
+| Backlog initialized or explicitly empty | Either real, dependency-mapped issues exist per [`BACKLOG_STANDARD.md`](./BACKLOG_STANDARD.md), each carrying an [`ISSUE_METADATA_STANDARD.md`](./ISSUE_METADATA_STANDARD.md) `## Metadata` block, or the repository explicitly records in `docs/engineering/BACKLOG.md` that its backlog is empty by design — never silently absent. | No |
 | CI workflow | A CI pipeline runs lint/typecheck/test/build on every PR. | Yes — fall back to running the same checks manually via [`commands/verify.md`](./commands/verify.md) until CI exists. |
-| Repository health workflow | The repository has a recorded cadence for [`commands/repo-health.md`](./commands/repo-health.md), even if "not yet started, first pass scheduled for X." | Yes — fall back to running [`commands/repo-health.md`](./commands/repo-health.md) on demand until a cadence is recorded. |
+| Repository health cadence | The repository has a recorded cadence for [`commands/repo-health.md`](./commands/repo-health.md) in `docs/engineering/REPO_HEALTH.md`, even if "not yet started, first pass scheduled for X." | Yes — fall back to running [`commands/repo-health.md`](./commands/repo-health.md) on demand until a cadence is recorded. |
 
 ## Adoption States
 
@@ -92,7 +97,7 @@ A single pass/fail checklist score doesn't tell you whether a repository is safe
 2. **Degraded but Usable** — every *non-degradable* item passes; only degradable items fail, each with its documented fallback actively in use and explicitly recorded (not silently assumed). An agent can operate here, in the specific degraded mode each failing item's fallback describes.
 3. **Not Onboarded** — any *non-degradable* item fails. This is not a matter of degree: a single non-degradable failure (most importantly, an `AGENTS.md` that actively conflicts with this playbook) means an agent cannot safely be assumed to be following this system at all, regardless of how good the rest of the repository's setup looks.
 
-Only the seven non-degradable items gate the Fully-Onboarded-or-better states; the six degradable items determine, among repositories that clear the non-degradable bar, whether the result is "Fully Onboarded" or "Degraded but Usable." Never describe a repository failing a non-degradable item as "degraded" — that word is reserved for the state where the core system is confirmed working and only the GitHub-native conveniences are missing.
+Only the twelve non-degradable items gate the Fully-Onboarded-or-better states; the two degradable items determine, among repositories that clear the non-degradable bar, whether the result is "Fully Onboarded" or "Degraded but Usable." Never describe a repository failing a non-degradable item as "degraded" — that word is reserved for the state where the core system is confirmed working and only CI/health-cadence conveniences are missing. A repository with no GitHub Project at all can still be **Fully Onboarded** — that item was removed from this checklist entirely, not just marked degradable, per this playbook's repository-centered architecture.
 
 ## Worked Example: `tfrs-website`
 
@@ -104,19 +109,20 @@ This example is built from `tfrs-website`'s actual, current repository state and
 | --- | --- | --- |
 | `AGENTS.md` | No | **Fail.** Present, but instructs agents to treat a vendored `agent-skills-main/` copy (an extracted zip committed directly into the repository) as the authoritative production knowledge base — not this playbook, and not the `TFRS-Admin/agent-skills` fork. Per [`SKILLS_STANDARD.md#precedence-on-conflict`](./SKILLS_STANDARD.md#precedence-on-conflict), repository-local guidance wins — which means, as written today, an agent in this repository would follow the vendored copy instead of this playbook. This is the single highest-priority fix before full dogfooding (see Remaining Gaps in the pull request that introduced this checklist). |
 | `CLAUDE.md` | No | **Fail.** Not present. |
+| `AI_AGENT_OPERATING_MODEL.md` | No | **Fail.** Not present. |
 | `DECISION_ROUTER.md` | No | **Fail.** Not present. |
+| `ARCHITECTURE.md` | No | **Fail.** `docs/` contains operational notes (`lighthouse-runtime.md`, `image-requirements.md`, `launch-readiness-2026-06-22.md`) but no architecture document at the repository root. |
+| Repository engineering docs | No | **Fail.** No `docs/engineering/` directory exists — none of `ROADMAP.md`, `BACKLOG.md`, `CURRENT_SPRINT.md`, or `REPO_HEALTH.md` are present. |
+| `.github/ISSUE_TEMPLATE/` | No | **Fail.** No `.github/` directory exists at all. |
+| `.github/PULL_REQUEST_TEMPLATE.md` | No | **Fail.** Same as above. |
 | Playbook reference | No | **Fail.** No file in the repository mentions `tfrs-engineering-playbook`. |
 | Skills repo reference | No | **Fail.** References a vendored `agent-skills-main/` extraction, not `TFRS-Admin/agent-skills`. |
 | Verification commands | No | **Pass.** `package.json` defines `check` (typecheck), `test` (vitest), `build`, `lint`, and `perf:test`/`perf:verify` (performance-budget checks) — real, runnable commands `commands/verify.md` can invoke. |
-| Backlog initialized or explicitly empty | No | **Pass (with a documented gap).** Issue #46 ("Epic: Repository Stabilization & Production Hardening") is a real master epic with 7 sub-epics (#47–#53) and 22 dependency-mapped task issues (#54–#75), each with Summary/Acceptance Criteria/Verification/Dependencies — produced by an actual `code-review-and-quality` + `planning-and-task-breakdown` skill pass. The gap: it's dependency-mapped in issue-body text, not via a real Project's `Blocked` field, because no Project exists (see below). |
-| Architecture docs | Yes | **Fail.** No `ARCHITECTURE.md`; `docs/` contains operational notes (`lighthouse-runtime.md`, `image-requirements.md`, `launch-readiness-2026-06-22.md`) but no architecture document. |
-| GitHub Project | Yes | **Fail.** Confirmed directly in issue #46's own body: no GitHub Projects (v2) board, custom fields, or milestones could be created in the pass that produced this issue tree — Priority/Risk/Size/Epic are recorded as structured text inside each issue body instead. |
-| Issue templates | Yes | **Fail.** No `.github/` directory exists at all. |
-| PR template | Yes | **Fail.** Same as above. |
-| CI workflow | Yes | **Fail.** Same as above — no CI runs on pull requests today. |
-| Repository health workflow | Yes | **Fail.** No recorded cadence. |
+| Backlog initialized or explicitly empty | No | **Pass.** Issue #46 ("Epic: Repository Stabilization & Production Hardening") is a real master epic with 7 sub-epics (#47–#53) and 22 dependency-mapped task issues (#54–#75), each with Summary/Acceptance Criteria/Verification/Dependencies text — produced by an actual `code-review-and-quality` + `planning-and-task-breakdown` skill pass. This is the exact shape [`ISSUE_METADATA_STANDARD.md`](./ISSUE_METADATA_STANDARD.md) formalizes; the remaining gap is that the issue bodies predate that standard's exact `## Metadata` heading format, not that anything about the underlying approach was wrong — dependency-mapping this way, directly in issue bodies, is now the primary path, not a fallback. |
+| CI workflow | Yes | **Fail.** No CI runs on pull requests today. |
+| Repository health cadence | Yes | **Fail.** No recorded cadence (and no `docs/engineering/REPO_HEALTH.md` to record it in yet). |
 
-**Net result: 2 of 13 pass — and, critically, 5 non-degradable items fail** (`AGENTS.md` conflicts, `CLAUDE.md`, `DECISION_ROUTER.md`, playbook reference, and skills repo reference are all missing or wrong). Per the [Adoption States](#adoption-states) model, that is decisive on its own: **this repository is classified `Not Onboarded`**, not "degraded" — degraded status is reserved for repositories that clear every non-degradable item and are only missing GitHub-native conveniences, which is not the case here. This repository is a strong worked example for the *backlog-and-execution* half of this playbook — the issue hierarchy is real, well-formed, and immediately usable — but it is not yet onboarded for the *session-initialization and GitHub-tracking* half. Treat the sections below as accurate for what they describe (the issue hierarchy) and explicit about what they don't yet claim (full playbook adoption).
+**Net result: 2 of 14 pass — and, critically, 10 non-degradable items fail** (`AGENTS.md` conflicts; `CLAUDE.md`, `AI_AGENT_OPERATING_MODEL.md`, `DECISION_ROUTER.md`, `ARCHITECTURE.md`, repository engineering docs, `.github/ISSUE_TEMPLATE/`, and `.github/PULL_REQUEST_TEMPLATE.md` are all missing; playbook reference and skills repo reference are missing or wrong). Per the [Adoption States](#adoption-states) model, that is decisive on its own: **this repository is classified `Not Onboarded`**, not "degraded" — degraded status is reserved for repositories that clear every non-degradable item and are only missing CI/health-cadence conveniences, which is not the case here. Note that **no GitHub Project check appears in this result at all** — it was never part of the readiness model to begin with; `tfrs-website` having no Project is simply not a finding, positive or negative. This repository is a strong worked example for the *backlog-and-execution* half of this playbook — the issue hierarchy is real, well-formed, and immediately usable — but it is not yet onboarded for the *session-initialization and repository-documentation* half. Treat the sections below as accurate for what they describe (the issue hierarchy) and explicit about what they don't yet claim (full playbook adoption).
 
 ### The Issue Hierarchy
 
@@ -169,7 +175,7 @@ Note #57's own verification section names `agent-skills-main/skills/tfrs-perform
 ### Sample Plain-Language Prompts and Expected Agent Behavior
 
 **"What's the next ready issue?"**
-→ Informational, per [`DECISION_ROUTER.md`](./DECISION_ROUTER.md). No real Project exists, so the agent reads open issues' body text directly (Session Initialization Protocol step 5), applies the ordering rule, and reports **#56** first (highest priority + risk, unblocked) — without opening a branch or making any change.
+→ Informational, per [`DECISION_ROUTER.md`](./DECISION_ROUTER.md). The agent reads open issues' body text directly (Session Initialization Protocol step 5) — this is the primary path regardless of whether a Project exists — applies the ordering rule, and reports **#56** first (highest priority + risk, unblocked) — without opening a branch or making any change.
 
 **"Implement issue #56."**
 → Routes to [`commands/execute.md`](./commands/execute.md). The agent confirms #56 has no `Blocked by` text (it doesn't), reads the parent epic (#48), inspects `server/_core/storageProxy.ts:184-208` and `server/storage.ts:24-29` as the issue's body directs, implements the auth/allowlist fix as the smallest safe change, and writes the new unauthenticated-rejection test alongside it — it does **not** also fix #59 (the axios advisory) just because both are security findings in the same epic; that's a separate issue and a separate invocation.
@@ -178,12 +184,13 @@ Note #57's own verification section names `agent-skills-main/skills/tfrs-perform
 → Routes to [`REVIEW_STANDARD.md`](./REVIEW_STANDARD.md) (not `commands/review.md` — this is PR review, not discovery; see the [Terminology Map](./AI_ENGINEERING_WORKFLOW.md#terminology-map)). Given `Risk: High`, the reviewer gives this extra scrutiny per [`REVIEW_STANDARD.md#approval-requirements`](./REVIEW_STANDARD.md#approval-requirements) and confirms the existing legitimate `/manus-storage/` callers still work, per the issue's own acceptance criteria.
 
 **"Ship #56."**
-→ Routes to [`commands/verify.md`](./commands/verify.md) → `REVIEW_STANDARD.md` approval → [`commands/ship.md`](./commands/ship.md), never straight to merge. Because there's no real GitHub Project, "moving `Status` to `Done`" means updating the issue directly (closing it with `state_reason: completed` and commenting the verification evidence) rather than a Project board field — the same principle, applied using the GitHub Project fallback from the Repository Readiness Checklist above. This fallback covers only that one degradable item; it doesn't change this repository's overall `Not Onboarded` classification.
+→ Routes to [`commands/verify.md`](./commands/verify.md) → `REVIEW_STANDARD.md` approval → [`commands/ship.md`](./commands/ship.md), never straight to merge. "Moving `Status` to `Done`" means updating the issue's `## Metadata` block directly (closing it with `state_reason: completed` and pasting the verification evidence into `## Verification`) — this is the primary path per [`ISSUE_METADATA_STANDARD.md`](./ISSUE_METADATA_STANDARD.md), not a fallback for a missing Project. `tfrs-website` having no GitHub Project doesn't change this step at all, and doesn't factor into its `Not Onboarded` classification either.
 
 ## Related Documents
 
 - [`README.md`](./README.md) — adoption guidance and versioning strategy
 - [`BACKLOG_STANDARD.md`](./BACKLOG_STANDARD.md) — detail on step 6
-- [`GITHUB_PROJECT_STANDARD.md`](./GITHUB_PROJECT_STANDARD.md) — detail on step 3
+- [`ISSUE_METADATA_STANDARD.md`](./ISSUE_METADATA_STANDARD.md) — the Metadata block referenced throughout this worked example
+- [`GITHUB_PROJECT_STANDARD.md`](./GITHUB_PROJECT_STANDARD.md) — the optional dashboard layer `tfrs-website` doesn't use, by design, without penalty
 - [`AI_AGENT_OPERATING_MODEL.md`](./AI_AGENT_OPERATING_MODEL.md) — the standing loop after step 7
 - [`DECISION_ROUTER.md`](./DECISION_ROUTER.md) — how the plain-language prompts above were routed

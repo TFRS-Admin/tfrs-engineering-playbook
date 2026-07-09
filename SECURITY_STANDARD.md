@@ -3,7 +3,7 @@
 
 ## Purpose
 
-Security guidance previously existed only as a few bullets inside [`REVIEW_STANDARD.md`](./REVIEW_STANDARD.md). This document is the single authoritative source for TFRS security practice; `REVIEW_STANDARD.md`, `REPO_HEALTH_STANDARD.md`, and `GITHUB_PROJECT_STANDARD.md`'s `Risk` field all point here instead of restating guidance.
+Security guidance previously existed only as a few bullets inside [`REVIEW_STANDARD.md`](./REVIEW_STANDARD.md). This document is the single authoritative source for TFRS security practice; `REVIEW_STANDARD.md`, `REPO_HEALTH_STANDARD.md`, and `ISSUE_METADATA_STANDARD.md`'s `Risk` field all point here instead of restating guidance.
 
 This standard synthesizes practices adopted from the `agent-skills` engineering methodology (see [`docs/agent-skills-main.zip`](./docs/agent-skills-main.zip), credited in [`README.md`](./README.md#engineering-methodology-lineage)), adapted to TFRS's JavaScript-heavy, AI-assisted delivery model.
 
@@ -15,7 +15,7 @@ Before implementing anything that crosses a trust boundary (accepts external inp
 2. The assets at risk (what data or capability would an attacker want).
 3. How each boundary could fail — walk through **Spoofing, Tampering, Repudiation, Information disclosure, Denial of service, Elevation of privilege (STRIDE)** for each boundary; this doesn't need to be a heavyweight document for routine work, but the questions should actually be asked, not skipped.
 
-Anything scoped `Risk: High` or `Risk: Critical` on the GitHub Project (see [`GITHUB_PROJECT_STANDARD.md`](./GITHUB_PROJECT_STANDARD.md)) must have this threat-model pass recorded in the plan produced by [`commands/plan.md`](./commands/plan.md), not skipped as "obviously fine."
+Anything scoped `Risk: High` or `Risk: Critical` in the issue's `## Metadata` block (see [`ISSUE_METADATA_STANDARD.md`](./ISSUE_METADATA_STANDARD.md)) must have this threat-model pass recorded in the plan produced by [`commands/plan.md`](./commands/plan.md), not skipped as "obviously fine."
 
 ## Vulnerability Categories to Prevent
 
@@ -92,12 +92,12 @@ TFRS is an AI-assisted shop; two risks are specific to that model and worth stat
 
 ## Relationship to the `Risk` Field
 
-[`GITHUB_PROJECT_STANDARD.md`](./GITHUB_PROJECT_STANDARD.md)'s `Risk` field (`Low`/`Medium`/`High`/`Critical`) is a **planning-time estimate** of how much could go wrong with a piece of work — it is not the same scale as a security audit's finding severity, even though the tier names overlap. A `Risk: High` issue means "run the Threat Model First step and expect `QA Required: Yes`"; an audit finding severity describes an already-discovered problem's urgency. Don't conflate the two when reading a Project board.
+[`ISSUE_METADATA_STANDARD.md`](./ISSUE_METADATA_STANDARD.md)'s `Risk` field (`Low`/`Medium`/`High`/`Critical`) is a **planning-time estimate** of how much could go wrong with a piece of work — it is not the same scale as a security audit's finding severity, even though the tier names overlap. A `Risk: High` issue means "run the Threat Model First step and expect `QA Required: Yes`"; an audit finding severity describes an already-discovered problem's urgency. Don't conflate the two when reading an issue's Metadata block.
 
 ## Related Documents
 
 - [`REVIEW_STANDARD.md`](./REVIEW_STANDARD.md) — the Security review axis points here for full detail
 - [`REPO_HEALTH_STANDARD.md`](./REPO_HEALTH_STANDARD.md) — the Security and Dependency health dimensions use the guidance above
-- [`GITHUB_PROJECT_STANDARD.md`](./GITHUB_PROJECT_STANDARD.md) — the `Risk` field
+- [`ISSUE_METADATA_STANDARD.md`](./ISSUE_METADATA_STANDARD.md) — the `Risk` field
 - [`AGENTS.md`](./AGENTS.md#what-agents-must-not-do) — the baseline "never commit secrets" rule this document expands on
 - If working in Claude Code and this environment has the built-in `security-review` skill available, invoke it for a structured pass against this standard before shipping anything `Risk: High` or `Risk: Critical`.

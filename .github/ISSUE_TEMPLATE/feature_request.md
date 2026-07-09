@@ -17,15 +17,24 @@ What problem should this solve?
 
 Describe the desired approach or user outcome.
 
+## Metadata
+
+Status: Backlog
+Priority:
+Risk:
+Size:
+Epic:
+Sprint:
+Blocked: No
+QA Required:
+Agent Persona:
+
 ## Acceptance Criteria
 
 - [ ] Given ...
 - [ ] When ...
 - [ ] Then ...
 
-## Priority
+## Verification
 
-- P0
-- P1
-- P2
-- P3
+## Dependencies

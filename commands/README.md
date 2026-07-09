@@ -16,7 +16,7 @@ review → roadmap → plan → backlog → execute → verify → ship
 - [`review.md`](./review.md): assess current state and produce findings, before planning begins.
 - [`roadmap.md`](./roadmap.md): sequence findings and business priorities into Epics.
 - [`plan.md`](./plan.md): turn an approved finding/Epic into a sized implementation strategy.
-- [`backlog.md`](./backlog.md): convert a plan into GitHub Projects, Epics, Issues, and execution order — the executable version of [`../BACKLOG_STANDARD.md`](../BACKLOG_STANDARD.md).
+- [`backlog.md`](./backlog.md): convert a plan into Epics, Issues, and repository engineering documentation, with execution order set — the executable version of [`../BACKLOG_STANDARD.md`](../BACKLOG_STANDARD.md). No GitHub Project is required.
 - [`execute.md`](./execute.md): implement a single `Ready` issue.
 - [`verify.md`](./verify.md): produce evidence that an implementation satisfies its acceptance criteria.
 - [`ship.md`](./ship.md): merge, release, and communicate a verified change.
@@ -24,7 +24,7 @@ review → roadmap → plan → backlog → execute → verify → ship
 
 ## Adoption Guides
 
-- [`setup-from-playbook.md`](./setup-from-playbook.md): use when aligning an existing repository to this playbook. For the full end-to-end bootstrap procedure, including GitHub Project setup and the first pass through the lifecycle, see [`../REPOSITORY_BOOTSTRAP_GUIDE.md`](../REPOSITORY_BOOTSTRAP_GUIDE.md).
+- [`setup-from-playbook.md`](./setup-from-playbook.md): use when aligning an existing repository to this playbook. For the full end-to-end bootstrap procedure, including establishing repository engineering documentation and the first pass through the lifecycle, see [`../REPOSITORY_BOOTSTRAP_GUIDE.md`](../REPOSITORY_BOOTSTRAP_GUIDE.md).
 
 ## Related Documents
 
