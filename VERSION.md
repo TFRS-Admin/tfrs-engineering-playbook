@@ -3,7 +3,7 @@
 
 ## Current Version
 
-**2.4.0**
+**2.4.1**
 
 ## Versioning Rules
 
@@ -23,6 +23,11 @@ Record changes using this format:
 ```
 
 ## Changelog
+
+## 2.4.1 - 2026-07-09
+- Type: patch
+- Summary: Downstream-adoption correctness fix for the Minimum Baseline introduced in 2.4.0. The four copied baseline files (`AGENTS.md`, `CLAUDE.md`, `AI_AGENT_OPERATING_MODEL.md`, `DECISION_ROUTER.md`) contained many local relative links (e.g. `./REVIEW_STANDARD.md`, `./SKILLS_STANDARD.md`, `./commands/execute.md`) to files that are not part of the copied baseline — any downstream repository that copied only the baseline, as instructed, would have inherited broken links the moment those four files left this repository. Converted every such link to its canonical `https://github.com/TFRS-Admin/tfrs-engineering-playbook/blob/main/...` URL; left links between the four baseline files themselves as local relative links, since both sides travel together when copied. Added a short clarifying note to `commands/setup-from-playbook.md#minimum-baseline` documenting this convention.
+- Impact: No behavior change for this repository itself — all links here still resolve identically. Downstream repositories that already copied the Minimum Baseline before this fix should re-copy the four files to pick up the corrected links.
 
 ## 2.4.0 - 2026-07-09
 - Type: minor
