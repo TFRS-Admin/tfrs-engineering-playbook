@@ -1,14 +1,24 @@
 <!-- Purpose: Canonical entry point for the TFRS engineering playbook and adoption guidance. -->
 # TFRS Engineering Playbook
 
-![Version](https://img.shields.io/badge/version-2.1.0-blue)
+![Version](https://img.shields.io/badge/version-2.2.0-blue)
 ![Last Updated](https://img.shields.io/badge/last%20updated-2026--07--09-brightgreen)
 
-The **TFRS Engineering Playbook** is the canonical engineering operating system for current and future TFRS projects. Version 1 established the documentation foundation: AI-assisted development conventions, planning and review expectations, reusable templates, and GitHub operating standards. Version 2.0 operationalized it — GitHub is the operational source of truth, chat is temporary, and every phase of the lifecycle (review, roadmap, plan, backlog, execute, verify, ship) is an executable prompt any AI agent can run, not just a document to read. Version 2.1 deepens the engineering discipline inside that lifecycle — security, testing, debugging, and code-quality practice that were previously thin or missing.
+The **TFRS Engineering Playbook** is the canonical engineering operating system for current and future TFRS projects. Version 1 established the documentation foundation: AI-assisted development conventions, planning and review expectations, reusable templates, and GitHub operating standards. Version 2.0 operationalized it — GitHub is the operational source of truth, chat is temporary, and every phase of the lifecycle (review, roadmap, plan, backlog, execute, verify, ship) is an executable prompt any AI agent can run, not just a document to read. Version 2.1 deepened the engineering discipline inside that lifecycle — security, testing, debugging, and code-quality practice that were previously thin or missing. Version 2.2 connects this playbook to [`TFRS-Admin/agent-skills`](https://github.com/TFRS-Admin/agent-skills), a live, shared execution library agents consult for step-by-step task mechanics that this playbook intentionally doesn't restate.
 
 ## Engineering Methodology Lineage
 
 This playbook treats [`agent-skills`](https://github.com/addyosmani/agent-skills) (a reference-quality, open-source engineering-skills pack, snapshotted at [`docs/agent-skills-main.zip`](./docs/agent-skills-main.zip)) as its engineering *methodology*, and this playbook as TFRS's *implementation* of that methodology — synthesized and adapted, not copied verbatim, and preserved where TFRS's existing workflow was already at least as strong. [`SECURITY_STANDARD.md`](./SECURITY_STANDARD.md) and [`TESTING_STANDARD.md`](./TESTING_STANDARD.md) are the two new standards that came directly out of this synthesis; nearly every other standard in this repository received smaller additions from it. See the pull request that introduced this synthesis for the full list of what was adopted, adapted, and intentionally left out, and the [Terminology Map](./AI_ENGINEERING_WORKFLOW.md#terminology-map) for where the two systems use the same word differently. The snapshot in `docs/agent-skills-main.zip` is a point-in-time reference, not a live dependency — re-sync it deliberately (a new snapshot plus a fresh comparison pass) rather than assuming it stays current on its own.
+
+## Skills Execution Library
+
+Separately from that one-time methodology synthesis, TFRS maintains an ongoing, live fork of that same source — [`TFRS-Admin/agent-skills`](https://github.com/TFRS-Admin/agent-skills) — as the shared execution library agents consult while doing the work this playbook governs. The three-repository architecture:
+
+- **This repository** defines *what TFRS requires and how work is tracked*: standards, the lifecycle, GitHub Project conventions.
+- **[`TFRS-Admin/agent-skills`](https://github.com/TFRS-Admin/agent-skills)** defines *how to execute a given kind of task step by step*: reusable, tool-agnostic workflows, plus TFRS-specific skills under `skills/tfrs/`.
+- **Any downstream repository** adds *what's true about that specific codebase* — and its local guidance always wins if it conflicts with either of the above.
+
+See [`SKILLS_STANDARD.md`](./SKILLS_STANDARD.md) for the full precedence rules and skill-selection guidance, and [`docs/agent-skills-integration.md`](./docs/agent-skills-integration.md) for a worked example. Nothing from the fork is vendored or duplicated into this repository — only referenced.
 
 ## Quick Start
 
@@ -51,12 +61,14 @@ Review → Roadmap → Plan → Backlog → Execute → Verify → Ship
 - [GITHUB_PROJECT_STANDARD.md](./GITHUB_PROJECT_STANDARD.md)
 - [SECURITY_STANDARD.md](./SECURITY_STANDARD.md)
 - [TESTING_STANDARD.md](./TESTING_STANDARD.md)
+- [SKILLS_STANDARD.md](./SKILLS_STANDARD.md)
 - [REPOSITORY_BOOTSTRAP_GUIDE.md](./REPOSITORY_BOOTSTRAP_GUIDE.md)
 - [REPO_HEALTH_STANDARD.md](./REPO_HEALTH_STANDARD.md)
 - [VERSION.md](./VERSION.md)
 - [docs/ai-prompting/README.md](./docs/ai-prompting/README.md)
 - [docs/code-patterns/README.md](./docs/code-patterns/README.md)
 - [docs/decision-log/README.md](./docs/decision-log/README.md)
+- [docs/agent-skills-integration.md](./docs/agent-skills-integration.md)
 - [templates/README.md](./templates/README.md)
 - [templates/new-repo-checklist.md](./templates/new-repo-checklist.md)
 - [templates/project-board-template.md](./templates/project-board-template.md)
@@ -112,7 +124,8 @@ Copy these into the downstream repository so they work without a live dependency
 
 Reference these directly from this repository rather than copying, since they change independently of any one downstream repository and copies would drift:
 
-- [`REVIEW_STANDARD.md`](./REVIEW_STANDARD.md), [`PLANNING_STANDARD.md`](./PLANNING_STANDARD.md), [`EXECUTION_STANDARD.md`](./EXECUTION_STANDARD.md), [`BACKLOG_STANDARD.md`](./BACKLOG_STANDARD.md), [`GITHUB_PROJECT_STANDARD.md`](./GITHUB_PROJECT_STANDARD.md), [`SECURITY_STANDARD.md`](./SECURITY_STANDARD.md), [`TESTING_STANDARD.md`](./TESTING_STANDARD.md), [`REPO_HEALTH_STANDARD.md`](./REPO_HEALTH_STANDARD.md) — the standards themselves.
+- [`REVIEW_STANDARD.md`](./REVIEW_STANDARD.md), [`PLANNING_STANDARD.md`](./PLANNING_STANDARD.md), [`EXECUTION_STANDARD.md`](./EXECUTION_STANDARD.md), [`BACKLOG_STANDARD.md`](./BACKLOG_STANDARD.md), [`GITHUB_PROJECT_STANDARD.md`](./GITHUB_PROJECT_STANDARD.md), [`SECURITY_STANDARD.md`](./SECURITY_STANDARD.md), [`TESTING_STANDARD.md`](./TESTING_STANDARD.md), [`SKILLS_STANDARD.md`](./SKILLS_STANDARD.md), [`REPO_HEALTH_STANDARD.md`](./REPO_HEALTH_STANDARD.md) — the standards themselves.
+- [`TFRS-Admin/agent-skills`](https://github.com/TFRS-Admin/agent-skills) — the shared skills execution library; reference it live per [`SKILLS_STANDARD.md`](./SKILLS_STANDARD.md), never vendor a copy of it into a downstream repository.
 - The [`commands/`](./commands/README.md) library — executable prompts should be run against the canonical version so improvements to a command reach every repository immediately.
 - [`AI_ENGINEERING_WORKFLOW.md`](./AI_ENGINEERING_WORKFLOW.md) and [`REPOSITORY_BOOTSTRAP_GUIDE.md`](./REPOSITORY_BOOTSTRAP_GUIDE.md).
 
