@@ -18,6 +18,10 @@ Turn an approved review finding, roadmap Epic, or raw issue into a concrete impl
 - Relevant constraints (deadlines, architecture limits, prior ADRs).
 - Related findings that should inform sequencing or risk.
 
+## Required Skill Consultation
+
+Mandatory per [`SKILLS_STANDARD.md#when-consultation-is-mandatory`](../SKILLS_STANDARD.md#when-consultation-is-mandatory): consult [`skills/planning-and-task-breakdown`](https://github.com/TFRS-Admin/agent-skills/tree/main/skills/planning-and-task-breakdown) for task-decomposition mechanics, and [`skills/spec-driven-development`](https://github.com/TFRS-Admin/agent-skills/tree/main/skills/spec-driven-development) when [`PLANNING_STANDARD.md#when-a-full-spec-is-required`](../PLANNING_STANDARD.md#when-a-full-spec-is-required) triggers a fuller plan.
+
 ## Workflow
 
 1. Read [`PLANNING_STANDARD.md`](../PLANNING_STANDARD.md) for issue anatomy, sizing, and acceptance criteria format.

@@ -3,7 +3,7 @@
 
 ## Current Version
 
-**2.2.0**
+**2.3.0**
 
 ## Versioning Rules
 
@@ -23,6 +23,11 @@ Record changes using this format:
 ```
 
 ## Changelog
+
+## 2.3.0 - 2026-07-09
+- Type: minor
+- Summary: Operational hardening pass — makes the system usable from a plain-language request rather than only an explicit command invocation. Expanded `AI_AGENT_OPERATING_MODEL.md` section 1 into a full Session Initialization Protocol (read local guidance, `AGENTS.md`, `CLAUDE.md`; identify repo and GitHub Project/issue; classify the task; select workflow and skill; state assumptions; get approval before state-changing actions). Added `DECISION_ROUTER.md` mapping plain-language request types to workflows, with ambiguity handling and approval checkpoints. Expanded `SKILLS_STANDARD.md` with an explicit mandatory-vs-optional consultation rule. Rewrote `commands/execute.md`'s workflow into a full twelve-step Issue Execution Protocol with an explicit Forbidden section (no multi-issue passes, no opportunistic refactors, no closing without verification, no chat-as-source-of-truth), and added a "Required Skill Consultation" section to every command file, including a full structural hardening of `commands/setup-from-playbook.md`. Added a Repository Readiness Checklist to `REPOSITORY_BOOTSTRAP_GUIDE.md` and ran it for real against `tfrs-website` — replacing the previously illustrative worked example with `tfrs-website`'s actual, verified issue hierarchy (epic #46, sub-epics #47–53, task issues #54–75) and an honest, mixed readiness result (2 of 12 checklist items pass). Corrected `README.md`'s prior claim that `tfrs-website` was "Active" — it is not yet onboarded; its own `AGENTS.md` currently points agents at a vendored skills copy instead of this playbook, which is now recorded as the top blocking gap.
+- Impact: Additive and backward-compatible — no GitHub Project field or lifecycle-phase changes. This release also corrects a documentation-accuracy issue in `README.md`'s adoption table (no functional impact, but downstream readers should not have treated `tfrs-website` as a reference implementation of full playbook adoption prior to this correction). Any repository being onboarded should run the new Repository Readiness Checklist and treat a "fail" honestly rather than assuming adoption is complete.
 
 ## 2.2.0 - 2026-07-09
 - Type: minor

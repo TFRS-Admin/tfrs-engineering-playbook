@@ -1,10 +1,12 @@
 <!-- Purpose: Canonical entry point for the TFRS engineering playbook and adoption guidance. -->
 # TFRS Engineering Playbook
 
-![Version](https://img.shields.io/badge/version-2.2.0-blue)
+![Version](https://img.shields.io/badge/version-2.3.0-blue)
 ![Last Updated](https://img.shields.io/badge/last%20updated-2026--07--09-brightgreen)
 
-The **TFRS Engineering Playbook** is the canonical engineering operating system for current and future TFRS projects. Version 1 established the documentation foundation: AI-assisted development conventions, planning and review expectations, reusable templates, and GitHub operating standards. Version 2.0 operationalized it — GitHub is the operational source of truth, chat is temporary, and every phase of the lifecycle (review, roadmap, plan, backlog, execute, verify, ship) is an executable prompt any AI agent can run, not just a document to read. Version 2.1 deepened the engineering discipline inside that lifecycle — security, testing, debugging, and code-quality practice that were previously thin or missing. Version 2.2 connects this playbook to [`TFRS-Admin/agent-skills`](https://github.com/TFRS-Admin/agent-skills), a live, shared execution library agents consult for step-by-step task mechanics that this playbook intentionally doesn't restate.
+The **TFRS Engineering Playbook** is the canonical engineering operating system for current and future TFRS projects. Version 1 established the documentation foundation: AI-assisted development conventions, planning and review expectations, reusable templates, and GitHub operating standards. Version 2.0 operationalized it — GitHub is the operational source of truth, chat is temporary, and every phase of the lifecycle (review, roadmap, plan, backlog, execute, verify, ship) is an executable prompt any AI agent can run, not just a document to read. Version 2.1 deepened the engineering discipline inside that lifecycle — security, testing, debugging, and code-quality practice that were previously thin or missing. Version 2.2 connected this playbook to [`TFRS-Admin/agent-skills`](https://github.com/TFRS-Admin/agent-skills), a live, shared execution library agents consult for step-by-step task mechanics that this playbook intentionally doesn't restate. Version 2.3 makes the system operational end to end: a [Session Initialization Protocol](./AI_AGENT_OPERATING_MODEL.md#1-session-initialization-protocol), a [Decision Router](./DECISION_ROUTER.md) that maps plain-language requests to the right workflow, a full [Issue Execution Protocol](./commands/execute.md#issue-execution-protocol), and a [Repository Readiness Checklist](./REPOSITORY_BOOTSTRAP_GUIDE.md#repository-readiness-checklist) — run for real against `tfrs-website`, with the honest result reported rather than assumed.
+
+**What this repository is:** the canonical source of engineering standards, the GitHub-Project-centered operating model, and the executable command library every TFRS repository and AI agent should follow. It does not contain application code, and it does not contain a copy of the shared skills library — see below.
 
 ## Engineering Methodology Lineage
 
@@ -22,13 +24,19 @@ See [`SKILLS_STANDARD.md`](./SKILLS_STANDARD.md) for the full precedence rules a
 
 ## Quick Start
 
-Choose one adoption model for a new or existing repository:
+**Starting a session against any repository?** Follow the [Session Initialization Protocol](./AI_AGENT_OPERATING_MODEL.md#1-session-initialization-protocol) — it works from a plain-language request (*"implement the next ready issue in `tfrs-website`"*) and routes itself via [`DECISION_ROUTER.md`](./DECISION_ROUTER.md); you don't need to know which command to run before you start.
+
+**Bootstrapping a new or existing repository?**
 
 1. **Copy the baseline files** you need first: [`AGENTS.md`](./AGENTS.md), [`CLAUDE.md`](./CLAUDE.md), [`AI_AGENT_OPERATING_MODEL.md`](./AI_AGENT_OPERATING_MODEL.md), [`REVIEW_STANDARD.md`](./REVIEW_STANDARD.md), and [`EXECUTION_STANDARD.md`](./EXECUTION_STANDARD.md).
 2. **Reference this repository directly** from the target repository README and contributor docs when you want a single maintained standard.
-3. Follow the full onboarding lifecycle in [`REPOSITORY_BOOTSTRAP_GUIDE.md`](./REPOSITORY_BOOTSTRAP_GUIDE.md) — it walks through repository creation, playbook adoption, GitHub Project setup, and the first pass through Review → Plan → Backlog → Execute, using `tfrs-website` as a complete worked example.
+3. Follow the full onboarding lifecycle in [`REPOSITORY_BOOTSTRAP_GUIDE.md`](./REPOSITORY_BOOTSTRAP_GUIDE.md) — it walks through repository creation, playbook adoption, GitHub Project setup, and the first pass through Review → Plan → Backlog → Execute, using `tfrs-website`'s real, current issue hierarchy as a worked example — including where that repository's own adoption is still incomplete, per its [Repository Readiness Checklist](./REPOSITORY_BOOTSTRAP_GUIDE.md#repository-readiness-checklist) result.
 4. Record the adoption decision in your repository docs and project board using [`GITHUB_PROJECT_STANDARD.md`](./GITHUB_PROJECT_STANDARD.md).
 5. From then on, run the [`commands/`](./commands/README.md) library for every phase of ongoing work instead of improvising the workflow.
+
+**Running one issue through the whole lifecycle?** See the [Sample Plain-Language Prompts](./REPOSITORY_BOOTSTRAP_GUIDE.md#sample-plain-language-prompts-and-expected-agent-behavior) walkthrough — it traces a single real issue (`tfrs-website` #56) from "what's next" through implementation, review, and ship.
+
+**Wondering whether a repository is actually ready to use this system?** Run the [Repository Readiness Checklist](./REPOSITORY_BOOTSTRAP_GUIDE.md#repository-readiness-checklist) against it directly — don't assume a repository is onboarded just because it's a TFRS repository.
 
 ## The Engineering Lifecycle
 
@@ -54,6 +62,7 @@ Review → Roadmap → Plan → Backlog → Execute → Verify → Ship
 - [CLAUDE.md](./CLAUDE.md)
 - [AI_ENGINEERING_WORKFLOW.md](./AI_ENGINEERING_WORKFLOW.md)
 - [AI_AGENT_OPERATING_MODEL.md](./AI_AGENT_OPERATING_MODEL.md)
+- [DECISION_ROUTER.md](./DECISION_ROUTER.md)
 - [REVIEW_STANDARD.md](./REVIEW_STANDARD.md)
 - [PLANNING_STANDARD.md](./PLANNING_STANDARD.md)
 - [EXECUTION_STANDARD.md](./EXECUTION_STANDARD.md)
@@ -102,7 +111,7 @@ Review → Roadmap → Plan → Backlog → Execute → Verify → Ship
 
 | Repository | Adoption Status | Notes |
 | --- | --- | --- |
-| tfrs-website | Active | Onboarded via [`REPOSITORY_BOOTSTRAP_GUIDE.md`](./REPOSITORY_BOOTSTRAP_GUIDE.md); its implementation surfaced the Plan → Execute gap that Version 2 closes |
+| tfrs-website | Partial (2 of 12 on the [Repository Readiness Checklist](./REPOSITORY_BOOTSTRAP_GUIDE.md#repository-readiness-checklist)) | Has a real, dependency-mapped issue hierarchy and runnable verification commands, used as this playbook's worked example — but its own `AGENTS.md` still points at a vendored skills copy instead of this playbook, and it has no GitHub Project, CI, or issue/PR templates yet. See the checklist result for the full breakdown before treating it as fully onboarded. |
 | Code-Gen-AI | Pending | JavaScript project queued for first-wave adoption |
 | prompt-showcase-by-team44-copy | Pending | Candidate for prompt and review standards rollout |
 | QPM_Base44 | Pending | Needs baseline repo standards and workflow alignment |
@@ -124,7 +133,7 @@ Copy these into the downstream repository so they work without a live dependency
 
 Reference these directly from this repository rather than copying, since they change independently of any one downstream repository and copies would drift:
 
-- [`REVIEW_STANDARD.md`](./REVIEW_STANDARD.md), [`PLANNING_STANDARD.md`](./PLANNING_STANDARD.md), [`EXECUTION_STANDARD.md`](./EXECUTION_STANDARD.md), [`BACKLOG_STANDARD.md`](./BACKLOG_STANDARD.md), [`GITHUB_PROJECT_STANDARD.md`](./GITHUB_PROJECT_STANDARD.md), [`SECURITY_STANDARD.md`](./SECURITY_STANDARD.md), [`TESTING_STANDARD.md`](./TESTING_STANDARD.md), [`SKILLS_STANDARD.md`](./SKILLS_STANDARD.md), [`REPO_HEALTH_STANDARD.md`](./REPO_HEALTH_STANDARD.md) — the standards themselves.
+- [`REVIEW_STANDARD.md`](./REVIEW_STANDARD.md), [`PLANNING_STANDARD.md`](./PLANNING_STANDARD.md), [`EXECUTION_STANDARD.md`](./EXECUTION_STANDARD.md), [`BACKLOG_STANDARD.md`](./BACKLOG_STANDARD.md), [`GITHUB_PROJECT_STANDARD.md`](./GITHUB_PROJECT_STANDARD.md), [`SECURITY_STANDARD.md`](./SECURITY_STANDARD.md), [`TESTING_STANDARD.md`](./TESTING_STANDARD.md), [`SKILLS_STANDARD.md`](./SKILLS_STANDARD.md), [`REPO_HEALTH_STANDARD.md`](./REPO_HEALTH_STANDARD.md), [`DECISION_ROUTER.md`](./DECISION_ROUTER.md) — the standards themselves.
 - [`TFRS-Admin/agent-skills`](https://github.com/TFRS-Admin/agent-skills) — the shared skills execution library; reference it live per [`SKILLS_STANDARD.md`](./SKILLS_STANDARD.md), never vendor a copy of it into a downstream repository.
 - The [`commands/`](./commands/README.md) library — executable prompts should be run against the canonical version so improvements to a command reach every repository immediately.
 - [`AI_ENGINEERING_WORKFLOW.md`](./AI_ENGINEERING_WORKFLOW.md) and [`REPOSITORY_BOOTSTRAP_GUIDE.md`](./REPOSITORY_BOOTSTRAP_GUIDE.md).

@@ -17,6 +17,10 @@ This is the executable version of [`BACKLOG_STANDARD.md`](../BACKLOG_STANDARD.md
 - The target repository and its GitHub Project.
 - Current sprint/cadence context if issues are being assigned to a specific sprint now.
 
+## Required Skill Consultation
+
+Check for `skills/tfrs/backlog-initialization` or `skills/tfrs/github-project-management` in [`TFRS-Admin/agent-skills`](https://github.com/TFRS-Admin/agent-skills) first — a TFRS-specific skill wins when one exists. As of this writing neither exists in the fork yet (see [`SKILLS_STANDARD.md#skill-selection`](../SKILLS_STANDARD.md#skill-selection)); until it does, follow this command and [`BACKLOG_STANDARD.md`](../BACKLOG_STANDARD.md) directly — there is no generic upstream skill to substitute, since backlog conversion against a GitHub Project is TFRS-specific.
+
 ## Workflow
 
 1. **Confirm project readiness.** Verify the GitHub Project exists, is attached to the repository, and has all ten required fields (`Status`, `Phase`, `Priority`, `Risk`, `Size`, `Sprint`, `Epic`, `QA Required`, `Blocked`, `Agent Persona`) and eight board views configured per [`GITHUB_PROJECT_STANDARD.md`](../GITHUB_PROJECT_STANDARD.md). Create whatever is missing before proceeding.

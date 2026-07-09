@@ -39,6 +39,7 @@ Use Conventional Commits for every agent-authored commit:
 
 ## How Agents Should Use This Playbook
 
+0. **Start every session with the [Session Initialization Protocol](./AI_AGENT_OPERATING_MODEL.md#1-session-initialization-protocol)** — this applies even to a plain-language request with no issue number attached; route it with [`DECISION_ROUTER.md`](./DECISION_ROUTER.md) rather than guessing which command applies.
 1. Read [`CLAUDE.md`](./CLAUDE.md) for response and execution conventions.
 2. Read [`AI_AGENT_OPERATING_MODEL.md`](./AI_AGENT_OPERATING_MODEL.md) for the full operating loop: what to read first, how to pick the next issue, when to stop, and how to update GitHub. This document defines behavior and conventions; that one defines the loop those conventions run inside.
 3. Follow [`EXECUTION_STANDARD.md`](./EXECUTION_STANDARD.md) when coding, and the executable command library under [`commands/`](./commands/README.md) for every phase of the lifecycle.

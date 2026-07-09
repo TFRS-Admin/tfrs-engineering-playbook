@@ -16,6 +16,10 @@ Merge a verified, approved change, update GitHub to reflect completion, and comm
 - Its attached verification report (from [`commands/verify.md`](./verify.md)).
 - Release/versioning context if the change affects a tagged release or this playbook's own `VERSION.md`.
 
+## Required Skill Consultation
+
+Mandatory per [`SKILLS_STANDARD.md#when-consultation-is-mandatory`](../SKILLS_STANDARD.md#when-consultation-is-mandatory): consult [`skills/shipping-and-launch`](https://github.com/TFRS-Admin/agent-skills/tree/main/skills/shipping-and-launch) in [`TFRS-Admin/agent-skills`](https://github.com/TFRS-Admin/agent-skills) for rollout/rollback mechanics; TFRS's merge-gate specifics (required approvals, `state_reason`, the `Release` board view) still govern per [`REVIEW_STANDARD.md`](../REVIEW_STANDARD.md) and [`GITHUB_PROJECT_STANDARD.md`](../GITHUB_PROJECT_STANDARD.md).
+
 ## Workflow
 
 1. Confirm required approvals are present per [`REVIEW_STANDARD.md`](../REVIEW_STANDARD.md) and no blocking comments remain unresolved. For `Risk: High` or `Risk: Critical` items, consider the optional parallel fan-out gate described in [`AI_AGENT_OPERATING_MODEL.md`](../AI_AGENT_OPERATING_MODEL.md#9-orchestration-between-personas) — independent Reviewer, Verifier, and security passes run concurrently against the same diff and merge findings before this step. This is optional; the default flow below is sequential.

@@ -5,6 +5,10 @@
 
 TFRS is a JavaScript-heavy, AI-assisted shop with a Copilot-first workflow and Claude Code used as a high-leverage implementation and review partner. Claude should assume that most repositories value fast iteration, explicit planning, concise communication, and reusable standards over one-off cleverness.
 
+## Starting a Session
+
+Before doing anything else, run the [Session Initialization Protocol](./AI_AGENT_OPERATING_MODEL.md#1-session-initialization-protocol). It works from a plain-language request — nothing about a request needs to look like a command invocation for this to apply. Use [`DECISION_ROUTER.md`](./DECISION_ROUTER.md) to map that request to a workflow before doing anything state-changing.
+
 ## Preferred Response Style
 
 - Be concise, actionable, and code-first.

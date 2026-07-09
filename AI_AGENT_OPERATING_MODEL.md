@@ -5,17 +5,21 @@
 
 [`AGENTS.md`](./AGENTS.md) defines baseline conventions (naming, style, commits, branch prefixes). This document defines the **operating loop**: what an agent does from the moment it starts a session in a repository that has adopted this playbook, to the moment it stops. Every future TFRS repository should be usable by an AI agent that has read only this file plus the repository's own README.
 
-## 1. What to Read First
+## 1. Session Initialization Protocol
 
-On entering any repository that references this playbook, read in this order and stop as soon as you have enough context to act:
+This is how every AI engineering session begins, whether it's triggered by an explicit issue number or by a plain-language request like *"implement the next ready issue in `tfrs-website`"*. **Plain-language requests are expected, not an edge case** — the agent is responsible for routing them, not the user. Do this in order, and don't skip a step because a request "seems" execution-only:
 
-1. The repository's own `README.md` — for repository-specific context this playbook cannot know.
-2. `AGENTS.md` and `CLAUDE.md` (or the repository's copies of them) — behavioral contract.
-3. `GITHUB_PROJECT_STANDARD.md` — how to read the current state of work on the project board.
-4. Any open issue or PR you were pointed at directly.
-5. `docs/decision-log/` (ADRs) for the area you are about to touch, so you do not contradict a recorded decision without flagging it.
+1. **Read local repository guidance first.** The target repository's own `README.md` and any repository-specific instructions — these can override this playbook per the precedence rule in [`SKILLS_STANDARD.md`](./SKILLS_STANDARD.md#precedence-on-conflict). If the repository's own guidance conflicts with what follows, the repository wins; note the conflict rather than silently picking a side.
+2. **Read `AGENTS.md`.** Baseline conventions: naming, style, commit format, what agents must never do.
+3. **Read `CLAUDE.md`.** Response style, planning-before-execution, PR conventions, and the Ask-vs-Proceed rule you'll need in step 9.
+4. **Identify the current repository.** Confirm which repository the request is about and that it has actually adopted this playbook (see the [Repository Readiness Checklist](./REPOSITORY_BOOTSTRAP_GUIDE.md#repository-readiness-checklist)) — don't assume a repository is fully onboarded just because it's a TFRS repository; check.
+5. **Identify the relevant GitHub Project or issue.** If a real GitHub Project exists, read it per [`GITHUB_PROJECT_STANDARD.md`](./GITHUB_PROJECT_STANDARD.md). If the repository has no Project board yet and instead records Priority/Risk/Size/dependencies as structured text inside issue bodies, read those directly — the absence of a real board is not a reason to skip determining current state, it just changes where you look.
+6. **Determine the task category.** Every request is one of: *informational* (a question, no state change), *planning* (turning an idea into a strategy), *review* (assessing a diff or existing state), *execution* (implementing a specific issue), *verification* (proving a change works), or *release* (shipping). Use [`DECISION_ROUTER.md`](./DECISION_ROUTER.md) to map a plain-language request to one of these categories.
+7. **Select the correct workflow.** Once the category is known, `DECISION_ROUTER.md` names the [`commands/`](./commands/README.md) prompt(s) to run.
+8. **Select the correct skill, if applicable.** Per [`SKILLS_STANDARD.md`](./SKILLS_STANDARD.md#skill-selection), most non-informational categories have a matching skill in [`TFRS-Admin/agent-skills`](https://github.com/TFRS-Admin/agent-skills) to consult before executing.
+9. **State assumptions; ask for approval before any state-changing action.** If routing or scope is ambiguous, say what you assumed rather than silently picking one. Reading code, issues, and this playbook is never state-changing and needs no approval; opening a branch, PR, or GitHub Project update does — per [`CLAUDE.md`](./CLAUDE.md#when-to-ask-vs-when-to-proceed), proceed only when the task is clear, scoped, and consistent with these standards.
 
-Do not re-derive information already recorded in these documents by re-reading the entire codebase. Trust the standards; verify only the specific issue you are working.
+Do not re-derive information already recorded in these documents by re-reading the entire codebase. Trust the standards; verify only the specific issue you are working. Steps 6–8 above are the entry point into the per-issue execution work — see [`commands/execute.md`](./commands/execute.md#issue-execution-protocol) for the detailed protocol once a specific `Ready` issue has been selected.
 
 ## 2. How to Determine Current Work
 

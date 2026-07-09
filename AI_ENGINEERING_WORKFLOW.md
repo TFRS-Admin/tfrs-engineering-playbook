@@ -3,7 +3,7 @@
 
 ## Purpose
 
-This workflow describes how TFRS moves from idea to shipped software using a human-led, AI-assisted model. It aligns repository planning, GitHub tracking, implementation, review, and retrospective learning.
+This workflow describes how TFRS moves from idea to shipped software using a human-led, AI-assisted model. It aligns repository planning, GitHub tracking, implementation, review, and retrospective learning. To route a specific plain-language request to a phase below, use [`DECISION_ROUTER.md`](./DECISION_ROUTER.md) rather than guessing from this table alone.
 
 ## Workflow Overview
 
