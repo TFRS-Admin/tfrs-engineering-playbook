@@ -5,7 +5,7 @@
 
 Security guidance previously existed only as a few bullets inside [`REVIEW_STANDARD.md`](./REVIEW_STANDARD.md). This document is the single authoritative source for TFRS security practice; `REVIEW_STANDARD.md`, `REPO_HEALTH_STANDARD.md`, and `ISSUE_METADATA_STANDARD.md`'s `Risk` field all point here instead of restating guidance.
 
-This standard synthesizes practices adopted from the `agent-skills` engineering methodology (see [`docs/agent-skills-main.zip`](./docs/agent-skills-main.zip), credited in [`README.md`](./README.md#engineering-methodology-lineage)), adapted to TFRS's JavaScript-heavy, AI-assisted delivery model.
+This standard synthesizes practices adopted from the `agent-skills` engineering methodology (see [`docs/agent-skills-main.zip`](./docs/agent-skills-main.zip), credited in [`README.md`](./README.md#engineering-methodology-lineage)), adapted to TFRS's TypeScript-heavy, AI-assisted delivery model.
 
 ## Threat Model First
 

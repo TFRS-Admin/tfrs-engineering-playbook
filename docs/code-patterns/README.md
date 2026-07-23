@@ -1,4 +1,4 @@
-<!-- Purpose: Document approved JavaScript-oriented implementation patterns for TFRS repositories. -->
+<!-- Purpose: Document approved TypeScript-oriented implementation patterns for TFRS repositories. -->
 # TFRS Code Patterns
 
 ## Comments
@@ -11,8 +11,11 @@ Comment the *why*, not the *what* — well-named code already shows what it does
 - Use `Promise.all` only when work is truly independent.
 - Wrap external I/O in small functions so failures stay localized.
 
-```js
-export async function loadCustomerProfile(apiClient, customerId) {
+```ts
+export async function loadCustomerProfile(
+  apiClient: ApiClient,
+  customerId: string,
+): Promise<{ customer: Customer; orders: Order[] }> {
   const [customer, orders] = await Promise.all([
     apiClient.getCustomer(customerId),
     apiClient.listOrders(customerId),
@@ -29,12 +32,13 @@ export async function loadCustomerProfile(apiClient, customerId) {
 - Convert unknown upstream failures into repository-appropriate error shapes at boundaries.
 - **Pick one error pattern per API and use it everywhere.** If some endpoints throw, others return `null` on failure, and others return `{ error }`, a consumer can't predict behavior without reading every call site. For REST endpoints, pair an HTTP status code with a structured error body (`{ error: { code, message, details? } }`): `400` invalid input, `401` not authenticated, `403` authenticated but not authorized, `404` not found, `409` conflict, `422` validation failed, `500` server error (never expose internal detail in the message).
 
-```js
-export async function fetchInventory(apiClient, sku) {
+```ts
+export async function fetchInventory(apiClient: ApiClient, sku: string): Promise<Inventory> {
   try {
     return await apiClient.getInventory(sku);
   } catch (error) {
-    throw new Error(`Unable to load inventory for ${sku}: ${error.message}`);
+    const message = error instanceof Error ? error.message : String(error);
+    throw new Error(`Unable to load inventory for ${sku}: ${message}`);
   }
 }
 ```

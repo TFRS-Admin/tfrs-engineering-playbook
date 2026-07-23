@@ -63,7 +63,7 @@ Criterion 1: Given a POST to /api/contact with a missing required field,
   body `{"errors":{"email":"required"}}`. PASS.
 
 Criterion 2: Integration tests cover the validation boundary.
-  Evidence: `npm test -- contact-form.integration.test.js` → 6 passed, 0 failed.
+  Evidence: `npm test -- contact-form.integration.test.ts` → 6 passed, 0 failed.
   PASS.
 
 Overall: PASS. No gaps. Proceeding to commands/ship.md.

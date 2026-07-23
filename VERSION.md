@@ -3,7 +3,7 @@
 
 ## Current Version
 
-**3.0.0**
+**3.1.0**
 
 ## Versioning Rules
 
@@ -23,6 +23,11 @@ Record changes using this format:
 ```
 
 ## Changelog
+
+## 3.1.0 - 2026-07-23
+- Type: minor
+- Summary: Switched the playbook's default language baseline from JavaScript-first to TypeScript-first. `AGENTS.md`'s File Naming Conventions now prefer TypeScript-first layouts (`order-service.ts` instead of `.js`) and gain a new TypeScript Rules section (strict mode on, no `any` without a documented reason, prefer `unknown` over `any` at boundaries, type external input rather than asserting it) alongside the unchanged ES-modules/async-await/`const`-by-default rules. `CLAUDE.md`'s Project Context now describes TFRS as TypeScript-heavy rather than JavaScript-heavy, matching the wording already used in `SECURITY_STANDARD.md` and `TESTING_STANDARD.md`. `templates/github-actions-template.yml` is renamed to a TypeScript CI Template and gains a `typecheck` (`tsc --noEmit`) job ahead of lint/test/build. `docs/code-patterns/README.md`'s async and error-handling code examples are now typed TypeScript rather than untyped JavaScript. The shared contact-form-validation worked example used throughout `commands/verify.md`, `commands/review.md`, and four templates (`adr-template.md`, `verification-report-template.md`, `repository-architecture-template.md`, `engineering-task-template.md`) is converted from `.js`/`.jsx` to `.ts`/`.tsx` in the same pass so the worked example stays internally consistent, rather than partially converted. Deliberately left untouched: the ADR-001 historical entry in `docs/decision-log/README.md`, the `Code-Gen-AI` row in this repository's own README adoption table, `tfrs-website`'s already-`.tsx` `VehicleConfigurator.tsx` reference, `SECURITY_STANDARD.md`'s "JS" output-encoding context (a different meaning of "JS"), and every Node.js/npm CI-tooling reference — none of these describe the playbook's own source-language convention.
+- Impact: Additive and backward-compatible — no existing JavaScript repository is required to convert immediately; this changes the *default* for new repositories and new code, not a requirement to retrofit existing code. Repositories that copied the Minimum Baseline (`AGENTS.md`, `CLAUDE.md`) should re-copy both next time they touch either file to pick up the updated language guidance, but this alone doesn't warrant an out-of-band re-copy. This is the first of two changes planned under the v3.1 release; the second (moving work-item tracking from GitHub Issues to repository-local files) lands as a separate pull request with its own changelog entry and its own upgrade impact.
 
 ## 3.0.0 - 2026-07-09
 - Type: major

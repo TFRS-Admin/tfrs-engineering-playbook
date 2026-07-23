@@ -67,7 +67,7 @@ Not mandatory per [`SKILLS_STANDARD.md#when-consultation-is-mandatory`](../SKILL
 **Output (excerpt):**
 ```text
 Finding 1 [Confirmed, High]: Contact form validation is client-side only
-  (src/components/ContactForm.jsx:42-58). Direct POST to the submission
+  (src/components/ContactForm.tsx:42-58). Direct POST to the submission
   endpoint bypasses all required-field and format checks.
   Likely direction: add matching server-side validation at the endpoint boundary.
 
