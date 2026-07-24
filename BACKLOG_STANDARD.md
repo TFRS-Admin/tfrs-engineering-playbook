@@ -66,7 +66,7 @@ Order work items for execution using this precedence, in order:
 3. **Risk** — prefer resolving `High`/`Critical` risk items earlier so there is runway left to react if they slip.
 4. **Size** — when priority and risk are equal, prefer smaller items first.
 
-There is no separate index file recording this order — it's derivable at any time by globbing `docs/engineering/backlog/*.md` and sorting by these fields directly; don't create one, it would be a second source of truth for facts already in each file.
+There is no separate index file recording this order — it's derivable at any time by globbing `docs/engineering/backlog/*.md` and sorting by these fields directly; don't create one, it would be a second source of truth for facts already in each file. This is the same ordering [`AI_AGENT_OPERATING_MODEL.md#3-how-to-choose-the-next-work-item`](./AI_AGENT_OPERATING_MODEL.md#3-how-to-choose-the-next-work-item) applies when an agent picks up work live — keep the two in sync if either changes.
 
 ## Acceptance Criteria
 

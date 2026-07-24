@@ -54,12 +54,13 @@ If you were invoked with an explicit work-item filename, that takes precedence o
 
 ## 3. How to Choose the Next Work Item
 
-When multiple work items are `Ready`, choose using this order:
+This is the same ordering [`BACKLOG_STANDARD.md#execution-ordering`](./BACKLOG_STANDARD.md#execution-ordering) defines for sequencing the backlog — one algorithm, applied live rather than restated differently here. When multiple work items are `Ready`, choose using this order:
 
 1. **`Blocked` = `No`** — never start work that is flagged blocked, even if it looks unblocked from the code.
-2. **Highest `Priority`**, then highest `Risk` (resolve risk while there is runway), then smallest `Size` when priority and risk tie (see [`BACKLOG_STANDARD.md#execution-ordering`](./BACKLOG_STANDARD.md#execution-ordering)).
+2. **Unblocks the most other work** — an item several others depend on goes first even if its own priority is lower.
+3. **Highest `Priority`**, then highest `Risk` (resolve risk while there is runway), then smallest `Size` when priority and risk tie.
 
-Both fields are read directly from the work item's `## Metadata` block per [`WORK_ITEM_METADATA_STANDARD.md`](./WORK_ITEM_METADATA_STANDARD.md). If no `Ready` item satisfies these constraints, stop and report that the backlog needs attention rather than inventing work.
+All fields are read directly from the work item's `## Metadata` block per [`WORK_ITEM_METADATA_STANDARD.md`](./WORK_ITEM_METADATA_STANDARD.md). If no `Ready` item satisfies these constraints, stop and report that the backlog needs attention rather than inventing work.
 
 ## 4. When to Stop
 
@@ -80,7 +81,7 @@ The repository — work-item files and `docs/engineering/` files — is the sour
 1. Move the work item's `## Metadata` `Status` line when you start (`Ready` → `In Progress`), when you open a PR (`In Progress` → `In Review`), and when QA is required (`In Review` → `QA`).
 2. Set `Blocked` to `Yes` immediately when you hit a blocker, with a note in the file explaining what is needed — do not silently pause.
 3. Reference the work item's filename in every commit, via the `work-item:` trailer defined in [`RULESET.md`](./RULESET.md), and in the PR description.
-4. Move `Status` to `Done` only after merge — never mark an item `Done` without a merged PR behind it.
+4. Move `Status` to `Done` as the final commit on the PR branch, pushed before the merge — not as a separate commit against `main` afterward, since a protected `main` has no direct-push path for that edit once the PR has landed. Per [`commands/ship.md`](./commands/ship.md), the `Done` state becomes true on `main` atomically, in the same merge — never mark an item `Done` on a branch that isn't about to merge.
 5. Update `docs/engineering/ROADMAP.md` when an Epic's scope or sequencing changes.
 6. Never let a chat-only status update substitute for a repository update. If it did not happen in the work-item file or the repository's engineering docs, it did not happen.
 

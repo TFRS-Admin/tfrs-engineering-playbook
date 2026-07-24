@@ -24,8 +24,8 @@ Mandatory per [`SKILLS_STANDARD.md#when-consultation-is-mandatory`](../SKILLS_ST
 
 1. Self-review the diff against [`RULESET.md`](../RULESET.md) (rule 2: Chesterton's Fence, Rule of 500; rule 3: verify AI-generated code didn't invent an API) and confirm no blocking comments remain unresolved.
 2. Confirm CI is green and the verification report is attached and shows an overall Pass.
-3. Merge the PR respecting branch protections (no `--no-verify`, no force-merging around a failing required check).
-4. Move the work item's `## Metadata` `Status` to `Done`.
+3. **On the PR branch itself** — not against `main` — move the work item's `## Metadata` `Status` to `Done` and push that commit. Do this before merging, not after: if `main` is protected (per [`templates/new-repo-checklist.md`](../templates/new-repo-checklist.md), it should be), there is no direct-push path to edit a work-item file on `main` once the PR has merged, so the `Status: Done` edit has to land as part of the PR that's about to merge, not as a follow-up. This is still safe to call "done" — the file only reads `Done` on `main` once the merge that makes it true has actually happened, atomically, in the same commit.
+4. Merge the PR respecting branch protections (no `--no-verify`, no force-merging around a failing required check).
 5. If the change affects a versioned artifact (a release, or this playbook itself), update the changelog (`VERSION.md` for this repository; the repository's own release notes elsewhere) per its versioning rules.
 6. Communicate downstream impact: if other repositories depend on the changed behavior, note it in the PR/work-item file and, for playbook changes, in the README adoption table.
 
@@ -45,6 +45,7 @@ Mandatory per [`SKILLS_STANDARD.md#when-consultation-is-mandatory`](../SKILLS_ST
 
 - **CI is red**: do not merge. Return to [`commands/execute.md`](./execute.md); do not bypass required checks.
 - **A late comment blocks merge**: resolve it or explicitly note it as a follow-up, tracked as its own work item, before merging.
+- **`main` isn't protected and a `Status: Done` edit already landed there directly**: that's still acceptable — the ordering in step 3 exists to work correctly *under* branch protection, not to require it — but treat it as a gap in that repository's setup per [`REPOSITORY_BOOTSTRAP_GUIDE.md`](../REPOSITORY_BOOTSTRAP_GUIDE.md) rather than the normal path.
 - **Release communication is unclear who needs it**: default to over-communicating (note it in the PR and the affected repositories' READMEs) rather than assuming no one depends on it.
 
 ## Example
@@ -54,9 +55,10 @@ Mandatory per [`SKILLS_STANDARD.md#when-consultation-is-mandatory`](../SKILLS_ST
 
 **Output (excerpt):**
 ```text
-Merged PR #201 into main.
-docs/engineering/backlog/FORM-01-add-server-side-contact-form-validation.md
+Pushed final commit to PR #201's branch:
+  docs/engineering/backlog/FORM-01-add-server-side-contact-form-validation.md
   Metadata: Status → Done.
+Merged PR #201 into main — Status: Done landed atomically with the merge.
 
 No cross-repository impact — contact form validation is internal to
 tfrs-website. No README/adoption table update needed.
