@@ -3,12 +3,12 @@
 
 ## Agent Identity & Scope
 
-AI coding agents operating in TFRS repositories are authorized to plan, implement, test, document, and review changes that are explicitly requested in issues, pull requests, or maintainer instructions. Agents should optimize for small, safe changes that preserve repository intent and should treat this playbook as the default operating contract unless a repository documents a stricter local rule.
+AI coding agents operating in TFRS repositories are authorized to plan, implement, test, document, and review changes that are explicitly requested in work items, pull requests, or operator instructions. Agents should optimize for small, safe changes that preserve repository intent and should treat this playbook as the default operating contract unless a repository documents a stricter local rule.
 
 ## File Naming Conventions
 
 - Prefer **TypeScript-first** repository layouts and documentation examples.
-- Use **kebab-case** for general files and folders such as `order-service.ts` or `project-board-template.md`.
+- Use **kebab-case** for general files and folders such as `order-service.ts` or `verification-report-template.md`.
 - Use **PascalCase** for React components, pages, and other framework conventions that expect component naming.
 - Keep filenames descriptive enough that Copilot and Claude can infer intent from path and name alone.
 
@@ -46,13 +46,12 @@ Use Conventional Commits for every agent-authored commit:
 
 ## How Agents Should Use This Playbook
 
-0. **Start every session with the [Session Initialization Protocol](./AI_AGENT_OPERATING_MODEL.md#1-session-initialization-protocol)** — this applies even to a plain-language request with no issue number attached; route it with [`DECISION_ROUTER.md`](./DECISION_ROUTER.md) rather than guessing which command applies.
+0. **Start every session with the [Session Initialization Protocol](./AI_AGENT_OPERATING_MODEL.md#1-session-initialization-protocol)** — this applies even to a plain-language request with no work-item filename attached; route it with [`DECISION_ROUTER.md`](./DECISION_ROUTER.md) rather than guessing which command applies.
 1. Read [`CLAUDE.md`](./CLAUDE.md) for response and execution conventions.
-2. Read [`AI_AGENT_OPERATING_MODEL.md`](./AI_AGENT_OPERATING_MODEL.md) for the full operating loop: what to read first, how to pick the next issue, when to stop, and how to update GitHub. This document defines behavior and conventions; that one defines the loop those conventions run inside.
-3. Follow [`EXECUTION_STANDARD.md`](https://github.com/TFRS-Admin/tfrs-engineering-playbook/blob/main/EXECUTION_STANDARD.md) when coding, and the executable command library under [`commands/`](https://github.com/TFRS-Admin/tfrs-engineering-playbook/blob/main/commands/README.md) for every phase of the lifecycle.
-4. Check [`REVIEW_STANDARD.md`](https://github.com/TFRS-Admin/tfrs-engineering-playbook/blob/main/REVIEW_STANDARD.md) before asking for or approving a pull request, and [`SECURITY_STANDARD.md`](https://github.com/TFRS-Admin/tfrs-engineering-playbook/blob/main/SECURITY_STANDARD.md) / [`TESTING_STANDARD.md`](https://github.com/TFRS-Admin/tfrs-engineering-playbook/blob/main/TESTING_STANDARD.md) whenever a change touches external input, auth, or behavior that needs test coverage.
-5. Use [`AI_ENGINEERING_WORKFLOW.md`](https://github.com/TFRS-Admin/tfrs-engineering-playbook/blob/main/AI_ENGINEERING_WORKFLOW.md) to decide what work belongs to humans versus AI.
-6. Consult [`SKILLS_STANDARD.md`](https://github.com/TFRS-Admin/tfrs-engineering-playbook/blob/main/SKILLS_STANDARD.md) for the step-by-step execution mechanics of a given task type (code review, planning, implementation, verification, and so on) — this playbook defines *what's required*, [`TFRS-Admin/agent-skills`](https://github.com/TFRS-Admin/agent-skills) defines *how to execute it*; don't re-derive a skill's workflow from scratch when one already exists.
+2. Read [`AI_AGENT_OPERATING_MODEL.md`](./AI_AGENT_OPERATING_MODEL.md) for the full operating loop: what to read first, how to pick the next work item, when to stop, and how to update repository state. This document defines behavior and conventions; that one defines the loop those conventions run inside.
+3. Follow [`RULESET.md`](https://github.com/TFRS-Admin/tfrs-engineering-playbook/blob/main/RULESET.md) when coding, and the executable command library under [`commands/`](https://github.com/TFRS-Admin/tfrs-engineering-playbook/blob/main/commands/README.md) for every phase of the lifecycle.
+4. Self-review against [`RULESET.md`](https://github.com/TFRS-Admin/tfrs-engineering-playbook/blob/main/RULESET.md) before opening a pull request, and check [`SECURITY_STANDARD.md`](https://github.com/TFRS-Admin/tfrs-engineering-playbook/blob/main/SECURITY_STANDARD.md) / [`TESTING_STANDARD.md`](https://github.com/TFRS-Admin/tfrs-engineering-playbook/blob/main/TESTING_STANDARD.md) whenever a change touches external input, auth, or behavior that needs test coverage.
+5. Consult [`SKILLS_STANDARD.md`](https://github.com/TFRS-Admin/tfrs-engineering-playbook/blob/main/SKILLS_STANDARD.md) for the step-by-step execution mechanics of a given task type (code review, planning, implementation, verification, and so on) — this playbook defines *what's required*, [`TFRS-Admin/agent-skills`](https://github.com/TFRS-Admin/agent-skills) defines *how to execute it*; don't re-derive a skill's workflow from scratch when one already exists.
 
 ## Branch Naming
 

@@ -1,7 +1,7 @@
 <!-- Purpose: Production-ready template for documenting a repository's current architecture. -->
 # Repository Architecture Template
 
-Copy this into a new `ARCHITECTURE.md` at the root of any repository adopting this playbook. Keep it current — documentation drift against this file is checked in [`REPO_HEALTH_STANDARD.md`](../REPO_HEALTH_STANDARD.md).
+Copy this into a new `ARCHITECTURE.md` at the root of any repository adopting this playbook. Keep it current — documentation drift against this file is checked during [`commands/repo-health.md`](../commands/repo-health.md).
 
 ---
 
@@ -51,4 +51,4 @@ See [`docs/decision-log/`](../docs/decision-log/README.md) for the full ADR inde
 
 ## Related Documents
 
-[`REPOSITORY_BOOTSTRAP_GUIDE.md`](../REPOSITORY_BOOTSTRAP_GUIDE.md) · [`REPO_HEALTH_STANDARD.md`](../REPO_HEALTH_STANDARD.md) · [`docs/decision-log/README.md`](../docs/decision-log/README.md)
+[`REPOSITORY_BOOTSTRAP_GUIDE.md`](../REPOSITORY_BOOTSTRAP_GUIDE.md) · [`commands/repo-health.md`](../commands/repo-health.md) · [`docs/decision-log/README.md`](../docs/decision-log/README.md)

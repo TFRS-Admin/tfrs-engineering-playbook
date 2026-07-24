@@ -28,10 +28,8 @@ Priority:
 Risk:
 Size:
 Epic:
-Sprint:
 Blocked: No
 QA Required:
-Agent Persona:
 
 ## Acceptance Criteria
 

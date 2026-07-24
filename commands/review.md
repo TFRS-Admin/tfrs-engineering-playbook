@@ -9,21 +9,21 @@ Produce a factual, evidence-backed account of the current state of a system, fea
 Review → Roadmap/Plan → Backlog → Execute → Verify → Ship
 ```
 
-This is distinct from PR review (see [`REVIEW_STANDARD.md`](../REVIEW_STANDARD.md), which is the approval bar for merging a specific diff — see the terminology map in [`AI_ENGINEERING_WORKFLOW.md`](../AI_ENGINEERING_WORKFLOW.md#terminology-map) for why both are called "Review"). This command reviews *existing state*, not a proposed change.
+This is distinct from PR review (see [`RULESET.md`](../RULESET.md), the approval bar for merging a specific diff — see the terminology map in [`DECISION_ROUTER.md#terminology-map`](../DECISION_ROUTER.md#terminology-map) for why both are called "Review"). This command reviews *existing state*, not a proposed change.
 
 ## When to Use It
 
 - Before starting work in an unfamiliar area of a repository.
 - Before a major feature or epic, to establish a baseline.
 - When investigating a bug, to separate symptom from root cause before proposing a fix.
-- As the discovery step of [`REPO_HEALTH_STANDARD.md`](../REPO_HEALTH_STANDARD.md).
+- As the discovery step of [`commands/repo-health.md`](./repo-health.md).
 - As the first step of [`REPOSITORY_BOOTSTRAP_GUIDE.md`](../REPOSITORY_BOOTSTRAP_GUIDE.md) when onboarding an existing repository.
 
 ## Required Inputs
 
 - **Scope**: the repository, directory, feature, or symptom to review. State it explicitly — "review the whole repo" is not a scope.
 - **Why now**: what triggered this review (planned feature, incident, scheduled health check).
-- **Related artifacts**: linked issues, prior ADRs ([`docs/decision-log/`](../docs/decision-log/README.md)), prior review findings for the same area.
+- **Related artifacts**: linked work-item files, prior ADRs ([`docs/decision-log/`](../docs/decision-log/README.md)), prior review findings for the same area.
 - **Known constraints**: anything already decided that the review should not re-litigate.
 
 ## Required Skill Consultation
@@ -37,7 +37,7 @@ Not mandatory per [`SKILLS_STANDARD.md#when-consultation-is-mandatory`](../SKILL
 3. Explore the scoped code (search by symbol, by directory, by behavior — use whatever breadth the scope requires; for a scope larger than a few files, fan out multiple independent searches rather than one linear pass).
 4. For each observation, capture: what you found, where (file:line or reproduction steps), why it matters, and severity.
 5. Distinguish **confirmed** findings (you traced the code path or reproduced the behavior) from **suspected** findings (plausible but unverified) — never present a suspicion as a fact.
-6. Do not write or propose a fix in this pass — this is Chesterton's Fence in practice: understand why something is the way it is before deciding whether to change it (see [`REVIEW_STANDARD.md`](../REVIEW_STANDARD.md#complexity--simplification)). If a fix is obvious, note it as a "likely direction" but leave the actual solution design to [`commands/plan.md`](./plan.md).
+6. Do not write or propose a fix in this pass — this is Chesterton's Fence in practice: understand why something is the way it is before deciding whether to change it (see [`RULESET.md`](../RULESET.md) rule 2). If a fix is obvious, note it as a "likely direction" but leave the actual solution design to [`commands/plan.md`](./plan.md).
 7. Rank findings by severity, then write the findings document.
 
 ## Required Outputs

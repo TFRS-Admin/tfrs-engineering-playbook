@@ -32,7 +32,7 @@ Every pull request prepared by Claude should include:
 - Testing or validation notes
 - Any known follow-up items or risks
 
-Reference [`REVIEW_STANDARD.md`](https://github.com/TFRS-Admin/tfrs-engineering-playbook/blob/main/REVIEW_STANDARD.md) to ensure the PR clears the TFRS review bar.
+Reference [`RULESET.md`](https://github.com/TFRS-Admin/tfrs-engineering-playbook/blob/main/RULESET.md) to ensure the PR clears the TFRS review bar.
 
 ## When to Ask vs. When to Proceed
 
@@ -41,11 +41,11 @@ Reference [`REVIEW_STANDARD.md`](https://github.com/TFRS-Admin/tfrs-engineering-
 
 ## Memory and Cross-References
 
-Use [`AGENTS.md`](./AGENTS.md) as the baseline for code style, naming, and branch rules. Use [`REVIEW_STANDARD.md`](https://github.com/TFRS-Admin/tfrs-engineering-playbook/blob/main/REVIEW_STANDARD.md) as the quality bar before proposing a merge. Use [`AI_AGENT_OPERATING_MODEL.md`](./AI_AGENT_OPERATING_MODEL.md) to determine current work, choose the next issue, and know when to stop — do not rely on chat context alone to answer those questions; GitHub is the source of truth.
+Use [`AGENTS.md`](./AGENTS.md) as the baseline for code style, naming, and branch rules. Use [`RULESET.md`](https://github.com/TFRS-Admin/tfrs-engineering-playbook/blob/main/RULESET.md) as the quality bar before proposing a merge. Use [`AI_AGENT_OPERATING_MODEL.md`](./AI_AGENT_OPERATING_MODEL.md) to determine current work, choose the next work item, and know when to stop — do not rely on chat context alone to answer those questions; the repository's own files are the source of truth.
 
 ## Executing the Lifecycle
 
-Every phase of the lifecycle — Review, Roadmap, Plan, Backlog, Execute, Verify, Ship, and recurring Repo Health — has an executable prompt under [`commands/`](https://github.com/TFRS-Admin/tfrs-engineering-playbook/blob/main/commands/README.md). Run the command that matches the current phase rather than improvising the workflow from these standards alone; the commands encode the required inputs, outputs, and quality gates precisely.
+Every phase of the lifecycle — Review, Roadmap, Plan, Backlog, Execute, Verify, Ship, and on-demand Repo Health — has an executable prompt under [`commands/`](https://github.com/TFRS-Admin/tfrs-engineering-playbook/blob/main/commands/README.md). Run the command that matches the current phase rather than improvising the workflow from these standards alone; the commands encode the required inputs, outputs, and quality gates precisely.
 
 ## Using the Skills Execution Library
 

@@ -1,7 +1,9 @@
-<!-- Purpose: Production-ready template for the standard unit of executable work — a Story or Task issue. -->
-# Engineering Task Template
+<!-- Purpose: Production-ready template for the one work-item shape — feature, bug, chore, or technical debt alike. -->
+# Work Item Template
 
-Copy this into a new GitHub issue when creating a Story/Task from an approved plan (see [`commands/plan.md`](../commands/plan.md) and [`commands/backlog.md`](../commands/backlog.md)). The `## Metadata`, `## Acceptance Criteria`, `## Verification`, and `## Dependencies` sections are required per [`ISSUE_METADATA_STANDARD.md`](../ISSUE_METADATA_STANDARD.md) — this issue body, not a GitHub Project, is authoritative for this issue's state.
+Copy this into a new file at `docs/engineering/backlog/<EPIC>-<NN>-<kebab-slug>.md` when creating a work item from an approved plan (see [`commands/plan.md`](../commands/plan.md) and [`commands/backlog.md`](../commands/backlog.md)). The `## Metadata`, `## Acceptance Criteria`, `## Verification`, and `## Dependencies` sections are required per [`WORK_ITEM_METADATA_STANDARD.md`](../WORK_ITEM_METADATA_STANDARD.md) — this file, not a GitHub Issue, is authoritative for this item's state.
+
+This is the one template for every kind of work item. A technical-debt item discovered during review or a health-checklist pass uses the same shape — lead the title with `Tech Debt:` (or `Feature:`/`Bug:`/`Chore:`) so the kind of work is legible at a glance; there is no separate `Type` field.
 
 ---
 
@@ -11,11 +13,11 @@ Copy this into a new GitHub issue when creating a Story/Task from an approved pl
 
 ## Origin
 
-Plan derived from review finding #1 on `tfrs-website`, part of Epic #142 ("Harden tfrs-website form and content pipeline").
+Plan derived from review finding #1 on `tfrs-website`, part of the "Harden tfrs-website form and content pipeline" Epic in `docs/engineering/ROADMAP.md`.
 
 ## Problem Statement
 
-The contact form endpoint accepts submissions with missing or malformed required fields because validation is enforced only in the client.
+The contact form endpoint accepts submissions with missing or malformed required fields because validation is enforced only in the client. (For a technical-debt item, this section is where the current state and why it matters go — e.g. "four dependencies are two or more major versions behind, one of them end-of-life with no further security patches.")
 
 ## Implementation Notes
 
@@ -32,11 +34,9 @@ Status: Ready
 Priority: P1
 Risk: Medium
 Size: S
-Epic: #142
-Sprint: Q3 Sprint 1
+Epic: Harden tfrs-website form and content pipeline
 Blocked: No
 QA Required: Yes
-Agent Persona: Implementer
 
 ## Acceptance Criteria
 
@@ -60,4 +60,4 @@ None.
 
 ## Related Documents
 
-[`PLANNING_STANDARD.md`](../PLANNING_STANDARD.md) · [`EXECUTION_STANDARD.md`](../EXECUTION_STANDARD.md) · [`ISSUE_METADATA_STANDARD.md`](../ISSUE_METADATA_STANDARD.md) · [`commands/execute.md`](../commands/execute.md)
+[`WORK_ITEM_METADATA_STANDARD.md`](../WORK_ITEM_METADATA_STANDARD.md) · [`RULESET.md`](../RULESET.md) · [`commands/execute.md`](../commands/execute.md)
