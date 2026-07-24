@@ -18,7 +18,7 @@ Date: 2026-07-09
 
 ## Decision
 
-Introduce a server-side validation layer that reuses the existing client-side rule definitions (`src/lib/contactFormRules.js`) rather than maintaining a second, separate rule set. The API rejects invalid submissions with a 400 and field-level errors before they reach storage.
+Introduce a server-side validation layer that reuses the existing client-side rule definitions (`src/lib/contactFormRules.ts`) rather than maintaining a second, separate rule set. The API rejects invalid submissions with a 400 and field-level errors before they reach storage.
 
 ## Alternatives Considered
 

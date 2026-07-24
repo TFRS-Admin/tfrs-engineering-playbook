@@ -5,7 +5,7 @@
 
 - [`new-repo-checklist.md`](./new-repo-checklist.md): use when creating a brand-new TFRS repository.
 - [`repository-architecture-template.md`](./repository-architecture-template.md): use to seed the required root `ARCHITECTURE.md`; keep it current against [`../REPO_HEALTH_STANDARD.md`](../REPO_HEALTH_STANDARD.md).
-- [`github-actions-template.yml`](./github-actions-template.yml): use when scaffolding a JavaScript repository workflow with lint, test, and build jobs.
+- [`github-actions-template.yml`](./github-actions-template.yml): use when scaffolding a TypeScript repository workflow with typecheck, lint, test, and build jobs.
 - [`project-board-template.md`](./project-board-template.md): **optional.** Use only if a repository's humans want a visual GitHub Project dashboard — see [`../GITHUB_PROJECT_STANDARD.md`](../GITHUB_PROJECT_STANDARD.md). Never required for a repository to be operational.
 
 ## Repository Engineering Docs

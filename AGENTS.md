@@ -7,8 +7,8 @@ AI coding agents operating in TFRS repositories are authorized to plan, implemen
 
 ## File Naming Conventions
 
-- Prefer **JavaScript-first** repository layouts and documentation examples.
-- Use **kebab-case** for general files and folders such as `order-service.js` or `project-board-template.md`.
+- Prefer **TypeScript-first** repository layouts and documentation examples.
+- Use **kebab-case** for general files and folders such as `order-service.ts` or `project-board-template.md`.
 - Use **PascalCase** for React components, pages, and other framework conventions that expect component naming.
 - Keep filenames descriptive enough that Copilot and Claude can infer intent from path and name alone.
 
@@ -19,6 +19,13 @@ AI coding agents operating in TFRS repositories are authorized to plan, implemen
 - Never introduce `var`; use `const` by default and `let` only when reassignment is required.
 - Keep functions focused, name side effects clearly, and default to early returns for guard clauses.
 - Reuse repository-standard tooling and patterns before introducing new dependencies.
+
+## TypeScript Rules
+
+- **Strict mode on.** Every new TypeScript project sets `"strict": true` in `tsconfig.json` — don't opt out of it to make a type error go away.
+- **No `any` without a documented reason.** A bare `any` needs an inline comment explaining why a real type isn't available yet.
+- **Prefer `unknown` over `any` at boundaries.** Anything crossing a trust boundary (an API response, an env var, `JSON.parse`, user input) types as `unknown` and is narrowed before use, not widened to `any`.
+- **Type external input, don't assert it.** No `as SomeType` on data you don't control — validate or parse it into that type instead (see the boundary-validation guidance in `docs/code-patterns/README.md`).
 
 ## Commit Message Format
 

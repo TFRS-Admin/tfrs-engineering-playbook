@@ -19,8 +19,8 @@ The contact form endpoint accepts submissions with missing or malformed required
 
 ## Implementation Notes
 
-- Reuse the existing client-side validation rules (`src/lib/contactFormRules.js`) as the source of truth for server-side rules rather than redefining them.
-- Validation errors should use the same field-level error shape already used elsewhere in the API (see `src/api/errors.js`).
+- Reuse the existing client-side validation rules (`src/lib/contactFormRules.ts`) as the source of truth for server-side rules rather than redefining them.
+- Validation errors should use the same field-level error shape already used elsewhere in the API (see `src/api/errors.ts`).
 
 ## Out of Scope
 

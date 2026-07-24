@@ -5,7 +5,7 @@
 
 [`commands/verify.md`](./commands/verify.md) requires evidence, not assertion, that acceptance criteria are met. That evidence has to come from somewhere — this document is the testing discipline that produces it. Previously TFRS's only testing guidance was a single "Tests" bullet in [`REVIEW_STANDARD.md`](./REVIEW_STANDARD.md); that bullet now points here for the full standard.
 
-This standard synthesizes practices adopted from the `agent-skills` engineering methodology (see [`docs/agent-skills-main.zip`](./docs/agent-skills-main.zip), credited in [`README.md`](./README.md#engineering-methodology-lineage)), adapted to TFRS's JavaScript-heavy delivery model.
+This standard synthesizes practices adopted from the `agent-skills` engineering methodology (see [`docs/agent-skills-main.zip`](./docs/agent-skills-main.zip), credited in [`README.md`](./README.md#engineering-methodology-lineage)), adapted to TFRS's TypeScript-heavy delivery model.
 
 ## Red-Green-Refactor
 

@@ -18,7 +18,7 @@ Browser
   ↓
 Static pages (build-time rendered) ──▶ CDN
   ↓
-Contact form POST ──▶ API layer (src/api/) ──▶ Validation (src/lib/contactFormRules.js)
+Contact form POST ──▶ API layer (src/api/) ──▶ Validation (src/lib/contactFormRules.ts)
                                              ──▶ Storage
 ```
 
@@ -34,7 +34,7 @@ Contact form POST ──▶ API layer (src/api/) ──▶ Validation (src/lib/c
 ## External Dependencies
 
 - CDN for static asset delivery.
-- No external database as of this writing; contact form submissions are stored via the API layer's storage adapter (see `src/api/storage.js`).
+- No external database as of this writing; contact form submissions are stored via the API layer's storage adapter (see `src/api/storage.ts`).
 
 ## Architectural Decisions in Effect
 
@@ -42,7 +42,7 @@ See [`docs/decision-log/`](../docs/decision-log/README.md) for the full ADR inde
 
 ## Known Constraints
 
-- The shared validation module (`src/lib/contactFormRules.js`) must remain framework-agnostic since both the browser bundle and the server import it directly.
+- The shared validation module (`src/lib/contactFormRules.ts`) must remain framework-agnostic since both the browser bundle and the server import it directly.
 - Page metadata generation depends on the shared source introduced in Epic #142 — do not reintroduce per-page hand-maintained metadata.
 
 ## Last Reviewed

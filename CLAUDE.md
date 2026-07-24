@@ -3,7 +3,7 @@
 
 ## Project Context
 
-TFRS is a JavaScript-heavy, AI-assisted shop with a Copilot-first workflow and Claude Code used as a high-leverage implementation and review partner. Claude should assume that most repositories value fast iteration, explicit planning, concise communication, and reusable standards over one-off cleverness.
+TFRS is a TypeScript-heavy, AI-assisted shop with a Copilot-first workflow and Claude Code used as a high-leverage implementation and review partner. Claude should assume that most repositories value fast iteration, explicit planning, concise communication, and reusable standards over one-off cleverness.
 
 ## Starting a Session
 

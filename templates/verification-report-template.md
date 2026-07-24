@@ -16,7 +16,7 @@ Attach this to the PR (and to the issue when `QA Required` is `Yes`) when runnin
 | # | Criterion | Result | Evidence |
 | --- | --- | --- | --- |
 | 1 | Given a POST with a missing required field, then a 400 with field-level error is returned | PASS | `curl -X POST https://staging.tfrs.example/api/contact -d '{"email":""}'` → `400 {"errors":{"email":"required"}}` |
-| 2 | Given a POST with all required fields valid, then a 200 is returned and stored | PASS | `npm test -- contact-form.integration.test.js` → 6 passed, 0 failed; manual POST confirmed row in storage adapter's dev log |
+| 2 | Given a POST with all required fields valid, then a 200 is returned and stored | PASS | `npm test -- contact-form.integration.test.ts` → 6 passed, 0 failed; manual POST confirmed row in storage adapter's dev log |
 
 ### Gaps
 
@@ -28,7 +28,7 @@ None. Both criteria had automated coverage plus a manual spot-check against the 
 
 ### Scope Check
 
-No behavior outside the stated acceptance criteria was introduced; diff is limited to `src/api/contact.js`, `src/lib/contactFormRules.js` (import only, no changes), and the new integration test file.
+No behavior outside the stated acceptance criteria was introduced; diff is limited to `src/api/contact.ts`, `src/lib/contactFormRules.ts` (import only, no changes), and the new integration test file.
 
 ## Related Documents
 
