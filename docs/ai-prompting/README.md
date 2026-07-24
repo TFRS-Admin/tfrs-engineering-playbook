@@ -3,12 +3,12 @@
 
 ## Planning Prompts
 
-### Plan a Scoped Issue
+### Plan a Scoped Work Item
 
 **When to use:** before implementation starts.
 
 ```text
-Create a TFRS-style execution plan for this issue.
+Create a TFRS-style execution plan for this work item.
 Goal: {{goal}}
 Constraints: {{constraints}}
 Acceptance criteria: {{acceptance_criteria}}
@@ -19,13 +19,13 @@ Return a checklist, risks, open questions, and suggested validation steps.
 
 ### Implement a Minimal Safe Change
 
-**When to use:** when an issue is ready for build.
+**When to use:** when a work item is ready for build.
 
 ```text
 Implement the smallest safe change for this repository.
 Task: {{task}}
 Files to inspect first: {{files}}
-Standards to follow: AGENTS.md, CLAUDE.md, EXECUTION_STANDARD.md, REVIEW_STANDARD.md
+Standards to follow: AGENTS.md, CLAUDE.md, RULESET.md
 Validation to run: {{validation}}
 ```
 
@@ -57,4 +57,4 @@ Logs or errors: {{logs}}
 Return likely causes, the next best check, and the smallest safe fix.
 ```
 
-For the full triage sequence this prompt is a shortcut for, see [`EXECUTION_STANDARD.md`](../../EXECUTION_STANDARD.md#debugging-error-recovery-and-blockers).
+For the full triage sequence this prompt is a shortcut for, see [`RULESET.md`](../../RULESET.md) rule 7.

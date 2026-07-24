@@ -29,21 +29,16 @@ jobs:
             README.md
             AGENTS.md
             CLAUDE.md
-            AI_ENGINEERING_WORKFLOW.md
             AI_AGENT_OPERATING_MODEL.md
             DECISION_ROUTER.md
             FOUNDER_WORKFLOW.md
-            REVIEW_STANDARD.md
-            PLANNING_STANDARD.md
-            EXECUTION_STANDARD.md
+            RULESET.md
             BACKLOG_STANDARD.md
-            ISSUE_METADATA_STANDARD.md
-            GITHUB_PROJECT_STANDARD.md
+            WORK_ITEM_METADATA_STANDARD.md
             SECURITY_STANDARD.md
             TESTING_STANDARD.md
             SKILLS_STANDARD.md
             REPOSITORY_BOOTSTRAP_GUIDE.md
-            REPO_HEALTH_STANDARD.md
             VERSION.md
             docs/ai-prompting/README.md
             docs/code-patterns/README.md
@@ -51,19 +46,12 @@ jobs:
             docs/agent-skills-integration.md
             templates/README.md
             templates/new-repo-checklist.md
-            templates/project-board-template.md
             templates/github-actions-template.yml
-            templates/epic-template.md
-            templates/technical-debt-template.md
             templates/engineering-task-template.md
             templates/adr-template.md
             templates/repository-architecture-template.md
             templates/engineering-roadmap-template.md
-            templates/engineering-backlog-template.md
-            templates/engineering-current-sprint-template.md
-            templates/engineering-repo-health-template.md
             templates/verification-report-template.md
-            templates/sprint-review-template.md
             templates/backlog-initialization-template.md
             commands/README.md
             commands/setup-from-playbook.md

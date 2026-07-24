@@ -1,42 +1,42 @@
-<!-- Purpose: Executable procedure for turning an approved finding, roadmap item, or issue into an implementation strategy. -->
+<!-- Purpose: Executable procedure for turning an approved finding, roadmap item, or raw request into an implementation strategy. -->
 # Command: Plan
 
 ## Purpose
 
-Turn an approved review finding, roadmap Epic, or raw issue into a concrete implementation strategy: broken into sized tasks, with testable acceptance criteria, risks, and a PR breakdown. Planning produces the strategy; it does not produce code and it does not produce GitHub issues — that's [`commands/backlog.md`](./backlog.md).
+Turn an approved review finding, roadmap Epic, or raw request into a concrete implementation strategy: broken into sized tasks, with testable acceptance criteria, risks, and a PR breakdown. Planning produces the strategy; it does not produce code and it does not produce work-item files — that's [`commands/backlog.md`](./backlog.md).
 
 ## When to Use It
 
 - Immediately after a finding is approved for action (from [`commands/review.md`](./review.md)).
 - When breaking a roadmap Epic (from [`commands/roadmap.md`](./roadmap.md)) into its component stories/tasks.
-- Any time an issue is created directly without having gone through review, and needs a strategy before it can enter the backlog.
+- Any time work is proposed directly without having gone through review, and needs a strategy before it can enter the backlog.
 
 ## Required Inputs
 
-- The finding, Epic, or issue being planned.
+- The finding, Epic, or request being planned.
 - A draft or existing acceptance criteria if one exists.
 - Relevant constraints (deadlines, architecture limits, prior ADRs).
 - Related findings that should inform sequencing or risk.
 
 ## Required Skill Consultation
 
-Mandatory per [`SKILLS_STANDARD.md#when-consultation-is-mandatory`](../SKILLS_STANDARD.md#when-consultation-is-mandatory): consult [`skills/planning-and-task-breakdown`](https://github.com/TFRS-Admin/agent-skills/tree/main/skills/planning-and-task-breakdown) for task-decomposition mechanics, and [`skills/spec-driven-development`](https://github.com/TFRS-Admin/agent-skills/tree/main/skills/spec-driven-development) when [`PLANNING_STANDARD.md#when-a-full-spec-is-required`](../PLANNING_STANDARD.md#when-a-full-spec-is-required) triggers a fuller plan.
+Mandatory per [`SKILLS_STANDARD.md#when-consultation-is-mandatory`](../SKILLS_STANDARD.md#when-consultation-is-mandatory): consult [`skills/planning-and-task-breakdown`](https://github.com/TFRS-Admin/agent-skills/tree/main/skills/planning-and-task-breakdown) for task-decomposition mechanics, and [`skills/spec-driven-development`](https://github.com/TFRS-Admin/agent-skills/tree/main/skills/spec-driven-development) when [`RULESET.md`](../RULESET.md) rule 2 calls for a fuller plan.
 
 ## Workflow
 
-1. Read [`PLANNING_STANDARD.md`](../PLANNING_STANDARD.md) for issue anatomy, sizing, and acceptance criteria format.
+1. Read [`RULESET.md`](../RULESET.md) rule 2 and [`WORK_ITEM_METADATA_STANDARD.md`](../WORK_ITEM_METADATA_STANDARD.md) for sizing and acceptance-criteria format.
 2. Restate the problem in one sentence — if you cannot, the input isn't ready for planning; send it back to `Review`.
-3. Check whether this work meets any trigger in [`PLANNING_STANDARD.md`](../PLANNING_STANDARD.md#when-a-full-spec-is-required); if so, produce the fuller plan described there (including an explicit `Assumptions:` block) rather than just a task list.
-4. Break the work into stories/tasks, each independently sized `S`/`M`/`L` (split anything that would be `XL`, and split further if it trips any of the finer-grained triggers in [`PLANNING_STANDARD.md`](../PLANNING_STANDARD.md#estimation-approach)).
+3. Check whether this work meets any of the fuller-plan triggers in [`RULESET.md`](../RULESET.md) rule 2; if so, produce the fuller plan (including an explicit `Assumptions:` block) rather than just a task list.
+4. Break the work into stories/tasks, each independently sized `S`/`M`/`L` (split anything that would be `XL`, and split further if it trips any of the finer-grained triggers in [`WORK_ITEM_METADATA_STANDARD.md#size`](../WORK_ITEM_METADATA_STANDARD.md#size)).
 5. Write acceptance criteria for each task in Given/When/Then form.
-6. Identify risks and unknowns explicitly — do not fold them silently into the estimate. For anything `Risk: High` or `Risk: Critical`, note that [`commands/backlog.md`](./backlog.md) will require the Threat Model First step from [`SECURITY_STANDARD.md`](../SECURITY_STANDARD.md).
+6. Identify risks and unknowns explicitly — do not fold them silently into the estimate. For anything `Risk: High` or `Risk: Critical`, note that this work will require the Threat Model First step from [`SECURITY_STANDARD.md`](../SECURITY_STANDARD.md).
 7. Identify dependencies between the tasks you just created, and between this work and anything else in flight.
 8. Propose a PR breakdown: which tasks can ship as independent PRs, and which are tightly coupled and must land together.
 9. Do not begin implementation. The output of this command is a strategy document, not a branch.
 
 ## Required Outputs
 
-- A task breakdown (list of stories/tasks with size, acceptance criteria, and dependencies) ready to be handed to [`commands/backlog.md`](./backlog.md) for GitHub issue generation.
+- A task breakdown (list of stories/tasks with size, acceptance criteria, and dependencies) ready to be handed to [`commands/backlog.md`](./backlog.md) for work-item file generation.
 - A risk list.
 - A proposed PR breakdown / sequencing.
 

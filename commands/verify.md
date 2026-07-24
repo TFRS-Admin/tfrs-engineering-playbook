@@ -10,8 +10,8 @@ If you are running inside Claude Code and this repository has the built-in `veri
 ## When to Use It
 
 - After implementation, before opening or marking a PR ready for review (called from [`commands/execute.md`](./execute.md)).
-- During a QA pass on any issue where `QA Required` = `Yes`.
-- As part of a [`REPO_HEALTH_STANDARD.md`](../REPO_HEALTH_STANDARD.md) testing-dimension check.
+- During a QA pass on any work item where `QA Required` = `Yes`.
+- As part of a [`commands/repo-health.md`](./repo-health.md) checklist run.
 
 ## Required Inputs
 
@@ -31,7 +31,7 @@ Mandatory per [`SKILLS_STANDARD.md#when-consultation-is-mandatory`](../SKILLS_ST
 4. Mark each criterion Pass / Fail / Not Verifiable (with reason) — never silently omit a criterion.
 5. If any criterion fails, stop here — do not proceed to [`commands/ship.md`](./ship.md). Return to [`commands/execute.md`](./execute.md) to fix it.
 6. Fill out [`templates/verification-report-template.md`](../templates/verification-report-template.md) with the results.
-7. Attach the report to the PR (and to the issue if `QA Required` = `Yes`).
+7. Attach the report to the PR (and paste the result into the work-item file's `## Verification` section if `QA Required` = `Yes`).
 
 ## Required Outputs
 

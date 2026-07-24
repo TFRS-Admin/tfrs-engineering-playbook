@@ -14,9 +14,9 @@ This is the example-driven companion to [`SKILLS_STANDARD.md`](../SKILLS_STANDAR
 │   and how is work tracked?" │◀────▶│   of task, step by step?"     │
 │                              │      │                                │
 │  Standards, lifecycle,      │      │  Reusable skill workflows,    │
-│  issue Metadata fields,     │      │  quality gates, agent          │
-│  TFRS-specific thresholds   │      │  personas, TFRS-only skills    │
-└──────────────────────────────┘      │  under skills/tfrs/           │
+│  work-item Metadata fields, │      │  quality gates, TFRS-only      │
+│  TFRS-specific thresholds   │      │  skills under skills/tfrs/     │
+└──────────────────────────────┘      └──────────────────────────────┘
               ▲                       └──────────────────────────────┘
               │
               │ overrides both, on conflict
@@ -32,16 +32,16 @@ Before this integration, an agent working in a TFRS repository had TFRS's standa
 
 ## The Workflow, Step by Step
 
-This is the same nine-step sequence defined in [`SKILLS_STANDARD.md#the-skill-consultation-workflow`](../SKILLS_STANDARD.md#the-skill-consultation-workflow), walked through with a concrete example: an agent picking up the `tfrs-website` contact-form-validation task used as the worked example throughout this playbook (see [`REPOSITORY_BOOTSTRAP_GUIDE.md`](../REPOSITORY_BOOTSTRAP_GUIDE.md#worked-example-tfrs-website)).
+This is the same sequence defined in [`SKILLS_STANDARD.md#the-skill-consultation-workflow`](../SKILLS_STANDARD.md#the-skill-consultation-workflow), walked through with a concrete example: an agent picking up a `tfrs-website` contact-form-validation work item.
 
 1. **Read local repository instructions first.** The agent reads `tfrs-website`'s own `CLAUDE.md` and finds nothing that overrides the playbook default for this task — proceed to the playbook.
-2. **Read the TFRS Engineering Playbook.** The task is implementation work on a `Ready` issue, so the agent reads [`EXECUTION_STANDARD.md`](../EXECUTION_STANDARD.md) and the issue's acceptance criteria.
+2. **Read the TFRS Engineering Playbook.** The task is implementation work on a `Ready` work item, so the agent reads [`RULESET.md`](../RULESET.md) and the work item's acceptance criteria.
 3. **Identify the task type.** This is "Implementation."
 4. **Consult the matching skill in `TFRS-Admin/agent-skills`.** Per the [Skill Selection table](../SKILLS_STANDARD.md#skill-selection), that's `skills/incremental-implementation` and `skills/test-driven-development` — the agent reads both `SKILL.md` files for the actual vertical-slice and red-green-refactor mechanics.
 5. **Execute the skill-defined workflow.** The agent implements the server-side validation as a thin vertical slice, writing the test with the implementation per the skill's Red-Green-Refactor cycle.
-6. **Apply repository-specific constraints.** The skill's generic guidance doesn't know about TFRS's 400-line PR cap or its Conventional Commits format — the agent applies [`EXECUTION_STANDARD.md`](../EXECUTION_STANDARD.md)'s specifics on top of the skill's generic mechanics, per the precedence order in `SKILLS_STANDARD.md`.
+6. **Apply repository-specific constraints.** The skill's generic guidance doesn't know about TFRS's Conventional Commits format or its `work-item:` commit trailer — the agent applies [`RULESET.md`](../RULESET.md)'s specifics on top of the skill's generic mechanics, per the precedence order in `SKILLS_STANDARD.md`.
 7. **Verify work.** The agent runs [`commands/verify.md`](../commands/verify.md), producing the evidence artifact per [`TESTING_STANDARD.md`](../TESTING_STANDARD.md) — the skill's own verification checklist informed *how* the tests were written, but the playbook's evidence-artifact requirement is what actually gates the PR.
-8. **Update the issue's `## Metadata` block.** `Status` moves through `In Progress` → `In Review` per [`ISSUE_METADATA_STANDARD.md`](../ISSUE_METADATA_STANDARD.md); this happens regardless of what either repository's generic guidance says, because the repository and its issues are TFRS's source of truth, not a skill's own bookkeeping.
+8. **Update the work item's `## Metadata` block.** `Status` moves through `In Progress` → `In Review` per [`WORK_ITEM_METADATA_STANDARD.md`](../WORK_ITEM_METADATA_STANDARD.md); this happens regardless of what either repository's generic guidance says, because the repository and its work-item files are TFRS's source of truth, not a skill's own bookkeeping.
 9. **Stop.** The agent opens the PR and stops — per [`AI_AGENT_OPERATING_MODEL.md`](../AI_AGENT_OPERATING_MODEL.md#4-when-to-stop) — rather than continuing past the acceptance criteria because the skill's workflow "felt" incomplete.
 
 ## Referencing the Fork Today
@@ -56,5 +56,5 @@ Either way, never vendor a copy of the fork's `skills/` directory into a downstr
 ## Related Documents
 
 - [`SKILLS_STANDARD.md`](../SKILLS_STANDARD.md) — the canonical standard this document walks through
-- [`AI_AGENT_OPERATING_MODEL.md`](../AI_AGENT_OPERATING_MODEL.md) — the broader per-issue operating loop this workflow nests inside
-- [`REPOSITORY_BOOTSTRAP_GUIDE.md`](../REPOSITORY_BOOTSTRAP_GUIDE.md) — the `tfrs-website` worked example referenced above, in full
+- [`AI_AGENT_OPERATING_MODEL.md`](../AI_AGENT_OPERATING_MODEL.md) — the broader per-work-item operating loop this workflow nests inside
+- [`REPOSITORY_BOOTSTRAP_GUIDE.md`](../REPOSITORY_BOOTSTRAP_GUIDE.md) — a fuller worked example in the same shape

@@ -19,9 +19,9 @@ Ask the agent to "review" the repository (or a specific part of it). This is a r
 
 ## I want an agent to start coding. What do I do?
 
-Say what you want built or fixed. If it's already a tracked, ready piece of work (an existing issue), just say "implement issue #N" or "implement the next ready thing." If it's brand new, the agent will first make sure it's properly planned and tracked in GitHub before writing any code — **this is not optional, and you shouldn't ask the agent to skip it**, even for something that looks small. A "quick fix" that skips planning is how small problems become untracked, unverified changes nobody can account for later.
+Say what you want built or fixed. If it's already a tracked, ready piece of work (an existing work item), just say "implement it" or "implement the next ready thing." If it's brand new, the agent will first make sure it's properly planned and tracked as a work-item file before writing any code — **this is not optional, and you shouldn't ask the agent to skip it**, even for something that looks small. A "quick fix" that skips planning is how small problems become untracked, unverified changes nobody can account for later.
 
-**What you should expect back:** confirmation of exactly what's being built, a link to the tracked issue, and — once done — a pull request with evidence that it works (see "what to ask for" below).
+**What you should expect back:** confirmation of exactly what's being built, a link to the tracked work-item file, and — once done — a pull request with evidence that it works (see "what to ask for" below).
 
 ## I got a pull request. How do I decide whether to merge it?
 
@@ -41,16 +41,16 @@ You don't have to know the difference — say what you want in plain words and t
 | --- | --- |
 | "What's going on with X?" / "Look into X" | **Review** — understand, don't change anything yet |
 | "I want to build X" | **Plan** — turn the idea into a scoped, trackable piece of work |
-| "Build it" / "implement issue #N" | **Execute** — write the code, but only once it's properly planned and tracked |
+| "Build it" / "implement it" | **Execute** — write the code, but only once it's properly planned and tracked |
 | "Does it actually work?" | **Verify** — prove it, with evidence, not just an assertion |
 | "Ship it" / "Merge it" | **Ship** — the last step, and only after review and verification both passed |
 
 ## What should I never skip?
 
 - **Never skip verification.** "It's a small change" is not evidence that it works.
-- **Never let the agent implement something that isn't tracked as a real, planned piece of work** — even if it feels faster. A change with no tracked issue behind it is a change nobody can account for six months from now.
-- **Never take "it's done" at face value without a link** — to the pull request, the issue, or the verification evidence. If you can't click through to it, it isn't confirmed.
-- **Never assume a repository is fully set up just because it's a TFRS repository.** Some are, some aren't — see [`REPOSITORY_BOOTSTRAP_GUIDE.md`](./REPOSITORY_BOOTSTRAP_GUIDE.md#adoption-states) if you want to know which.
+- **Never let the agent implement something that isn't tracked as a real, planned piece of work** — even if it feels faster. A change with no tracked work-item file behind it is a change nobody can account for six months from now.
+- **Never take "it's done" at face value without a link** — to the pull request, the work-item file, or the verification evidence. If you can't click through to it, it isn't confirmed.
+- **Never assume a repository is fully set up just because it's a TFRS repository.** Some are, some aren't — see [`REPOSITORY_BOOTSTRAP_GUIDE.md`](./REPOSITORY_BOOTSTRAP_GUIDE.md) if you want to know which.
 
 ## What should I ask the agent to show me before I approve anything?
 

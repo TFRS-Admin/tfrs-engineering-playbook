@@ -22,27 +22,27 @@ None of these three repositories restates another's content. This playbook does 
 **Repository-local guidance always wins.** When guidance conflicts, resolve in this order:
 
 1. **The downstream repository's own local instructions** (its `CLAUDE.md`, `AGENTS.md`, or explicit maintainer direction) — always wins. A repository that documents a stricter or different local rule is exercising a decision this playbook already defers to (see [`AGENTS.md`](./AGENTS.md#agent-identity--scope): "treat this playbook as the default operating contract *unless a repository documents a stricter local rule*").
-2. **This playbook's standards** — win over the skills fork's generic guidance. If a skill in `TFRS-Admin/agent-skills` suggests a 100-line PR target and `EXECUTION_STANDARD.md` says the hard cap is 400, TFRS's cap governs; if a skill's generic quality bar conflicts with a TFRS-specific field or threshold, the TFRS-specific one wins because it accounts for context the generic skill can't know.
+2. **This playbook's standards** — win over the skills fork's generic guidance. If a skill's generic quality bar conflicts with a TFRS-specific field, threshold, or rule in [`RULESET.md`](./RULESET.md), the TFRS-specific one wins because it accounts for context the generic skill can't know.
 3. **`TFRS-Admin/agent-skills`** — fills in execution detail this playbook doesn't (and shouldn't) specify, wherever the above two don't already say something more specific.
 
 An agent that notices a real conflict (not just a difference in detail level) should surface it rather than silently picking a side — per [`CLAUDE.md`](./CLAUDE.md#when-to-ask-vs-when-to-proceed), ambiguity that would change scope or standards is an "ask," not a "proceed."
 
 ## When Consultation Is Mandatory
 
-Skill consultation is **mandatory** before running any of: `commands/plan.md`, `commands/execute.md`, `commands/verify.md`, `REVIEW_STANDARD.md`'s PR review, or `commands/repo-health.md`'s per-dimension assessment — i.e., anything that plans, implements, verifies, or reviews. It is **not required** for purely informational requests (answering a question, reading code to explain it) or for `commands/review.md`'s discovery pass, which produces findings rather than executing a skill-shaped task. When in doubt, treat consultation as mandatory — reading one `SKILL.md` is cheap; skipping it and re-deriving generic execution mechanics from scratch is the failure mode this document exists to prevent.
+Skill consultation is **mandatory** before running any of: `commands/plan.md`, `commands/execute.md`, `commands/verify.md`, a self-review against [`RULESET.md`](./RULESET.md) before shipping, or `commands/repo-health.md`'s checklist run — i.e., anything that plans, implements, verifies, or reviews. It is **not required** for purely informational requests (answering a question, reading code to explain it) or for `commands/review.md`'s discovery pass, which produces findings rather than executing a skill-shaped task. When in doubt, treat consultation as mandatory — reading one `SKILL.md` is cheap; skipping it and re-deriving generic execution mechanics from scratch is the failure mode this document exists to prevent.
 
 ## The Skill-Consultation Workflow
 
 This is the step-by-step procedure an agent follows when using both repositories together. It runs *inside* the broader operating loop already defined in [`AI_AGENT_OPERATING_MODEL.md`](./AI_AGENT_OPERATING_MODEL.md#summary-loop) — specifically, it's the detail behind that loop's "Implement within acceptance criteria → Verify with evidence" steps. The operating model doesn't restate this; this document doesn't restate the operating model's board/issue-selection logic.
 
 1. **Read local repository instructions first** — the downstream repo's own `CLAUDE.md`/`AGENTS.md` and any README context. Per the precedence rule above, this can override everything below.
-2. **Read the TFRS Engineering Playbook** — this repository's standards for the task at hand (e.g. `EXECUTION_STANDARD.md` for implementation, `SECURITY_STANDARD.md` for anything touching external input).
+2. **Read the TFRS Engineering Playbook** — this repository's standards for the task at hand (e.g. `RULESET.md` for implementation, `SECURITY_STANDARD.md` for anything touching external input).
 3. **Identify the task type** — review, planning, specification, implementation, verification, repository health, or backlog/project creation (see the Skill Selection table below).
 4. **Consult the matching skill in [`TFRS-Admin/agent-skills`](https://github.com/TFRS-Admin/agent-skills)** — read the relevant `SKILL.md` for the step-by-step execution workflow, its quality gates, and its anti-rationalization table.
 5. **Execute the skill-defined workflow** — follow it as written; don't partially apply a skill and call it done.
 6. **Apply repository-specific constraints** — reconcile the skill's generic workflow with this playbook's TFRS-specific thresholds and the downstream repo's local rules, per the precedence order above.
 7. **Verify work** — per [`commands/verify.md`](./commands/verify.md) and [`TESTING_STANDARD.md`](./TESTING_STANDARD.md); a skill's own verification checklist is evidence, not a substitute for TFRS's evidence-artifact requirement.
-8. **Update the issue's `## Metadata` block and repository engineering docs** — per [`ISSUE_METADATA_STANDARD.md`](./ISSUE_METADATA_STANDARD.md) and [`AI_AGENT_OPERATING_MODEL.md`](./AI_AGENT_OPERATING_MODEL.md#5-how-to-update-state). This is never optional and never happens only in the skills fork's own terms — the repository and its issues, per this playbook, are still the source of truth.
+8. **Update the work item's `## Metadata` block and repository engineering docs** — per [`WORK_ITEM_METADATA_STANDARD.md`](./WORK_ITEM_METADATA_STANDARD.md) and [`AI_AGENT_OPERATING_MODEL.md`](./AI_AGENT_OPERATING_MODEL.md#5-how-to-update-state). This is never optional and never happens only in the skills fork's own terms — the repository and its work-item files, per this playbook, are still the source of truth.
 9. **Stop** — per [`AI_AGENT_OPERATING_MODEL.md`](./AI_AGENT_OPERATING_MODEL.md#4-when-to-stop). Finishing a skill's workflow is not, by itself, a reason to keep going past the issue's acceptance criteria.
 
 ## Skill Selection
@@ -51,15 +51,15 @@ Use this table to go from "what kind of task is this" to "which skill do I consu
 
 | Task type | Consult this skill in `TFRS-Admin/agent-skills` | TFRS standard that still governs |
 | --- | --- | --- |
-| Code review | [`skills/code-review-and-quality`](https://github.com/TFRS-Admin/agent-skills/tree/main/skills/code-review-and-quality) | [`REVIEW_STANDARD.md`](./REVIEW_STANDARD.md) |
-| Planning | [`skills/planning-and-task-breakdown`](https://github.com/TFRS-Admin/agent-skills/tree/main/skills/planning-and-task-breakdown) | [`PLANNING_STANDARD.md`](./PLANNING_STANDARD.md), [`commands/plan.md`](./commands/plan.md) |
-| Specification | [`skills/spec-driven-development`](https://github.com/TFRS-Admin/agent-skills/tree/main/skills/spec-driven-development) | [`PLANNING_STANDARD.md#when-a-full-spec-is-required`](./PLANNING_STANDARD.md#when-a-full-spec-is-required) |
-| Implementation | [`skills/incremental-implementation`](https://github.com/TFRS-Admin/agent-skills/tree/main/skills/incremental-implementation) and [`skills/test-driven-development`](https://github.com/TFRS-Admin/agent-skills/tree/main/skills/test-driven-development) | [`EXECUTION_STANDARD.md`](./EXECUTION_STANDARD.md), [`commands/execute.md`](./commands/execute.md) |
+| Code review | [`skills/code-review-and-quality`](https://github.com/TFRS-Admin/agent-skills/tree/main/skills/code-review-and-quality) | [`RULESET.md`](./RULESET.md) |
+| Planning | [`skills/planning-and-task-breakdown`](https://github.com/TFRS-Admin/agent-skills/tree/main/skills/planning-and-task-breakdown) | [`RULESET.md`](./RULESET.md), [`WORK_ITEM_METADATA_STANDARD.md`](./WORK_ITEM_METADATA_STANDARD.md), [`commands/plan.md`](./commands/plan.md) |
+| Specification | [`skills/spec-driven-development`](https://github.com/TFRS-Admin/agent-skills/tree/main/skills/spec-driven-development) | [`RULESET.md`](./RULESET.md) rule 2 (when a fuller plan is warranted) |
+| Implementation | [`skills/incremental-implementation`](https://github.com/TFRS-Admin/agent-skills/tree/main/skills/incremental-implementation) and [`skills/test-driven-development`](https://github.com/TFRS-Admin/agent-skills/tree/main/skills/test-driven-development) | [`RULESET.md`](./RULESET.md), [`commands/execute.md`](./commands/execute.md) |
 | Verification | [`skills/test-driven-development`](https://github.com/TFRS-Admin/agent-skills/tree/main/skills/test-driven-development) and [`skills/debugging-and-error-recovery`](https://github.com/TFRS-Admin/agent-skills/tree/main/skills/debugging-and-error-recovery) | [`TESTING_STANDARD.md`](./TESTING_STANDARD.md), [`commands/verify.md`](./commands/verify.md) |
-| Repository health | `skills/tfrs/repo-health` *(not yet added to the fork — see Fork Management below)* | Follow [`REPO_HEALTH_STANDARD.md`](./REPO_HEALTH_STANDARD.md) and [`commands/repo-health.md`](./commands/repo-health.md) directly until that skill exists |
-| GitHub backlog/project creation | `skills/tfrs/backlog-initialization` or `skills/tfrs/github-project-management` *(not yet added to the fork)* | Follow [`BACKLOG_STANDARD.md`](./BACKLOG_STANDARD.md) and [`commands/backlog.md`](./commands/backlog.md) directly until a TFRS-specific skill exists |
+| Repository health | `skills/tfrs/repo-health` *(not yet added to the fork — see Fork Management below)* | Follow [`commands/repo-health.md`](./commands/repo-health.md) directly until that skill exists — there is no separate standard behind it |
+| Backlog / work-item creation | `skills/tfrs/backlog-initialization` *(not yet added to the fork)* | Follow [`BACKLOG_STANDARD.md`](./BACKLOG_STANDARD.md) and [`commands/backlog.md`](./commands/backlog.md) directly until a TFRS-specific skill exists |
 
-The last two rows are the concrete case of a general rule: **a TFRS-specific skill in the fork wins when one exists; otherwise, fall back to this playbook's own standard and command directly.** Never invent a generic-skill substitute for TFRS-specific process (backlog conversion, the issue Metadata-block conventions) that has no upstream equivalent — those concepts don't exist in the reference methodology because it isn't built around a repository-centered execution model with structured issue Metadata the way TFRS is (see the [Terminology Map](./AI_ENGINEERING_WORKFLOW.md#terminology-map)).
+The last two rows are the concrete case of a general rule: **a TFRS-specific skill in the fork wins when one exists; otherwise, fall back to this playbook's own standard and command directly.** Never invent a generic-skill substitute for TFRS-specific process (backlog conversion, the work-item Metadata-block conventions) that has no upstream equivalent — those concepts don't exist in the reference methodology because it isn't built around a repository-centered execution model with structured work-item Metadata the way TFRS is (see the [Terminology Map](./DECISION_ROUTER.md#terminology-map)).
 
 ## Fork Management
 
@@ -90,4 +90,4 @@ TFRS-specific skills live under `skills/tfrs/` — never mixed into the upstream
 - [`docs/agent-skills-integration.md`](./docs/agent-skills-integration.md) — the walked-through version of this standard with a worked example
 - [`README.md`](./README.md#engineering-methodology-lineage) — the one-time methodology synthesis, a distinct relationship from the ongoing one this document defines
 - [`AI_AGENT_OPERATING_MODEL.md`](./AI_AGENT_OPERATING_MODEL.md) — the broader operating loop this document's workflow nests inside
-- [`AI_ENGINEERING_WORKFLOW.md`](./AI_ENGINEERING_WORKFLOW.md#terminology-map) — where TFRS and the reference methodology use the same words differently
+- [`DECISION_ROUTER.md`](./DECISION_ROUTER.md#terminology-map) — where TFRS and the reference methodology use the same words differently

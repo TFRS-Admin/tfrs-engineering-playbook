@@ -1,14 +1,14 @@
 <!-- Purpose: Production-ready template for the evidence artifact produced by commands/verify.md. -->
 # Verification Report Template
 
-Attach this to the PR (and to the issue when `QA Required` is `Yes`) when running [`commands/verify.md`](../commands/verify.md).
+Attach this to the PR (and paste into the work item's `## Verification` section when `QA Required` is `Yes`) when running [`commands/verify.md`](../commands/verify.md).
 
 ---
 
-## Verification Report: Add server-side contact form validation (#143)
+## Verification Report: docs/engineering/backlog/FORM-01-add-server-side-contact-form-validation.md
 
 **PR:** #201
-**Verified by:** Claude Code (Verifier persona)
+**Verified by:** Claude Code
 **Date:** 2026-07-09
 
 ### Acceptance Criteria Results

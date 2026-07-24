@@ -8,23 +8,23 @@ These are executable prompts, not general documentation. Each one is written so 
 ```text
 review → roadmap → plan → backlog → execute → verify → ship
                                                   ↑
-                                          repo-health (recurring, cross-cutting)
+                                          repo-health (on demand)
 ```
 
 ## Lifecycle Commands
 
 - [`review.md`](./review.md): assess current state and produce findings, before planning begins.
-- [`roadmap.md`](./roadmap.md): sequence findings and business priorities into Epics.
+- [`roadmap.md`](./roadmap.md): sequence findings and priorities into Epics (sections in `docs/engineering/ROADMAP.md`).
 - [`plan.md`](./plan.md): turn an approved finding/Epic into a sized implementation strategy.
-- [`backlog.md`](./backlog.md): convert a plan into Epics, Issues, and repository engineering documentation, with execution order set — the executable version of [`../BACKLOG_STANDARD.md`](../BACKLOG_STANDARD.md). No GitHub Project is required.
-- [`execute.md`](./execute.md): implement a single `Ready` issue.
+- [`backlog.md`](./backlog.md): convert a plan into work-item files and roadmap sections, with execution order set — the executable version of [`../BACKLOG_STANDARD.md`](../BACKLOG_STANDARD.md).
+- [`execute.md`](./execute.md): implement a single `Ready` work item.
 - [`verify.md`](./verify.md): produce evidence that an implementation satisfies its acceptance criteria.
 - [`ship.md`](./ship.md): merge, release, and communicate a verified change.
-- [`repo-health.md`](./repo-health.md): run the recurring repository health assessment — the executable version of [`../REPO_HEALTH_STANDARD.md`](../REPO_HEALTH_STANDARD.md).
+- [`repo-health.md`](./repo-health.md): run the on-demand repository health checklist.
 
 ## Adoption Guides
 
-- [`setup-from-playbook.md`](./setup-from-playbook.md): use when aligning an existing repository to this playbook. For the full end-to-end bootstrap procedure, including establishing repository engineering documentation and the first pass through the lifecycle, see [`../REPOSITORY_BOOTSTRAP_GUIDE.md`](../REPOSITORY_BOOTSTRAP_GUIDE.md).
+- [`setup-from-playbook.md`](./setup-from-playbook.md): use when aligning an existing repository to this playbook. For the full end-to-end bootstrap procedure, see [`../REPOSITORY_BOOTSTRAP_GUIDE.md`](../REPOSITORY_BOOTSTRAP_GUIDE.md).
 
 ## Related Documents
 
